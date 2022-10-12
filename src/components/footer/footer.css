@@ -1,0 +1,22 @@
+.footer {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-evenly;
+	background-color: black;
+	position: fixed;
+	width: 100%;
+	left: 0;
+	bottom: 0;
+	color: white;
+	height: 40px;
+}
+
+.copy-right {
+}
+
+.social-icons {
+}
+
+.contact-links {
+}
