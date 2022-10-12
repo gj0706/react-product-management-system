@@ -17,7 +17,7 @@ const Header = ({ modalOn, setModalOn }) => {
 			</div>
 
 			<div className="search-bar">
-				<input className="nav-search" type="text" />
+				<input className="nav-search" type="text" placeholder="search" />
 				<button className="search-btn">
 					<img id="search-icon" src={searchIcon} width="10px" height="10px" />
 				</button>

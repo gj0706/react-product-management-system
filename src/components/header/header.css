@@ -26,7 +26,8 @@
 	margin: 30px 5px;
 }
 #smallTitle {
-	font-size: small;
+	font-size: x-small;
+	font-weight: bold;
 }
 
 input.nav-search {

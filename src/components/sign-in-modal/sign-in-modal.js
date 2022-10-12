@@ -70,6 +70,14 @@ const Signin = ({ users, setUsers, modalOn, setModalOn }) => {
 					value="Sign in"
 					placeholder="Enter password"
 				/>
+				<div className="extra-form-text">
+					<span id="no-account">
+						Don't have an account? <a>Sign up</a>
+					</span>
+					<span id="no-password">
+						<a>Forgot password?</a>
+					</span>
+				</div>
 			</form>
 		</div>
 	);
