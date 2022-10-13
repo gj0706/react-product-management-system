@@ -8,6 +8,7 @@ import "./App.css";
 function App() {
 	const [users, setUsers] = useState([]);
 	const [modalOn, setModalOn] = useState(false);
+	const [error, setError] = useState(false);
 
 	return (
 		<div className="App">
@@ -17,6 +18,8 @@ function App() {
 				setUsers={setUsers}
 				modalOn={modalOn}
 				setModalOn={setModalOn}
+				error={error}
+				setError={setError}
 			/>
 			<Footer />
 		</div>
