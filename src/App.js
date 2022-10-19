@@ -10,22 +10,11 @@ import "./App.css";
 function App() {
 	return (
 		<div className="App">
-			<Header />
-			{/* <Signin
-				users={users}
-				setUsers={setUsers}
-				modalOn={modalOn}
-				setModalOn={setModalOn}
-				error={error}
-				setError={setError}
-			/> */}
-			{/* <div className="body">
+			<div className="flex-container">
+				<Header />
 
-			</div> */}
-			{/* <SignInModalContent />
-			<SignUnModalContent />
-			<UpdatePwModalContent /> */}
-			<Footer />
+				<Footer />
+			</div>
 		</div>
 	);
 }

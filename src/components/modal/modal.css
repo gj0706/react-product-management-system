@@ -1,6 +1,7 @@
-.modal-container {
-	height: 350px;
-	width: 400px;
+div.modal-container {
+	display: flex;
+	height: 390px;
+	width: 450px;
 	border-radius: 5px;
 	box-shadow: 2px 2px 2px 2px lightgray;
 	/* background: white; */
@@ -14,10 +15,20 @@
 	top: 50%;
 	transform: translate(-50%, -50%);
 }
+
+@media (max-width: 640px) {
+	.modal-container {
+		flex-direction: column;
+	}
+}
+#title-text {
+	margin-top: 40px;
+}
 .close {
 	color: black;
 	float: right;
 	margin-right: 15px;
+	margin-top: -80px;
 	font-size: 28px;
 	cursor: pointer;
 }

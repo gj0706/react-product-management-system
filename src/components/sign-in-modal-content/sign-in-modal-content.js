@@ -12,9 +12,7 @@ const defaultFormFields = {
 const SignInModalContent = ({
 	users,
 	setUsers,
-	signUpModalOn,
 	showSignUpModal,
-	forgetPwModalOn,
 	showForgetPwModal,
 }) => {
 	const [formFields, setFormFields] = useState(defaultFormFields);
@@ -72,14 +70,6 @@ const SignInModalContent = ({
 		const { name, value } = event.target;
 		setFormFields({ ...formFields, [name]: value });
 	};
-
-	// const openSignUpModal = () => {
-	// 	setSignUpModalOn((signUpModalOn) => !signUpModalOn);
-	// };
-
-	// const openUpdatePwModal = () => {
-	// 	setForgetPwModalOn((forgetPwModalOn) => !forgetPwModalOn);
-	// };
 
 	return (
 		<div className="sign-in-container">

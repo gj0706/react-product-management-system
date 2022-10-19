@@ -7,7 +7,7 @@
 	margin-top: 10px;
 }
 
-#have-account {
+#have-account a {
 	color: #5048e5;
 	cursor: pointer;
 }

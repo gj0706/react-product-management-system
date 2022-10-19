@@ -19,7 +19,7 @@ const Modal = ({
 			className="modal-container"
 			style={{ display: visible ? "block" : "none" }}
 		>
-			<h3>{titleText}</h3>
+			<h3 id="title-text">{titleText}</h3>
 			<span className="close" onClick={closeModal}>
 				&times;
 			</span>

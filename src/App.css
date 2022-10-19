@@ -1,3 +1,17 @@
 .App {
 	text-align: center;
 }
+
+.flext-container {
+	display: flex;
+	flex-direction: row;
+}
+
+@media (max-width: 640px) {
+	.flext-container {
+		flex-direction: column;
+	}
+	.modal-container {
+		flex-direction: column;
+	}
+}

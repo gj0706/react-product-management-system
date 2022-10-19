@@ -8,14 +8,7 @@ const defaultFormFields = {
 	email: "",
 	password: "",
 };
-const SignUpModalContent = ({
-	visible,
-	setVisible,
-	users,
-	setUsers,
-	signInModalOn,
-	showSignInModal,
-}) => {
+const SignUpModalContent = ({ users, setUsers, showSignInModal }) => {
 	const [formFields, setFormFields] = useState(defaultFormFields);
 	const { email, password } = formFields;
 
@@ -63,11 +56,8 @@ const SignUpModalContent = ({
 				</SubmitButton>
 
 				<div className="extra-form-text">
-					<span>
-						Already have an account ?{" "}
-						<a id="have-account" onClick={showSignInModal}>
-							Sign in
-						</a>
+					<span id="have-account">
+						Already have an account ? <a onClick={showSignInModal}>Sign in</a>
 					</span>
 				</div>
 			</form>

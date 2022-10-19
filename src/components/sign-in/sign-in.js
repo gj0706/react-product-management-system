@@ -29,27 +29,6 @@ const SignIn = () => {
 		setForgetPwModalOn(true);
 	};
 
-	const switchTitleTexts = () => {
-		if (signInModalOn) {
-			return FORM.SIGNIN_TITLE;
-		} else if (signUpModalOn) {
-			return FORM.SIGNUP_TITLE;
-		} else if (forgetPwModalOn) {
-			return FORM.FORGET_PW_TITLE;
-		}
-	};
-
-	const switchVisible = () => {
-		if (signUpModalOn) {
-			return setSignInModalOn;
-		} else if (forgetPwModalOn) {
-			return setForgetPwModalOn;
-		} else if (signInModalOn) {
-			return setSignInModalOn;
-		} else {
-			return setVisible;
-		}
-	};
 	return (
 		<>
 			<div className="nav-sign-in">
@@ -76,9 +55,7 @@ const SignIn = () => {
 					<SignUpModalContent
 						users={users}
 						setUsers={setUsers}
-						signInModalOn={signInModalOn}
-						showSigInModal={showSignInModal}
-						setSignInModalOn={setSignInModalOn}
+						showSignInModal={showSignInModal}
 					/>
 				) : forgetPwModalOn ? (
 					<UpdatePwModalContent />
@@ -86,7 +63,6 @@ const SignIn = () => {
 					<SignInModalContent
 						users={users}
 						setUsers={setUsers}
-						signUpModalOn={signUpModalOn}
 						showForgetPwModal={showForgetPwModal}
 						showSignUpModal={showSignUpModal}
 					/>

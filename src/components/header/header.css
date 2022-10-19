@@ -10,12 +10,20 @@
 	justify-content: space-around;
 	height: 50px;
 	font-weight: bold;
+	flex-direction: row;
 }
 
+@media screen and (max-width: 640px) {
+	.nav-bar,
+	.search-bar {
+		flex-direction: column;
+	}
+}
 .nav-title {
 	/* margin: auto; */
 }
 .search-bar {
+	display: flex;
 	/* flex-grow: 1.5; */
 	width: 40%;
 	/* margin-right: auto; */
