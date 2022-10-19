@@ -1,0 +1,28 @@
+#sign-in-text {
+	cursor: pointer;
+}
+#user-icon {
+	width: 20px;
+	height: 20px;
+	margin-top: 8px;
+	margin-right: 10px;
+	cursor: pointer;
+}
+.modal-container {
+	height: 500px;
+	width: 600px;
+	border-radius: 5px;
+	box-shadow: 2px 2px 2px 2px lightgray;
+	background: white;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20%;
+	text-align: center;
+}
+.close {
+	color: #aaaaaa;
+	float: right;
+	margin-right: 15px;
+	font-size: 28px;
+	cursor: pointer;
+}

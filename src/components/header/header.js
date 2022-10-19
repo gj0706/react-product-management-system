@@ -1,45 +1,54 @@
-import Signin from "../sign-in-modal/sign-in-modal";
-import searchIcon from "../../assets/magnifier.svg";
-import userIcon from "../../assets/user.png";
+import SignIn from "../sign-in/sign-in";
+import { ReactComponent as SearchIcon } from "../../assets/magnifier.svg";
 import cartIcon from "../../assets/cart.png";
-
+import FORM from "../../constants/form";
 import "./header.css";
-const Header = ({ modalOn, setModalOn }) => {
-	const openModal = () => {
-		setModalOn((modalOn) => !modalOn);
-	};
 
+const Header = () => {
 	return (
-		<nav className="nav-bar">
-			<div className="nav-title">
-				<span id="bigTitle">Management</span>
-				<span id="smallTitle">Chuwa</span>
-			</div>
+		<>
+			<nav className="nav-bar">
+				<div className="nav-title">
+					<span id="bigTitle">Management</span>
+					<span id="smallTitle">Chuwa</span>
+				</div>
 
-			<div className="search-bar">
-				<input className="nav-search" type="text" placeholder="search" />
-				<button className="search-btn">
-					<img id="search-icon" src={searchIcon} width="10px" height="10px" />
-				</button>
-			</div>
+				<div className="search-bar">
+					<input className="nav-search" type="text" placeholder="search" />
+					<button className="search-btn">
+						{/* <img id="search-icon" src={searchIcon} width="10px" height="10px" /> */}
+						<SearchIcon className="search-icon" />
+					</button>
+				</div>
+				<div className="nav-right">
+					<SignIn />
+					<div className="shopping-cart">
+						<img id="cart-icon" src={cartIcon} width="20px" height="20px" />
+						<span id="cart-text">$0.00</span>
+					</div>
+				</div>
+			</nav>
 
-			<div className="sign-in-icon">
-				<img
-					id="user-icon"
-					src={userIcon}
-					width="20px"
-					height="20px"
-					onClick={openModal}
-				/>
-				<span id="sign-in-text" onClick={openModal}>
-					Sign in
-				</span>
-			</div>
-			<div className="shopping-cart">
-				<img id="cart-icon" src={cartIcon} width="20px" height="20px" />
-				<span id="cart-text">$0.00</span>
-			</div>
-		</nav>
+			{/* {signInModalOn ? (
+				<Modal title={FORM.SIGNIN} width={393} visible={openSignInModal}>
+					<SignInModal />
+				</Modal>
+			) : sinUpModalOn ? (
+				forgetPwModalOn ? (
+					<Modal>
+						<ForgetPwModal />
+					</Modal>
+				) : (
+					<Modal>
+						<SignInModal />
+					</Modal>
+				)
+			) : (
+				<Modal>
+					<SignUpModal />
+				</Modal>
+			)} */}
+		</>
 	);
 };
 

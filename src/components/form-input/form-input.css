@@ -1,0 +1,17 @@
+.input-field {
+	background: none;
+	background-color: white;
+	font-size: 18px;
+	padding: 10px 0px 10px 0px;
+	display: block;
+	width: 100%;
+	border: 1px solid lightgrey;
+	border-radius: 15;
+	margin: 25px 0;
+}
+
+.input-label {
+	display: block;
+	float: left;
+	color: grey;
+}
