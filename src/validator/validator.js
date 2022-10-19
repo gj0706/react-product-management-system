@@ -43,6 +43,7 @@ export const useForm = (
 		setErrors(errors);
 		setTouched({ ...touched, [event.target.name]: true });
 	};
+	const resetFormFields = () => setFormFields(initialState);
 
 	// const submitHandler = (event) => {
 	// 	event.preventDefault();
@@ -54,6 +55,7 @@ export const useForm = (
 		isValid,
 		errors,
 		touched,
+		resetFormFields,
 		// , submitHandler
 	};
 };

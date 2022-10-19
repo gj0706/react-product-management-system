@@ -32,37 +32,28 @@ const SignInModalContent = ({
 				password: "Password is at least 6 alphanumeric characters",
 			},
 	];
-	const { formFields, isValid, errors, changeHandler, submitHandler, touched } =
-		useForm(initialState, validations);
+	const {
+		formFields,
+		isValid,
+		errors,
+		changeHandler,
+		resetFormFields,
+		touched,
+	} = useForm(initialState, validations);
 
-	// setUsers((prev) => {
-	// 	return [...prev, formFields];
-	// });
-	// console.log(users);
-	// const resetFormFields = () => {
-	// 	setFormFields(defaultFormFields);
-	// };
-
-	// const [errorMessage, setErrorMessage] = useState("");
-	// const ERROR_MESSAGE = {
-	// 	emailError: "Invalid email format.",
-	// 	emptyFieldError: "Field cannot be empty.",
-	// };
-	// /*
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		alert(JSON.stringify(formFields, null, 2));
+		alert(
+			"You've signed in with the following information: " +
+				JSON.stringify(formFields, null, 2)
+		);
 
 		setUsers((prev) => {
 			return [...prev, formFields];
 		});
 		console.log(users);
+		resetFormFields();
 	};
-
-	// const handleChange = (event) => {
-	// 	const { name, value } = event.target;
-	// 	setFormFields({ ...formFields, [name]: value });
-	// };
 
 	return (
 		<div className="sign-in-container">
