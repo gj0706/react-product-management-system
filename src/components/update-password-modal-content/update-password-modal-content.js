@@ -36,7 +36,7 @@ const UpdatePwModalContent = () => {
 					border: touched.email && errors.email && "1px solid red",
 				}}
 				name="email"
-				type="email"
+				type="text"
 				value={formFields.email}
 				label="Email"
 				handleChange={changeHandler}
