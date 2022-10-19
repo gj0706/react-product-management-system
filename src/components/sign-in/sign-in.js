@@ -11,7 +11,7 @@ import UpdatePwModalContent from "../update-password-modal-content/update-passwo
 const SignIn = () => {
 	const [users, setUsers] = useState([]);
 	const [visible, setVisible] = useState(false);
-	const [signInModalOn, setSignInModalOn] = useState(false);
+	const [signInModalOn, setSignInModalOn] = useState(true);
 	const [signUpModalOn, setSignUpModalOn] = useState(false);
 	const [forgetPwModalOn, setForgetPwModalOn] = useState(false);
 	const [error, setError] = useState(false);
@@ -67,35 +67,6 @@ const SignIn = () => {
 						showSignUpModal={showSignUpModal}
 					/>
 				)}
-				{/* <div>
-					{(() => {
-						if (signUpModalOn) {
-							return (
-								<SignUpModalContent
-									users={users}
-									setUsers={setUsers}
-									signInModalOn={signInModalOn}
-									showSigInModal={showSignInModal}
-									setSignInModalOn={setSignInModalOn}
-								/>
-							);
-						} else if (forgetPwModalOn) {
-							return <UpdatePwModalContent />;
-						} else {
-							return (
-								<SignInModalContent
-									users={users}
-									setUsers={setUsers}
-									signUpModalOn={signUpModalOn}
-									showForgetPwModal={showForgetPwModal}
-									showSignUpModal={showSignUpModal}
-								/>
-							);
-						}
-					})()}
-				</div> */}
-
-				{/* <SignInModalContent /> */}
 			</Modal>
 		</>
 	);

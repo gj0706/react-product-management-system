@@ -1,8 +1,15 @@
 import { useState } from "react";
+import {
+	useForm,
+	isRequired,
+	isValidEmail,
+	isValidPassword,
+} from "../../validator/validator";
 import FormInput from "../form-input/form-input";
 import SubmitButton from "../submit-button/submit-button";
 import FORM from "../../constants/form";
 import "./sign-up-modal-content.css";
+import SignInModalContent from "../sign-in-modal-content/sign-in-modal-content";
 
 const defaultFormFields = {
 	email: "",
@@ -57,7 +64,8 @@ const SignUpModalContent = ({ users, setUsers, showSignInModal }) => {
 
 				<div className="extra-form-text">
 					<span id="have-account">
-						Already have an account ? <a onClick={showSignInModal}>Sign in</a>
+						Already have an account ?{" "}
+						<a onClick={showSignInModal}>{FORM.SIGNIN}</a>
 					</span>
 				</div>
 			</form>

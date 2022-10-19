@@ -1,13 +1,14 @@
 import { useState } from "react";
+import {
+	useForm,
+	isRequired,
+	isValidEmail,
+	isValidPassword,
+} from "../../validator/validator";
 import FORM from "../../constants/form";
 import FormInput from "../form-input/form-input";
 import SubmitButton from "../submit-button/submit-button";
 import "./sign-in-modal-content.css";
-
-const defaultFormFields = {
-	email: "",
-	password: "",
-};
 
 const SignInModalContent = ({
 	users,
@@ -15,84 +16,85 @@ const SignInModalContent = ({
 	showSignUpModal,
 	showForgetPwModal,
 }) => {
-	const [formFields, setFormFields] = useState(defaultFormFields);
-	const { email, password } = formFields;
-
-	const resetFormFields = () => {
-		setFormFields(defaultFormFields);
+	// const [formFields, setFormFields] = useState(defaultFormFields);
+	// const { email, password } = formFields;
+	const initialState = {
+		email: "",
+		password: "",
 	};
+	const validations = [
+		({ email }) => isRequired(email) || { email: "E-mail is required" },
+		({ email }) => isValidEmail(email) || { email: "E-mail is not valid" },
+		({ password }) =>
+			isRequired(password) || { password: "Password is required" },
+		({ password }) =>
+			isValidPassword(password) || {
+				password: "Password is at least 6 alphanumeric characters",
+			},
+	];
+	const { formFields, isValid, errors, changeHandler, submitHandler, touched } =
+		useForm(initialState, validations);
+
+	// setUsers((prev) => {
+	// 	return [...prev, formFields];
+	// });
+	// console.log(users);
+	// const resetFormFields = () => {
+	// 	setFormFields(defaultFormFields);
+	// };
 
 	// const [errorMessage, setErrorMessage] = useState("");
 	// const ERROR_MESSAGE = {
 	// 	emailError: "Invalid email format.",
 	// 	emptyFieldError: "Field cannot be empty.",
 	// };
-
+	// /*
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		if (!email.includes("@")) {
-			resetFormFields();
-			// setError(true);
-			// setErrorMessage(ERROR_MESSAGE.emailError);
-			// alert(ERROR_MESSAGE.emailError);
-			return;
-		}
-		if (!email.trim() || !password.trim()) {
-			resetFormFields();
-			// setError(true);
-			// setErrorMessage(ERROR_MESSAGE.emptyFieldError);
-			// alert(ERROR_MESSAGE.emptyFieldError);
-			return;
-		}
-		// setError(false);
-		// setErrorMessage("");
-		const newUser = {
-			email: email,
-			password: password,
-			// errorMessage: "",
-			// error: !error,
-		};
+		alert(JSON.stringify(formFields, null, 2));
+
 		setUsers((prev) => {
-			return [...prev, newUser];
+			return [...prev, formFields];
 		});
 		console.log(users);
-
-		console.log({
-			email: email,
-			password: password,
-			// error: error,
-			// errorMessage: errorMessage,
-		});
-		resetFormFields();
 	};
 
-	const handleChange = (event) => {
-		const { name, value } = event.target;
-		setFormFields({ ...formFields, [name]: value });
-	};
+	// const handleChange = (event) => {
+	// 	const { name, value } = event.target;
+	// 	setFormFields({ ...formFields, [name]: value });
+	// };
 
 	return (
 		<div className="sign-in-container">
 			<form className="sign-in-form" onSubmit={handleSubmit}>
 				<FormInput
+					style={{
+						border: touched.email && errors.email && "1px solid red",
+					}}
 					name="email"
-					type="email"
-					value={email}
+					type="text"
+					value={formFields.email}
 					label="Email"
-					handleChange={handleChange}
+					handleChange={changeHandler}
 					placeholder={FORM.EMAIL.PLACE_HOLDER}
-					required
 				/>
+				{touched.email && errors.email && (
+					<p className="error">{errors.email}</p>
+				)}
 				<FormInput
+					style={{
+						border: touched.password && errors.password && "1px solid red",
+					}}
 					name="password"
 					type="password"
-					value={password}
+					value={formFields.password}
 					label="Password"
-					handleChange={handleChange}
+					handleChange={changeHandler}
 					placeholder={FORM.PASSWORD.PLACE_HOLDER}
-					required
 				/>
-
+				{touched.password && errors.password && (
+					<p className="error">{errors.password}</p>
+				)}
 				<SubmitButton type="submit">
 					<span>{FORM.SIGNIN}</span>
 				</SubmitButton>

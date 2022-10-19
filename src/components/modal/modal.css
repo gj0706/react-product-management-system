@@ -1,7 +1,7 @@
 div.modal-container {
 	display: flex;
-	height: 390px;
-	width: 450px;
+	height: 420px;
+	width: 400px;
 	border-radius: 5px;
 	box-shadow: 2px 2px 2px 2px lightgray;
 	/* background: white; */
