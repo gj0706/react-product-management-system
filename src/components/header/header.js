@@ -10,7 +10,7 @@ const Header = () => {
 	const width = window.innerWidth;
 	const [users, setUsers] = useState([]);
 	const [visible, setVisible] = useState(false);
-	const [signInModalOn, setSignInModalOn] = useState(false);
+	const [signInModalOn, setSignInModalOn] = useState(true);
 	const [signUpModalOn, setSignUpModalOn] = useState(false);
 	const [forgetPwModalOn, setForgetPwModalOn] = useState(false);
 
@@ -20,13 +20,14 @@ const Header = () => {
 		setVisible(true);
 	};
 	const showSignUpModal = () => {
-		setSignUpModalOn((signUpModalOn) => !signUpModalOn);
+		setSignUpModalOn(true);
 	};
 	const showSignInModal = () => {
-		setSignInModalOn((signInModalOn) => !signInModalOn);
+		setSignInModalOn(true);
+		console.log(signInModalOn);
 	};
 	const showForgetPwModal = () => {
-		setForgetPwModalOn((forgetPwModalOn) => !forgetPwModalOn);
+		setForgetPwModalOn(true);
 	};
 	return (
 		<>
@@ -88,6 +89,7 @@ const Header = () => {
 						visible={visible}
 						users={users}
 						setUsers={setUsers}
+						signInModalOn={signInModalOn}
 						showSignInModal={showSignInModal}
 					/>
 				) : forgetPwModalOn ? (
