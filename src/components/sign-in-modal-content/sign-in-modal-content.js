@@ -16,12 +16,11 @@ const SignInModalContent = ({
 	showSignUpModal,
 	showForgetPwModal,
 }) => {
-	// const [formFields, setFormFields] = useState(defaultFormFields);
-	// const { email, password } = formFields;
 	const initialState = {
 		email: "",
 		password: "",
 	};
+
 	const validations = [
 		({ email }) => isRequired(email) || { email: "E-mail is required" },
 		({ email }) => isValidEmail(email) || { email: "E-mail is not valid" },
@@ -32,6 +31,7 @@ const SignInModalContent = ({
 				password: "Password is at least 6 alphanumeric characters",
 			},
 	];
+
 	const {
 		formFields,
 		isValid,
@@ -43,6 +43,7 @@ const SignInModalContent = ({
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
+
 		alert(
 			"You've signed in with the following information: " +
 				JSON.stringify(formFields, null, 2)
@@ -89,16 +90,15 @@ const SignInModalContent = ({
 				<SubmitButton type="submit">
 					<span>{FORM.SIGNIN}</span>
 				</SubmitButton>
-
-				<div className="extra-form-text">
-					<span id="no-account">
-						Don't have an account? <a onClick={showSignUpModal}>Sign up</a>
-					</span>
-					<span id="no-password">
-						<a onClick={showForgetPwModal}>Forgot password?</a>
-					</span>
-				</div>
 			</form>
+			<div className="extra-form-text">
+				<span id="no-account">
+					Don't have an account? <a onClick={showSignUpModal}>Sign up</a>
+				</span>
+				<span id="no-password">
+					<a onClick={showForgetPwModal}>Forgot password?</a>
+				</span>
+			</div>
 		</div>
 	);
 };

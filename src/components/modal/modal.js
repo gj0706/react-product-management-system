@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback } from "react";
+// import { useEffect, useRef, useCallback } from "react";
 import "./modal.css";
 const Modal = ({
 	visible,
@@ -38,10 +38,10 @@ const Modal = ({
 	return (
 		<div
 			className="modal-container"
-			// ref={modal}s
+			// ref={modal}
 			style={{ display: visible ? "block" : "none" }}
 		>
-			<h3 id="title-text">{titleText}</h3>
+			<h2 id="title-text">{titleText}</h2>
 			<span className="close" onClick={closeModal}>
 				&times;
 			</span>

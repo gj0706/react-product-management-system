@@ -16,7 +16,7 @@
 #bigTitle {
 	font-size: larger;
 	font-weight: bold;
-	margin: 0px 0px 0px 120px;
+	margin: 0px 5px 0px 120px;
 }
 
 #bigTitle-shrink {
@@ -99,6 +99,9 @@ input.nav-search {
 		/* align-items: center; */
 		/* flex-direction: column; */
 		/* position: relative; */
+		width: 100%;
+		left: 0;
+		top: 0;
 		flex-wrap: wrap;
 	}
 	.nav-title {
@@ -130,7 +133,7 @@ input.nav-search {
 		color: white;
 		font-size: larger;
 		font-weight: bold;
-		/* margin: px 0px; */
+		margin-right: 0px;
 	}
 
 	#bigTitle {

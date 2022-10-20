@@ -10,7 +10,7 @@ const Header = () => {
 	const width = window.innerWidth;
 	const [users, setUsers] = useState([]);
 	const [visible, setVisible] = useState(false);
-	const [signInModalOn, setSignInModalOn] = useState(true);
+	const [signInModalOn, setSignInModalOn] = useState(false);
 	const [signUpModalOn, setSignUpModalOn] = useState(false);
 	const [forgetPwModalOn, setForgetPwModalOn] = useState(false);
 
@@ -20,13 +20,13 @@ const Header = () => {
 		setVisible(true);
 	};
 	const showSignUpModal = () => {
-		setSignUpModalOn(true);
+		setSignUpModalOn((signUpModalOn) => !signUpModalOn);
 	};
 	const showSignInModal = () => {
-		setSignInModalOn(true);
+		setSignInModalOn((signInModalOn) => !signInModalOn);
 	};
 	const showForgetPwModal = () => {
-		setForgetPwModalOn(true);
+		setForgetPwModalOn((forgetPwModalOn) => !forgetPwModalOn);
 	};
 	return (
 		<>
@@ -69,21 +69,32 @@ const Header = () => {
 						: FORM.SIGNIN_TITLE
 				}
 				visible={visible}
-				setVisible={setVisible}
+				setVisible={
+					setVisible
+					// signUpModalOn
+					// 	? setSignUpModalOn
+					// 	: forgetPwModalOn
+					// 	? setForgetPwModalOn
+					// 	: signInModalOn
+					// 	? setSignInModalOn
+					// 	: setVisible
+				}
 				setSignInModalOn={setSignInModalOn}
 				setSignUpModalOn={setSignUpModalOn}
 				setForgetPwModalOn={setForgetPwModalOn}
 			>
 				{signUpModalOn ? (
 					<SignUpModalContent
+						visible={visible}
 						users={users}
 						setUsers={setUsers}
 						showSignInModal={showSignInModal}
 					/>
 				) : forgetPwModalOn ? (
-					<UpdatePwModalContent />
+					<UpdatePwModalContent visible={visible} />
 				) : (
 					<SignInModalContent
+						visible={visible}
 						users={users}
 						setUsers={setUsers}
 						showForgetPwModal={showForgetPwModal}

@@ -73,3 +73,11 @@ export const isValidEmail = (value) => {
 export const isValidPassword = (value) => {
 	return value.length > 6;
 };
+
+export const areValidBoth = (value1, value2) => {
+	return isValidEmail && isValidPassword;
+};
+
+export const areRequiredBoth = (value1, value2) => {
+	return isRequired(value1) && isRequired(value2);
+};

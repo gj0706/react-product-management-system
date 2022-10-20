@@ -29,14 +29,14 @@ const UpdatePwModalContent = () => {
 	};
 
 	return (
-		<div className="sign-in-container">
+		<div className="update-pw-container">
 			<p id="update-pw-text">{FORM.PASSWORD.UPDATE_TEXT}</p>
 			<FormInput
 				style={{
 					border: touched.email && errors.email && "1px solid red",
 				}}
 				name="email"
-				type="email"
+				type="text"
 				value={formFields.email}
 				label="Email"
 				handleChange={changeHandler}

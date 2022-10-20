@@ -2,10 +2,6 @@ import FORM from "../../constants/form";
 import "./sign-in.css";
 
 const SignIn = (setVisible) => {
-	const showModal = () => {
-		setVisible(true);
-	};
-
 	return (
 		<>
 			<div className="nav-sign-in">

@@ -1,17 +1,21 @@
 .sign-in-container {
-	height: 350px;
-	width: 400px;
+	/* height: 350px;
+	width: 400px; */
 	/* border-radius: 5px;
 	box-shadow: 2px 2px 2px 2px lightgray; */
 	/* background: white; */
-	margin-left: auto;
-	margin-right: auto;
+	/* margin-left: auto;
+	margin-right: auto; */
 	/* margin-top: 20%; */
+
 	text-align: center;
 }
 
 .sign-in-form {
-	padding: 20px 30px;
+	width: 80%;
+	height: 100%;
+	margin: auto;
+	/* padding: 20px 30px; */
 }
 
 .error {
@@ -38,6 +42,9 @@
 }
 
 .extra-form-text {
+	width: 80%;
+	height: 100%;
+	margin: auto;
 	color: black;
 	font-size: 10px;
 	display: flex;
