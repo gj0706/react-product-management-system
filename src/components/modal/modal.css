@@ -14,13 +14,9 @@ div.modal-container {
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
+	background-color: white;
 }
 
-@media (max-width: 640px) {
-	.modal-container {
-		flex-direction: column;
-	}
-}
 #title-text {
 	margin-top: 40px;
 }
@@ -31,4 +27,11 @@ div.modal-container {
 	margin-top: -80px;
 	font-size: 28px;
 	cursor: pointer;
+}
+@media screen and (max-width: 640px) {
+	.modal-container {
+		flex-direction: column;
+		height: 300px;
+		width: 350px;
+	}
 }

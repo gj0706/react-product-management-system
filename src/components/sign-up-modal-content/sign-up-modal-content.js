@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useEffect } from "react";
 import {
 	useForm,
 	isRequired,
@@ -37,14 +38,16 @@ const SignUpModalContent = ({ users, setUsers, showSignInModal }) => {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
+
+		if (formFields)
+			setUsers((prev) => {
+				return [...prev, formFields];
+			});
+
 		alert(
 			"You've signed up with the following information:" +
 				JSON.stringify(formFields, null, 2)
 		);
-
-		setUsers((prev) => {
-			return [...prev, formFields];
-		});
 		console.log(users);
 		resetFormFields();
 	};
@@ -56,7 +59,7 @@ const SignUpModalContent = ({ users, setUsers, showSignInModal }) => {
 						border: touched.email && errors.email && "1px solid red",
 					}}
 					name="email"
-					type="email"
+					type="text"
 					value={formFields.email}
 					label="Email"
 					handleChange={changeHandler}

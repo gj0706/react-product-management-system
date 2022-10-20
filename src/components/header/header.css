@@ -9,45 +9,41 @@
 	align-items: center;
 	justify-content: space-around;
 	height: 50px;
-	font-weight: bold;
+	/* font-weight: bold; */
 	flex-direction: row;
-}
-
-@media screen and (max-width: 640px) {
-	.nav-bar,
-	.search-bar {
-		flex-direction: column;
-	}
-}
-.nav-title {
-	/* margin: auto; */
-}
-.search-bar {
-	display: flex;
-	/* flex-grow: 1.5; */
-	width: 40%;
-	/* margin-right: auto; */
-	padding-bottom: 5px;
-}
-
-.nav-right {
-	display: flex;
-	align-items: center;
 }
 
 #bigTitle {
 	font-size: larger;
-	margin: 30px 5px;
+	font-weight: bold;
+	margin: 0px 0px 0px 120px;
+}
+
+#bigTitle-shrink {
+	display: none;
 }
 #smallTitle {
 	font-size: x-small;
+	font-weight: bold;
+}
+.nav-title {
+	/* margin: auto; */
+}
+
+.search-bar {
+	/* display: flex; */
+	/* flex-grow: 1.5; */
+	width: 40%;
+	margin-right: auto;
+	padding-bottom: 5px;
 }
 
 input.nav-search {
 	width: 70%;
-	margin: auto;
-	padding: 5px 10px;
+	padding: 5px 0px;
 	margin-top: 5px;
+	height: 23px;
+	border-radius: 5px;
 }
 
 .search-btn {
@@ -55,24 +51,37 @@ input.nav-search {
 	border: none;
 	outline: none;
 	margin-left: -33px;
-}
-
-.search-btn img {
-	width: 15px;
-	height: 15px;
-	object-fit: cover;
+	cursor: pointer;
 }
 
 .search-icon {
 	cursor: pointer;
-	width: 13px;
-	height: 13px;
-	/* background-color: #111827; */
 }
 
+.nav-right {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.nav-right {
+	font-size: medium;
+	font-weight: bold;
+	margin: 0px 20px 0px 0px;
+}
+
+#sign-in-text {
+	cursor: pointer;
+}
+#user-icon {
+	/* margin-top: 8px;
+	margin-right: 10px; */
+	margin: 10px 10px 10px 20px;
+	cursor: pointer;
+}
 .shopping-cart {
-	margin: 15px 15px;
-	/* margin: auto; */
+	cursor: pointer;
+	margin: 0px 15px;
 }
 
 #cart-text {
@@ -80,7 +89,51 @@ input.nav-search {
 }
 
 #cart-icon {
-	margin-top: 8px;
-	margin-right: 10px;
+	margin: 0px 10px;
 	cursor: pointer;
+}
+
+@media screen and (max-width: 640px) {
+	.nav-bar {
+		height: 140px;
+		/* align-items: center; */
+		/* flex-direction: column; */
+		/* position: relative; */
+		flex-wrap: wrap;
+	}
+	.nav-title {
+		order: 1;
+	}
+
+	.search-bar {
+		order: 3;
+		width: 100%;
+		margin-top: 0px;
+	}
+
+	#sign-in-text {
+		display: none;
+	}
+
+	.nav-right {
+		order: 2;
+	}
+
+	.shopping-cart {
+		display: flex;
+		flex-direction: row;
+		/* float: right; */
+	}
+
+	#bigTitle-shrink {
+		display: inline;
+		color: white;
+		font-size: larger;
+		font-weight: bold;
+		/* margin: px 0px; */
+	}
+
+	#bigTitle {
+		display: none;
+	}
 }

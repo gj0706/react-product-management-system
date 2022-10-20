@@ -11,6 +11,7 @@
 	bottom: 0;
 	color: white;
 	height: 60px;
+	font-size: medium;
 }
 
 .contact-links a {
@@ -21,11 +22,27 @@
 }
 
 .social-icons img {
-	height: 15px;
-	width: 15px;
+	height: 25px;
+	width: 25px;
 	margin-right: 20px;
 }
 
 .contact-links a {
 	cursor: pointer;
+}
+@media screen and (max-width: 640px) {
+	.footer {
+		height: auto;
+		flex-direction: column;
+	}
+	.copy-right {
+		order: 3;
+	}
+	.social-icons {
+		margin-top: 20px;
+		order: 1;
+	}
+	.contact-links {
+		order: 2;
+	}
 }

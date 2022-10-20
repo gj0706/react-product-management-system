@@ -12,7 +12,7 @@ function App() {
 		<div className="App">
 			<div className="flex-container">
 				<Header />
-
+				<div className="body"></div>
 				<Footer />
 			</div>
 		</div>

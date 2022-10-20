@@ -7,6 +7,10 @@ export const FORM = {
 	SIGNUP_TITLE: "Sign up an account",
 	FORGET_PW_TITLE: "Update your password",
 	UPDATE_PW: "Update password",
+	USER_TYPE: {
+		CUSTOMER: "CUSTOMER",
+		ADMIN: "ADMINISTRATOR",
+	},
 	CREATE_ACC: "Create account",
 	COPYRIGHT: "@2022 All Rights Reserved",
 	CONTACTUS: "Contact us",
