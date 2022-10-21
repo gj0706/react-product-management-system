@@ -21,13 +21,18 @@ const Header = () => {
 	};
 	const showSignUpModal = () => {
 		setSignUpModalOn(true);
+		setSignInModalOn(false);
+		setForgetPwModalOn(false);
 	};
 	const showSignInModal = () => {
 		setSignInModalOn(true);
-		console.log(signInModalOn);
+		setSignUpModalOn(false);
+		setForgetPwModalOn(false);
 	};
 	const showForgetPwModal = () => {
 		setForgetPwModalOn(true);
+		setSignInModalOn(false);
+		setSignUpModalOn(false);
 	};
 	return (
 		<>
