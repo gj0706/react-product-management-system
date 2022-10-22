@@ -7,6 +7,7 @@ export const FORM = {
 	SIGNUP_TITLE: "Sign up an account",
 	FORGET_PW_TITLE: "Update your password",
 	UPDATE_PW: "Update password",
+	LOCAL_LOGIN_API_BASE_URL: "http://localhost:3000",
 	USER_TYPE: {
 		CUSTOMER: "CUSTOMER",
 		ADMIN: "ADMINISTRATOR",

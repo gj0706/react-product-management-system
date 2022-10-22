@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import api from "../../api/api";
 import Modal from "../modal/modal";
 import SignInModalContent from "../sign-in-modal-content/sign-in-modal-content";
 import SignUpModalContent from "../sign-up-modal-content/sign-up-modal-content";
@@ -9,6 +10,7 @@ import "./header.css";
 const Header = () => {
 	const width = window.innerWidth;
 	const [users, setUsers] = useState([]);
+	const [isLoggdIn, setIsLoggedin] = useState(false);
 	const [visible, setVisible] = useState(false);
 	const [signInModalOn, setSignInModalOn] = useState(true);
 	const [signUpModalOn, setSignUpModalOn] = useState(false);
@@ -34,6 +36,27 @@ const Header = () => {
 		setSignInModalOn(false);
 		setSignUpModalOn(false);
 	};
+
+	// useEffect(() => {
+	// 	async function getUser() {
+	// 		try {
+	// 			const response = await api.getUsersApi();
+	// 			if (response.status === StatusCodes.OK) {
+	// 				setIsLoggedin(true);
+	// 			} else if (response.status === StatusCodes.UNAUTHORIZED) {
+	// 				setIsLoggedin(false);
+	// 			} else {
+	// 				throw new Error(
+	// 					`Get customer API response status error: ${response.status}`
+	// 				);
+	// 			}
+	// 		} catch (error) {
+	// 			// throw new Error(`Get customer API error: ${JSON.stringify(error)}`);
+	// 		}
+	// 	}
+	// 	getCustomer();
+	// }, []);
+
 	return (
 		<>
 			<nav className="nav-bar">
@@ -75,16 +98,7 @@ const Header = () => {
 						: FORM.SIGNIN_TITLE
 				}
 				visible={visible}
-				setVisible={
-					setVisible
-					// signUpModalOn
-					// 	? setSignUpModalOn
-					// 	: forgetPwModalOn
-					// 	? setForgetPwModalOn
-					// 	: signInModalOn
-					// 	? setSignInModalOn
-					// 	: setVisible
-				}
+				setVisible={setVisible}
 				setSignInModalOn={setSignInModalOn}
 				setSignUpModalOn={setSignUpModalOn}
 				setForgetPwModalOn={setForgetPwModalOn}
@@ -106,6 +120,7 @@ const Header = () => {
 						setUsers={setUsers}
 						showForgetPwModal={showForgetPwModal}
 						showSignUpModal={showSignUpModal}
+						// handleOnLogin={handleOnLogin}
 					/>
 				)}
 			</Modal>

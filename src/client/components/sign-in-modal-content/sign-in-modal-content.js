@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import api from "../../api/api";
 import {
 	useForm,
 	isRequired,
@@ -15,6 +16,7 @@ const SignInModalContent = ({
 	setUsers,
 	showSignUpModal,
 	showForgetPwModal,
+	handleOnLogin,
 }) => {
 	const initialState = {
 		email: "",
@@ -40,6 +42,33 @@ const SignInModalContent = ({
 		resetFormFields,
 		touched,
 	} = useForm(initialState, validations);
+
+	// userEffect
+	// const handleSubmit = async (event) => {
+	// 	event.preventDefault();
+	// 	if (!(errors || !isValid)) {
+	// 		try {
+	// 			const response = await fetch("/signin", {
+	// 				method: "POST",
+	// 				headers: {
+	// 					"Content-Type": "application/json",
+	// 				},
+	// 				body: JSON.stringify(formFields),
+	// 			});
+	// 			const result = await response.json();
+	// 			console.log(result);
+	// 			if (response.status === 200) {
+	// 				resetFormFields();
+	// 				console.log("User created successfully");
+	// 				return result;
+	// 			} else {
+	// 				console.log("Some error occured");
+	// 			}
+	// 		} catch (error) {
+	// 			console.log(error);
+	// 		}
+	// 	}
+	// };
 
 	const handleSubmit = (event) => {
 		event.preventDefault();

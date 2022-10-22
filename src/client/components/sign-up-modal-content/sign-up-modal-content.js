@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useEffect } from "react";
+import api from "../../api/api";
 import {
 	useForm,
 	isRequired,
@@ -13,7 +14,13 @@ import SubmitButton from "../submit-button/submit-button";
 import FORM from "../../constants/form";
 import "./sign-up-modal-content.css";
 
-const SignUpModalContent = ({ users, setUsers, showSignInModal, visible }) => {
+const SignUpModalContent = ({
+	users,
+	setUsers,
+	showSignInModal,
+	visible,
+	handleOnLogin,
+}) => {
 	const [clickable, setClickable] = useState(true);
 
 	const initialState = {
@@ -41,21 +48,61 @@ const SignUpModalContent = ({ users, setUsers, showSignInModal, visible }) => {
 		touched,
 	} = useForm(initialState, validations);
 
-	const { email, password } = formFields;
-	const handleSubmit = (event) => {
+	const handleSubmit = async (event) => {
 		event.preventDefault();
-
-		alert(
-			"You've signed in with the following information: " +
-				JSON.stringify(formFields, null, 2)
-		);
-
-		setUsers((prev) => {
-			return [...prev, formFields];
-		});
-		console.log(users);
-		resetFormFields();
+		if (!(errors || !isValid)) {
+			try {
+				const response = await fetch("/signup", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(formFields),
+				});
+				const result = await response.json();
+				console.log(result);
+				if (response.status === 200) {
+					resetFormFields();
+					console.log("User created successfully");
+					return result;
+				} else {
+					console.log("Some error occured");
+				}
+			} catch (error) {
+				console.log(error);
+			}
+		}
 	};
+	// const handleSubmit1 = async (event) => {
+	// 	event.preventDefault();
+	// 	if (!errors && isValid) {
+	// 		const response = await api.loginApi({
+	// 			formFields,
+	// 		});
+	// 		if (response.status !== 200) {
+	// 			throw new Error(
+	// 				`Login API response status error: ${JSON.stringify(response)}`
+	// 			);
+	// 		} else {
+	// 			alert("succeed");
+	// 		}
+	// 	}
+	// };
+	const { email, password } = formFields;
+	// const handleSubmit = (event) => {
+	// 	event.preventDefault();
+
+	// 	alert(
+	// 		"You've signed in with the following information: " +
+	// 			JSON.stringify(formFields, null, 2)
+	// 	);
+
+	// 	setUsers((prev) => {
+	// 		return [...prev, formFields];
+	// 	});
+	// 	console.log(users);
+	// 	resetFormFields();
+	// };
 
 	return (
 		<div className="sign-in-container">

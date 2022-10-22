@@ -31,26 +31,6 @@ app.use(express.static(path.join(__dirname, "public")));
 // app.use("/users", usersRouter);
 
 // mock database
-
-// 1. get all customers(GET)
-app.get("/getUsers", (_, res) => {
-	console.log("Succeeded to retrive all users");
-	res.json(users);
-});
-
-// 2. add a customer(POST) todo content will be put in the req.body => exapmple: {user: "email@address", password: "3333333"}
-// to get content, use : req.body.content
-app.post("/signup", (req, res) => {
-	//happy path
-	if (req.body && req.body.email && req.body.password) {
-		users = [...users, req.body];
-		res.json({ message: "Succeeded to add a user" });
-		return;
-	}
-	// error handling
-	res.json({ message: "failed to add a user" });
-});
-
 let users = [
 	{ email: "feeney.myrna@hotmail.com", password: 111111 },
 	{ email: "xcorkery@gmail.com", password: 222222 },
@@ -58,6 +38,54 @@ let users = [
 	{ email: "gayle.gorczany@wisoky.com", password: 444444 },
 	{ email: "ferry.zoila@gmail.com", password: 555555 },
 ];
+
+// 1. get all customers(GET)
+app.get("/getUsers", (_, res) => {
+	console.log("Succeeded to retrive all users");
+	res.json(users);
+});
+
+// app.get("/getAccInfo", (_, res)=>{
+// 	let email = req.body.email;
+// 	let password = req.body.password;
+// 	res.send(`You've signed in with Email: ${email} Password: ${password}`);
+// })
+
+app.post("/signin", (req, res) => {
+	if (req.body && req.body.email && req.body.password) {
+		for (let i = 0; i < users.length; i++) {
+			if (users[i].email === req.body.email) {
+				res.json({
+					message: `You've signed in with Email: ${req.body.email}`,
+				});
+			}
+		}
+	}
+});
+
+// 2. add a customer(POST) todo content will be put in the req.body => exapmple: {user: "email@address", password: "3333333"}
+// to get content, use : req.body.content
+app.post("/signup", (req, res) => {
+	//happy path
+	if (req.body && req.body.email && req.body.password) {
+		for (let i = 0; i < users.length; i++) {
+			if (users[i].email === req.body.email) {
+				res.json({
+					message: "Account already exists",
+				});
+				return;
+			}
+		}
+
+		users = [...users, req.body];
+		res.json({
+			message: `You've signed up with Email: ${req.body.email}`,
+		});
+		return;
+	}
+	// error handling
+	res.json({ message: "failed to add a user" });
+});
 
 // 3. update a user (PUT) email as id
 //  req.body => {email:  "ferry.zoila@gmail.com", password: 777777} =>
@@ -80,7 +108,7 @@ app.delete("/delete", (req, res) => {
 		for (let i = 0; i < users.length; i++) {
 			if (users[i].email === req.body.email) {
 				users = [...users.slice(0, i), ...users.slice(i + 1)];
-				res.json({ message: "Deleted succeeded" });
+				res.json({ message: "Deletion succeeded" });
 			}
 		}
 		return;
