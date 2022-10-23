@@ -1,8 +1,12 @@
 import "./submit-button.css";
 
-const SubmitButton = ({ children, isClickable, ...otherProps }) => {
+const SubmitButton = ({ children, ...otherProps }) => {
 	return (
-		<button className="submit-btn" {...otherProps} disabled={isClickable}>
+		<button
+			className="submit-btn"
+			{...otherProps}
+			//  disabled={isClickable}
+		>
 			{children}
 		</button>
 	);

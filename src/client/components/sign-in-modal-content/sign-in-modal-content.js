@@ -75,7 +75,15 @@ const SignInModalContent = ({
 		try {
 			let response = await fetch("/signin", {
 				method: "POST",
-				// mode: "cors",
+				mode: "cors",
+				cache: "no-cache",
+				credentials: "same-origin",
+				headers: {
+					"Content-Type": "application/json",
+					Accept: "application/json",
+				},
+				redirect: "follow",
+				referrerPolicy: "no-referrer",
 				body: JSON.stringify({
 					email: email,
 					password: password,

@@ -21,7 +21,7 @@ const SignUpModalContent = ({
 	visible,
 	handleOnLogin,
 }) => {
-	const [clickable, setClickable] = useState(true);
+	// const [clickable, setClickable] = useState(true);
 
 	const initialState = {
 		email: "",
@@ -80,6 +80,14 @@ const SignUpModalContent = ({
 			let response = await fetch("/signup", {
 				method: "POST",
 				mode: "cors",
+				cache: "no-cache",
+				credentials: "same-origin",
+				headers: {
+					"Content-Type": "application/json",
+					Accept: "application/json",
+				},
+				redirect: "follow",
+				referrerPolicy: "no-referrer",
 				body: JSON.stringify({
 					email: email,
 					password: password,
@@ -89,7 +97,7 @@ const SignUpModalContent = ({
 			console.log(result);
 			if (response.status === 200) {
 				resetFormFields();
-				console.log("User created successfully");
+				console.log("Signed up successfully");
 			} else {
 				console.log("Some error occured");
 			}
@@ -156,7 +164,7 @@ const SignUpModalContent = ({
 				{touched.password && errors.password && (
 					<p className="error">{errors.password}</p>
 				)}
-				<SubmitButton isClickable={clickable} type="submit">
+				<SubmitButton type="submit">
 					<span>{FORM.SIGNUP}</span>
 				</SubmitButton>
 			</form>

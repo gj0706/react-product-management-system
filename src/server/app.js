@@ -31,13 +31,25 @@ app.use(express.static(path.join(__dirname, "public")));
 // app.use("/users", usersRouter);
 
 // mock database
-let users = [
-	{ email: "feeney.myrna@hotmail.com", password: 111111 },
-	{ email: "xcorkery@gmail.com", password: 222222 },
-	{ email: "brekke.timothy@hotmail.com", password: 333333 },
-	{ email: "gayle.gorczany@wisoky.com", password: 444444 },
-	{ email: "ferry.zoila@gmail.com", password: 555555 },
-];
+let users = {
+	"feeney.myrna@hotmail.com": {
+		email: "feeney.myrna@hotmail.com",
+		password: "1111111",
+	},
+	"xcorkery@gmail.com": { email: "xcorkery@gmail.com", password: "2222222" },
+	"brekke.timothy@hotmail.com": {
+		email: "brekke.timothy@hotmail.com",
+		password: "3333333",
+	},
+	"gayle.gorczany@wisoky.com": {
+		email: "gayle.gorczany@wisoky.com",
+		password: "4444444",
+	},
+	"ferry.zoila@gmail.com": {
+		email: "ferry.zoila@gmail.com",
+		password: "5555555",
+	},
+};
 
 // 1. get all customers(GET)
 app.get("/getUsers", (_, res) => {
@@ -53,15 +65,19 @@ app.get("/getUsers", (_, res) => {
 
 app.post("/signin", (req, res) => {
 	if (req.body && req.body.email && req.body.password) {
-		for (let i = 0; i < users.length; i++) {
-			if (users[i].email === req.body.email) {
+		for (let email of Object.keys(users)) {
+			if (
+				email === req.body.email &&
+				users[email].password === req.body.password
+			) {
 				res.json({
-					message: `You've signed in with Email: ${req.body.email}`,
+					message: `You've successfully signed in with Email: ${req.body.email}`,
 				});
-				res.status(200).json("success");
+				return;
 			}
 		}
 	}
+	res.json({ message: "Failed to sign in" });
 });
 
 // 2. add a customer(POST) todo content will be put in the req.body => exapmple: {user: "email@address", password: "3333333"}
@@ -69,18 +85,18 @@ app.post("/signin", (req, res) => {
 app.post("/signup", (req, res) => {
 	//happy path
 	if (req.body && req.body.email && req.body.password) {
-		for (let i = 0; i < users.length; i++) {
-			if (users[i].email === req.body.email) {
+		for (let email of Object.keys(users)) {
+			if (email === req.body.email) {
 				res.json({
 					message: "Account already exists",
 				});
 				return;
 			}
 		}
+		users[req.body.email] = req.body;
 
-		users = [...users, req.body];
 		res.json({
-			message: `You've signed up with Email: ${req.body.email}`,
+			message: `You've successfully signed up with Email: ${req.body.email}`,
 		});
 		return;
 	}
@@ -115,7 +131,7 @@ app.delete("/delete", (req, res) => {
 		return;
 	}
 	// error handling
-	res.json({ message: "Delete failed" });
+	res.json({ message: "Deletion failed" });
 });
 
 // catch 404 and forward to error handler
