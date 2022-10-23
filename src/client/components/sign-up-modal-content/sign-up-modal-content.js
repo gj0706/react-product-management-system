@@ -48,47 +48,68 @@ const SignUpModalContent = ({
 		touched,
 	} = useForm(initialState, validations);
 
-	const handleSubmit = async (event) => {
-		event.preventDefault();
-		if (!(errors || !isValid)) {
-			try {
-				const response = await fetch("/signup", {
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify(formFields),
-				});
-				const result = await response.json();
-				console.log(result);
-				if (response.status === 200) {
-					resetFormFields();
-					console.log("User created successfully");
-					return result;
-				} else {
-					console.log("Some error occured");
-				}
-			} catch (error) {
-				console.log(error);
-			}
-		}
-	};
-	// const handleSubmit1 = async (event) => {
+	// const handleSubmit = async (event) => {
 	// 	event.preventDefault();
-	// 	if (!errors && isValid) {
-	// 		const response = await api.loginApi({
-	// 			formFields,
-	// 		});
-	// 		if (response.status !== 200) {
-	// 			throw new Error(
-	// 				`Login API response status error: ${JSON.stringify(response)}`
-	// 			);
-	// 		} else {
-	// 			alert("succeed");
+	// 	if (!(errors || !isValid)) {
+	// 		try {
+	// 			const response = await fetch("/signup", {
+	// 				method: "POST",
+	// 				headers: {
+	// 					"Content-Type": "application/json",
+	// 				},
+	// 				body: JSON.stringify(formFields),
+	// 			});
+	// 			const result = await response.json();
+	// 			console.log(result);
+	// 			if (response.status === 200) {
+	// 				resetFormFields();
+	// 				console.log("User created successfully");
+	// 				return result;
+	// 			} else {
+	// 				console.log("Some error occured");
+	// 			}
+	// 		} catch (error) {
+	// 			console.log(error);
 	// 		}
 	// 	}
 	// };
 	const { email, password } = formFields;
+
+	const fetchData = async () => {
+		try {
+			let response = await fetch("/signup", {
+				method: "POST",
+				mode: "cors",
+				body: JSON.stringify({
+					email: email,
+					password: password,
+				}),
+			});
+			let result = await response.json();
+			console.log(result);
+			if (response.status === 200) {
+				resetFormFields();
+				console.log("User created successfully");
+			} else {
+				console.log("Some error occured");
+			}
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		fetchData();
+	};
+
+	// useEffect(() => {
+	// 	fetchData();
+	// }, []);
+	// useEffect(() => {
+	// 	handleSubmit();
+	// }, []);
+
 	// const handleSubmit = (event) => {
 	// 	event.preventDefault();
 

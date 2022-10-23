@@ -69,21 +69,50 @@ const SignInModalContent = ({
 	// 		}
 	// 	}
 	// };
+	const { email, password } = formFields;
 
-	const handleSubmit = (event) => {
-		event.preventDefault();
-
-		alert(
-			"You've signed in with the following information: " +
-				JSON.stringify(formFields, null, 2)
-		);
-
-		setUsers((prev) => {
-			return [...prev, formFields];
-		});
-		console.log(users);
-		resetFormFields();
+	const fetchData = async () => {
+		try {
+			let response = await fetch("/signin", {
+				method: "POST",
+				// mode: "cors",
+				body: JSON.stringify({
+					email: email,
+					password: password,
+				}),
+			});
+			let result = await response.json();
+			console.log(result);
+			if (response.status === 200) {
+				resetFormFields();
+				console.log("Signed in successfully");
+			} else {
+				console.log("Some error occured");
+			}
+		} catch (err) {
+			console.log(err);
+		}
 	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		fetchData();
+	};
+
+	// const handleSubmit = (event) => {
+	// 	event.preventDefault();
+
+	// 	alert(
+	// 		"You've signed in with the following information: " +
+	// 			JSON.stringify(formFields, null, 2)
+	// 	);
+
+	// 	setUsers((prev) => {
+	// 		return [...prev, formFields];
+	// 	});
+	// 	console.log(users);
+	// 	resetFormFields();
+	// };
 
 	return (
 		<div className="sign-in-container">

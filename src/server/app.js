@@ -58,6 +58,7 @@ app.post("/signin", (req, res) => {
 				res.json({
 					message: `You've signed in with Email: ${req.body.email}`,
 				});
+				res.status(200).json("success");
 			}
 		}
 	}
