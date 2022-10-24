@@ -1,0 +1,73 @@
+.item-container {
+	/* display: felx;
+	flex-direction: column; */
+	/* height: 50px; */
+	/* width: 40px; */
+	/* width: 100%; */
+	/* display: flex; */
+	width: 300px;
+	height: 350px;
+	align-items: center;
+	border: 1px solid lightgrey;
+	padding: 20px 20px;
+	margin: 30px 20px;
+	background-color: #f3f3f3;
+	/* position: relative; */
+}
+
+.item-container p {
+	text-align: start;
+}
+/* .item-img {
+	width: 100%;
+	height: 95%;
+	object-fit: cover;
+	margin-bottom: 5px;
+} */
+
+.item-img {
+	height: 200px;
+	width: 180px;
+}
+.item-btn-conatiner {
+	display: flex;
+	justify-content: space-between;
+	flex-direction: row;
+}
+
+.add-item-btn {
+	display: inline-block;
+	width: 45%;
+	height: 30px;
+	/* margin: 25px 0px 0px 0px; */
+	/* padding: 10px 0px 10px 0px; */
+	/* font-size: 15px;
+	letter-spacing: 0.5px; */
+	background-color: rgb(67, 27, 227);
+	color: white;
+	border: 2px solid rgb(67, 27, 227);
+	border-radius: 3px;
+	cursor: pointer;
+	margin-right: 15px;
+}
+
+.edit-btn {
+	display: inline-block;
+	width: 45%;
+	height: 30px;
+	background-color: white;
+	border: 1px solid lightgrey;
+	border-radius: 2px;
+	cursor: pointer;
+	margin-left: 15px;
+}
+.add-item-btn:hover {
+	background-color: rgb(255, 255, 255);
+	color: black;
+	border: 1px solid black;
+}
+
+.edit-btn:hover {
+	background-color: black;
+	color: white;
+}

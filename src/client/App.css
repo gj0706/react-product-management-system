@@ -2,10 +2,10 @@
 	text-align: center;
 }
 
-.flext-container {
+/* .flext-container {
 	display: flex;
 	flex-direction: row;
-}
+} */
 /* 
 @media (max-width: 640px) {
 	.flext-container {
