@@ -1,15 +1,19 @@
-import FORM from "../../constants/form";
-import "./sign-in.css";
+// import FORM from "../../constants/form";
+import { useState, useEffect } from "react";
 
-const SignIn = (setVisible) => {
+import "./sign-in.css";
+import Modal from "../modal/modal";
+import SignInModalContent from "../sign-in-modal-content/sign-in-modal-content";
+import SignUpModalContent from "../sign-up-modal-content/sign-up-modal-content";
+import UpdatePwModalContent from "../update-password-modal-content/update-password-modal-content";
+import FORM from "../../constants/form";
+
+const SignIn = ({ showModal }) => {
 	return (
 		<>
-			<div className="nav-sign-in">
-				<i id="user-icon" className="fa-solid fa-user" onClick={showModal}></i>
-				<span id="sign-in-text" onClick={showModal}>
-					{FORM.SIGNIN}
-				</span>
-			</div>
+			<span id="sign-in-text" onClick={showModal}>
+				{FORM.SIGNIN}
+			</span>
 		</>
 	);
 };

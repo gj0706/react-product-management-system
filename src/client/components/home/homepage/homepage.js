@@ -13,13 +13,15 @@ const Homepage = ({ products, isSignedIn }) => {
 						<option>Price: low to high</option>
 						<option>Price: high to low</option>
 					</select>
-					<SubmitButton className="add-product" onClick={addProduct}>
-						Add Product
-					</SubmitButton>
+					{isSignedIn && (
+						<SubmitButton className="add-product" onClick={addProduct}>
+							Add Product
+						</SubmitButton>
+					)}
 				</div>
 			</div>
 
-			<ProductList products={products} />
+			<ProductList products={products} isSignedIn={isSignedIn} />
 
 			<div className="pagenation"></div>
 		</div>

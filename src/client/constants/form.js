@@ -1,7 +1,6 @@
 export const FORM = {
-	LOGIN: "Login",
-	LOGOUT: "Logout",
 	SIGNIN: "Sign in",
+	SIGNOUT: "Sign out",
 	SIGNUP: "Sign up",
 	SIGNIN_TITLE: "Sign in to your account",
 	SIGNUP_TITLE: "Sign up an account",

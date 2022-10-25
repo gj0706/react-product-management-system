@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import api from "../../api/api";
+import SignOut from "../sign-out/sign-out";
+import SignIn from "../sign-in/sign-in";
 import Modal from "../modal/modal";
 import SignInModalContent from "../sign-in-modal-content/sign-in-modal-content";
 import SignUpModalContent from "../sign-up-modal-content/sign-up-modal-content";
@@ -7,16 +9,12 @@ import UpdatePwModalContent from "../update-password-modal-content/update-passwo
 import FORM from "../../constants/form";
 import "./header.css";
 
-const Header = () => {
-	const width = window.innerWidth;
-	const [users, setUsers] = useState([]);
-	const [isLoggdIn, setIsLoggedin] = useState(false);
+const Header = ({ isSignedIn, setSignedIn, handleSignIn, handleSignOut }) => {
+	const [user, setUser] = useState({});
 	const [visible, setVisible] = useState(false);
 	const [signInModalOn, setSignInModalOn] = useState(true);
 	const [signUpModalOn, setSignUpModalOn] = useState(false);
 	const [forgetPwModalOn, setForgetPwModalOn] = useState(false);
-
-	const setTrue = (func) => func(true);
 
 	const showModal = () => {
 		setVisible(true);
@@ -38,14 +36,28 @@ const Header = () => {
 	};
 
 	// useEffect(() => {
-	// 	async function getUser() {
+	// 	const getUserData = async () => {
 	// 		try {
-	// 			const response = await api.getUsersApi();
-	// 			if (response.status === StatusCodes.OK) {
-	// 				setIsLoggedin(true);
-	// 			} else if (response.status === StatusCodes.UNAUTHORIZED) {
-	// 				setIsLoggedin(false);
+	// 			const response = await fetch("/getUser", {
+	// 				method: "POST",
+	// 				mode: "cors",
+	// 				cache: "no-cache",
+	// 				credentials: "same-origin",
+	// 				headers: {
+	// 					"Content-Type": "application/json",
+	// 					Accept: "application/json",
+	// 				},
+	// 				redirect: "follow",
+	// 				referrerPolicy: "no-referrer",
+	// 				body: JSON.stringify({
+	// 					email: user.email,
+	// 					password: user.password,
+	// 				}),
+	// 			});
+	// 			if (response.status === 200) {
+	// 				setSignedIn(true);
 	// 			} else {
+	// 				setSignedIn(false);
 	// 				throw new Error(
 	// 					`Get customer API response status error: ${response.status}`
 	// 				);
@@ -53,9 +65,10 @@ const Header = () => {
 	// 		} catch (error) {
 	// 			// throw new Error(`Get customer API error: ${JSON.stringify(error)}`);
 	// 		}
-	// 	}
-	// 	getCustomer();
-	// }, []);
+	// 	};
+	// 	getUserData();
+	// }, [isSignedIn]);
+	const handleOnClick = () => {};
 
 	return (
 		<>
@@ -77,11 +90,29 @@ const Header = () => {
 						<i
 							id="user-icon"
 							className="fa-solid fa-user"
-							onClick={showModal}
+							// onClick={showModal}
 						></i>
-						<span id="sign-in-text" onClick={showModal}>
-							{FORM.SIGNIN}
-						</span>
+						{isSignedIn ? (
+							<SignOut handleSignOut={handleSignOut} />
+						) : (
+							// <span
+							// 	id="sign-out-text"
+							// 	onClick={handleOnClick}
+							// 	handleSignOut={() => setSignedIn(false)}
+							// >
+							// 	{FORM.SIGNOUT}
+							// </span>
+							<SignIn showModal={showModal} handleSignIn={handleSignIn} />
+							// <span
+							// 	id="sign-in-text"
+							// 	onClick={showModal}
+							// 	handleSignIn={() => {
+							// 		setSignedIn(true);
+							// 	}}
+							// >
+							// 	{FORM.SIGNIN}
+							// </span>
+						)}
 					</div>
 					<div className="shopping-cart">
 						<i className="fa-solid fa-cart-shopping" id="cart-icon"></i>
@@ -106,8 +137,8 @@ const Header = () => {
 				{signUpModalOn ? (
 					<SignUpModalContent
 						visible={visible}
-						users={users}
-						setUsers={setUsers}
+						user={user}
+						setUser={setUser}
 						signInModalOn={signInModalOn}
 						showSignInModal={showSignInModal}
 					/>
@@ -116,11 +147,14 @@ const Header = () => {
 				) : (
 					<SignInModalContent
 						visible={visible}
-						users={users}
-						setUsers={setUsers}
+						setVisible={setVisible}
+						user={user}
+						setUser={setUser}
 						showForgetPwModal={showForgetPwModal}
 						showSignUpModal={showSignUpModal}
-						// handleOnLogin={handleOnLogin}
+						handleSignIn={handleSignIn}
+						isSignedIn={isSignedIn}
+						setSignedIn={setSignedIn}
 					/>
 				)}
 			</Modal>

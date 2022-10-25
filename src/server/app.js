@@ -57,11 +57,19 @@ app.get("/getUsers", (_, res) => {
 	res.json(users);
 });
 
-// app.get("/getAccInfo", (_, res)=>{
-// 	let email = req.body.email;
-// 	let password = req.body.password;
-// 	res.send(`You've signed in with Email: ${email} Password: ${password}`);
-// })
+app.post("/getUser", (req, res) => {
+	for (let email of Object.keys(users)) {
+		if (
+			email === req.body.email &&
+			users[email].password === req.body.password
+		) {
+			res.json({
+				message: `You've successfully signed in with Email: ${req.body.email}`,
+			});
+			return;
+		}
+	}
+});
 
 app.post("/signin", (req, res) => {
 	if (req.body && req.body.email && req.body.password) {
@@ -74,11 +82,12 @@ app.post("/signin", (req, res) => {
 					message: `You've successfully signed in with Email: ${req.body.email}`,
 				});
 				return;
-			} else {
-				return res
-					.status(400)
-					.json({ message: "Email or passrod doesn't match" });
 			}
+			// else {
+			// 	return res
+			// 		.status(400)
+			// 		.json({ message: "Email or passrod doesn't match" });
+			// }
 		}
 	}
 	res.json({ message: "Failed to sign in" });
@@ -106,6 +115,10 @@ app.post("/signup", (req, res) => {
 	}
 	// error handling
 	res.json({ message: "failed to add a user" });
+});
+
+app.get("/signout", (req, res) => {
+	res.json("Successfully signedout");
 });
 
 const products = {

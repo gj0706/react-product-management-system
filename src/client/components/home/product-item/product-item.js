@@ -1,6 +1,6 @@
 import SubmitButton from "../../submit-button/submit-button";
 import "./product-item.css";
-const ProductItem = ({ name, price, imageUrl }) => {
+const ProductItem = ({ name, price, imageUrl, isSignedIn }) => {
 	const addProductToCart = () => {};
 	const editProduct = () => {};
 	return (
@@ -14,10 +14,11 @@ const ProductItem = ({ name, price, imageUrl }) => {
 				<SubmitButton className="add-item-btn" onClick={addProductToCart}>
 					Add
 				</SubmitButton>
-
-				<SubmitButton className="edit-btn" onClick={editProduct}>
-					Edit
-				</SubmitButton>
+				{isSignedIn && (
+					<SubmitButton className="edit-btn" onClick={editProduct}>
+						Edit
+					</SubmitButton>
+				)}
 			</div>
 		</div>
 	);

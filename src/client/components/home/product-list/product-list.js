@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ProductItem from "../product-item/product-item";
 import "./product-list.css";
 
-const ProductList = ({ products }) => {
+const ProductList = ({ products, isSignedIn }) => {
 	// const { id, price, imageUrl, description } = props;
 	const productList = Object.values(products).map(
 		({ id, price, imageUrl, description }) => {
@@ -12,6 +12,7 @@ const ProductList = ({ products }) => {
 					name={description.split(",")[0]}
 					price={"$" + `${price}`}
 					imageUrl={imageUrl}
+					isSignedIn={isSignedIn}
 				/>
 			);
 		}

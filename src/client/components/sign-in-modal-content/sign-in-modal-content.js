@@ -12,11 +12,14 @@ import SubmitButton from "../submit-button/submit-button";
 import "./sign-in-modal-content.css";
 
 const SignInModalContent = ({
-	users,
-	setUsers,
 	showSignUpModal,
 	showForgetPwModal,
-	handleOnLogin,
+	handleSignIn,
+	setVisible,
+	isSignedIn,
+	setSignedIn,
+	user,
+	setUser,
 }) => {
 	const initialState = {
 		email: "",
@@ -43,32 +46,6 @@ const SignInModalContent = ({
 		touched,
 	} = useForm(initialState, validations);
 
-	// userEffect
-	// const handleSubmit = async (event) => {
-	// 	event.preventDefault();
-	// 	if (!(errors || !isValid)) {
-	// 		try {
-	// 			const response = await fetch("/signin", {
-	// 				method: "POST",
-	// 				headers: {
-	// 					"Content-Type": "application/json",
-	// 				},
-	// 				body: JSON.stringify(formFields),
-	// 			});
-	// 			const result = await response.json();
-	// 			console.log(result);
-	// 			if (response.status === 200) {
-	// 				resetFormFields();
-	// 				console.log("User created successfully");
-	// 				return result;
-	// 			} else {
-	// 				console.log("Some error occured");
-	// 			}
-	// 		} catch (error) {
-	// 			console.log(error);
-	// 		}
-	// 	}
-	// };
 	const { email, password } = formFields;
 
 	const fetchData = async () => {
@@ -92,9 +69,12 @@ const SignInModalContent = ({
 			let result = await response.json();
 			console.log(result);
 			if (response.status === 200) {
-				resetFormFields();
-				console.log("Signed in successfully");
-			} else {
+				setUser(formFields);
+				handleSignIn();
+				setVisible(false);
+
+				// console.log("Signed in successfully");
+			} else if (response.status === 400) {
 				console.log("Some error occured");
 			}
 		} catch (err) {
@@ -105,22 +85,8 @@ const SignInModalContent = ({
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		fetchData();
+		resetFormFields();
 	};
-
-	// const handleSubmit = (event) => {
-	// 	event.preventDefault();
-
-	// 	alert(
-	// 		"You've signed in with the following information: " +
-	// 			JSON.stringify(formFields, null, 2)
-	// 	);
-
-	// 	setUsers((prev) => {
-	// 		return [...prev, formFields];
-	// 	});
-	// 	console.log(users);
-	// 	resetFormFields();
-	// };
 
 	return (
 		<div className="sign-in-container">
