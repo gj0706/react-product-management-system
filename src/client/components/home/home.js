@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import Header from "../header/header";
 import Homepage from "./homepage/homepage";
 import Footer from "../footer/footer";
-
+import CreateProductPage from "./create-product/create-product";
+import "./home.css";
 const Home = () => {
 	const [isSignedIn, setSignedIn] = useState(false);
 	const [products, setProducts] = useState({});
+	const [addClicked, setAddClicked] = useState(false);
 
 	const handleSignIn = () => {
 		setSignedIn(true);
@@ -43,8 +45,11 @@ const Home = () => {
 				products={products}
 				isSignedIn={isSignedIn}
 				setSignedIn={setSignedIn}
+				addClicked={addClicked}
+				setAddClicked={setAddClicked}
 			/>
 			{/* )} */}
+			{/* <CreateProductPage /> */}
 
 			<Footer />
 		</div>

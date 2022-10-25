@@ -1,0 +1,139 @@
+/* .add-product {
+	height: 40px;
+	width: 120px;
+	background-color: rgb(67, 27, 227);
+	color: white;
+	border: 1px solid lightgrey;
+	border-radius: 15;
+	cursor: pointer;
+} */
+
+.form-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	/* align-items: center; */
+	height: 950px;
+	width: 800px;
+	margin: auto;
+	background-color: white;
+	padding: 40px 40px;
+	color: grey;
+	font-weight: bold;
+}
+
+.form-container label {
+	display: block;
+	text-align: start;
+	margin: 30px 0px;
+}
+/* .create-product-form {
+	height: 100%;
+} */
+
+.product-name {
+	width: 100%;
+	height: 30px;
+	border: 1px solid lightgrey;
+}
+
+.textarea {
+	width: 100%;
+	height: 100px;
+	border: 1px solid lightgrey;
+}
+
+.category-price {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.category {
+	display: inline-block;
+	width: 49%;
+}
+
+.price {
+	display: inline-block;
+	width: 49%;
+}
+
+.select-category {
+	height: 36px;
+	width: 100%;
+	/* margin-right: 5px; */
+	border: 1px solid lightgrey;
+}
+
+.price input {
+	width: 100%;
+	height: 30px;
+	border: 1px solid lightgrey;
+}
+
+.instock-upload {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.instock {
+	/* height: 30px; */
+	width: 38%;
+}
+
+.upload {
+	/* height: 30px; */
+	width: 58%;
+}
+
+.instock input {
+	height: 30px;
+	width: 100%;
+	border: 1px solid lightgrey;
+}
+
+.upload input[type="text"] {
+	height: 30px;
+	width: 100%;
+	border: 1px solid lightgrey;
+}
+
+/* .upload-btn {
+	display: inline;
+	position: absolute;
+	top: 100px;
+	right: 60px;
+} */
+
+.img-preview {
+	height: 345px;
+	width: 582px;
+	border: 1px dashed lightgrey;
+	margin: auto;
+}
+
+.add-product {
+	margin-top: 20px;
+}
+
+#img-url {
+	/* padding-right: 50px; */
+}
+
+#upload [type="submit"] {
+	/* display: inline; */
+	margin-left: -50px;
+	width: 50px;
+}
+.add-cancel {
+	display: flex;
+	justify-content: space-between;
+}
+
+.add-product:hover {
+	background-color: rgb(255, 255, 255);
+	color: black;
+	border: 1px solid black;
+}

@@ -1,3 +1,8 @@
+.homepage-container {
+	/* display: flex; */
+	align-items: center;
+}
+
 .product-title {
 	display: flex;
 	justify-content: space-between;
