@@ -145,6 +145,7 @@
 	},
 	"devDependencies": {
 		"node-polyfill-webpack-plugin": "^2.0.1",
-		"stream-http": "^3.2.0"
+		"stream-http": "^3.2.0",
+		"webpack-node-externals": "^3.0.0"
 	}
 }

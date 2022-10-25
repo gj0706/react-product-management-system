@@ -27,12 +27,22 @@
 
 .item-img {
 	height: 200px;
-	width: 180px;
+	width: 230px;
 }
 .item-btn-conatiner {
 	display: flex;
 	justify-content: space-between;
 	flex-direction: row;
+}
+
+#item-name {
+	font-size: small;
+	color: grey;
+	overflow: hidden;
+}
+
+#item-price {
+	font-weight: bold;
 }
 
 .add-item-btn {

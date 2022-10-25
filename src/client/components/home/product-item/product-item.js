@@ -1,4 +1,4 @@
-import SubmitButton from "../../../submit-button/submit-button";
+import SubmitButton from "../../submit-button/submit-button";
 import "./product-item.css";
 const ProductItem = ({ name, price, imageUrl }) => {
 	const addProductToCart = () => {};
@@ -7,8 +7,8 @@ const ProductItem = ({ name, price, imageUrl }) => {
 		<div className="item-container">
 			<img className="item-img" src={imageUrl} alt={`${name}`} />
 			{/* <div className="item-info"> */}
-			<p>{name}</p>
-			<p>{price}</p>
+			<p id="item-name">{name}</p>
+			<p id="item-price">{price}</p>
 			{/* </div> */}
 			<div className="item-btn-container">
 				<SubmitButton className="add-item-btn" onClick={addProductToCart}>

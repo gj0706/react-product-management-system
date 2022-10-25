@@ -32,6 +32,21 @@ const getUsersApi = async () => {
 	}
 };
 
+const getProductsApi = async () => {
+	try {
+		const response = await fetch("/getProducts", {
+			method: "GET",
+			headers: {
+				"Content-Type": "aapplication/json",
+			},
+		});
+		const result = await response.json();
+		console.log(result);
+		return result;
+	} catch (error) {
+		console.log(error);
+	}
+};
 const signinApi = async (accountInfo) => {
 	try {
 		const response = await fetch("/signin", {
@@ -73,4 +88,4 @@ const logoutApi = async () => {
 	}
 };
 
-export default { getUsersApi, signinApi, signupApi, logoutApi };
+export default { getUsersApi, signinApi, signupApi, logoutApi, getProductsApi };
