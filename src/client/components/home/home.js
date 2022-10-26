@@ -21,7 +21,6 @@ const Home = () => {
 			try {
 				const response = await fetch("/getProducts");
 				const result = await response.json();
-				console.log(result);
 				setProducts(result);
 			} catch (error) {
 				console.log(error);
@@ -38,9 +37,7 @@ const Home = () => {
 				handleSignIn={handleSignIn}
 				handleSignOut={handleSignOut}
 			/>
-			{/* {isSignedIn ? (
-				<AdminPage products={products} />
-			) : ( */}
+
 			<Homepage
 				products={products}
 				isSignedIn={isSignedIn}
@@ -48,8 +45,6 @@ const Home = () => {
 				addClicked={addClicked}
 				setAddClicked={setAddClicked}
 			/>
-			{/* )} */}
-			{/* <CreateProductPage /> */}
 
 			<Footer />
 		</div>

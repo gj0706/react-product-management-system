@@ -123,6 +123,8 @@ app.get("/signout", (req, res) => {
 
 const products = {
 	"item_cell_34-360-174__0": {
+		name: "Acer Nitro 5 AN515-57-59F7",
+		quantity: 2,
 		id: "item_cell_34-360-174__0",
 		price: "699.99",
 		imageUrl:
@@ -131,6 +133,8 @@ const products = {
 			'Acer Nitro 5 AN515-57-59F7, 15.6" 144 Hz IPS Intel Core i5 11th Gen 11400H (2.70GHz) NVIDIA GeForce RTX 3050 Laptop GPU 16GB Memory 512 GB NVMe SSD Windows 11 Home 64-bit Gaming Laptop',
 	},
 	"item_cell_34-273-562__0": {
+		name: "HP Laptop Intel Core i5",
+		quantity: 30,
 		id: "item_cell_34-273-562__0",
 		price: "399.99",
 		imageUrl:
@@ -139,6 +143,8 @@ const products = {
 			'HP Laptop Intel Core i5, 11th Gen 1155G7 (2.50GHz) 12GB Memory 1TB HDD Intel Iris Xe Graphics 17.3" Windows 11 Home 64-bit 17-cn1053cl',
 	},
 	"item_cell_34-236-186__0": {
+		name: "ASUS TUF Gaming A17 Gaming Laptop",
+		quantity: 4,
 		id: "item_cell_34-236-186__0",
 		price: "999.99",
 		imageUrl:
@@ -148,6 +154,8 @@ const products = {
 	},
 	item_cell_9SIBE13J9N2512__0: {
 		id: "item_cell_9SIBE13J9N2512__0",
+		name: "Acer Swift 3 Intel Evo Thin & Light Laptop",
+		quantity: 22,
 		price: "409.99",
 		imageUrl:
 			"https://c1.neweggimages.com/ProductImageCompressAll300/A8X5S22050310LWNM1D.jpg",
@@ -156,6 +164,8 @@ const products = {
 	},
 	"item_cell_34-236-012__0": {
 		id: "item_cell_34-236-012__0",
+		name: "ASUS VivoBook Pro 16X OLED Laptop",
+		quantity: 11,
 		price: "999.99",
 		imageUrl:
 			"https://c1.neweggimages.com/ProductImageCompressAll300/34-236-012-V14.jpg",
@@ -164,6 +174,8 @@ const products = {
 	},
 	"item_cell_34-233-521__0": {
 		id: "item_cell_34-233-521__0",
+		name: "GIGABYTE AERO 5 XE4",
+		quantity: 28,
 		price: "1,549.00",
 		imageUrl:
 			"https://c1.neweggimages.com/ProductImageCompressAll300/34-233-521-V01.jpg",
@@ -172,6 +184,8 @@ const products = {
 	},
 	item_cell_9SIBDSAHZ56888__0: {
 		id: "item_cell_9SIBDSAHZ56888__0",
+		name: "HP EliteBook 840 G3 Laptop",
+		quantity: 16,
 		price: "229.00",
 		imageUrl:
 			"https://c1.neweggimages.com/ProductImageCompressAll300/34-271-969-S01.jpg",
@@ -180,6 +194,8 @@ const products = {
 	},
 	item_cell_9SIA6PFDAV1885__0: {
 		id: "item_cell_9SIA6PFDAV1885__0",
+		name: "WAVLINK USB C Docking Station",
+		quantity: 8,
 		price: "52.99",
 		imageUrl:
 			"https://c1.neweggimages.com/ProductImageCompressAll300/A6PFS2101049MMCq.jpg",
@@ -188,6 +204,8 @@ const products = {
 	},
 	"item_cell_34-236-180__0": {
 		id: "item_cell_34-236-180__0",
+		name: "ASUS ZenBook Pro 15",
+		quantity: 24,
 		price: "1,199.99",
 		imageUrl:
 			"https://c1.neweggimages.com/ProductImageCompressAll300/34-236-180-V01.jpg",
@@ -196,6 +214,8 @@ const products = {
 	},
 	item_cell_9SIADG3J0E1893__0: {
 		id: "item_cell_9SIADG3J0E1893__0",
+		name: "Aorus 15P XD-73US224SO",
+		quantity: 31,
 		price: "1,399.99",
 		imageUrl:
 			"https://c1.neweggimages.com/ProductImageCompressAll300/34-725-184-V01.jpg",
@@ -204,6 +224,8 @@ const products = {
 	},
 	"item_cell_34-156-238__0": {
 		id: "item_cell_34-156-238__0",
+		name: "MSI Laptop AMD Ryzen 5 5000 Series",
+		quantity: 10,
 		price: "649.00",
 		imageUrl:
 			"https://c1.neweggimages.com/ProductImageCompressAll300/34-156-238-V01.jpg",
@@ -212,6 +234,8 @@ const products = {
 	},
 	"item_cell_34-236-212__0": {
 		id: "item_cell_34-236-212__0",
+		name: "ASUS VivoBook S 15 Slim Laptop",
+		quantity: 8,
 		price: "899.99",
 		imageUrl:
 			"https://c1.neweggimages.com/ProductImageCompressAll300/34-236-212-01.jpg",
@@ -220,6 +244,8 @@ const products = {
 	},
 	"item_cell_34-236-240__0": {
 		id: "item_cell_34-236-240__0",
+		name: "SUS TUF Gaming A17 (2021) Gaming Laptop",
+		quantity: 36,
 		price: "799.99",
 		imageUrl:
 			"https://c1.neweggimages.com/ProductImageCompressAll300/34-236-240-V12.jpg",
@@ -228,6 +254,8 @@ const products = {
 	},
 	item_cell_9SIAA0SJK40439__0: {
 		id: "item_cell_9SIAA0SJK40439__0",
+		name: "ASUS VivoBook 15 F515",
+		quantity: 19,
 		price: "749.99",
 		imageUrl:
 			"https://c1.neweggimages.com/ProductImageCompressAll300/34-236-025-S07.jpg",
@@ -236,6 +264,8 @@ const products = {
 	},
 	"item_cell_34-236-241__0": {
 		id: "item_cell_34-236-241__0",
+		name: "ASUS TUF Gaming F15 Gaming Laptop",
+		quantity: 23,
 		price: "899.99",
 		imageUrl:
 			"https://c1.neweggimages.com/ProductImageCompressAll300/34-236-241-V15.jpg",
@@ -244,6 +274,8 @@ const products = {
 	},
 	item_cell_9SIB0WNJ9H4961__0: {
 		id: "item_cell_9SIB0WNJ9H4961__0",
+		name: "GIGABYTE G5 KD-52US123SO",
+		quantity: 35,
 		price: "1,194.99",
 		imageUrl:
 			"https://c1.neweggimages.com/ProductImageCompressAll300/34-233-514-01.jpg",
@@ -252,41 +284,49 @@ const products = {
 	},
 	"item_cell_34-236-026__0": {
 		id: "item_cell_34-236-026__0",
+		name: "ASUS VivoBook S14 S435 Laptop",
+		quantity: 8,
 		price: "599.99",
 		imageUrl:
 			"https://c1.neweggimages.com/ProductImageCompressAll300/34-236-026-S01.jpg",
 		description:
 			'ASUS VivoBook S14 S435 Laptop, 14" FHD Display, Intel Evo Platform, i7-1165G7 CPU, 8GB RAM, 512GB PCIe SSD, Windows 11 Home, AI Noise-Cancellation, Deep Green, S435EA-DH71-GR',
 	},
-	item_cell_9SIB0WNFNK3557__0: {
-		id: "item_cell_9SIB0WNFNK3557__0",
-		price: "1,279.99",
-		imageUrl:
-			"https://c1.neweggimages.com/ProductImageCompressAll300/34-155-806-01.jpg",
-		description:
-			'MSI SUMMIT E13FLIP Evo, 13.4" FHD+ TOUCH Ultra Thin and Light Professional 2-in-1 Laptop Intel Core i7-1185G7 IRIS Xe 16 GB DDR4 512 GB NVMe SSD Win10 with MSI Pen',
-	},
-	item_cell_9SIA4R8JK33162__0: {
-		id: "item_cell_9SIA4R8JK33162__0",
-		price: "188.00",
-		imageUrl:
-			"https://c1.neweggimages.com/ProductImageCompressAll300/34-343-796-04.jpg",
-		description:
-			'DELL Laptop Latitude 5480, Intel Core i5 6th Gen 6300U (2.40GHz) 16GB Memory 256 GB SSD Intel HD Graphics 520 14.0" Windows 10 Pro 64-bit 6R2TF',
-	},
-	"item_cell_34-725-205__0": {
-		id: "item_cell_34-725-205__0",
-		price: "1,249.00",
-		imageUrl:
-			"https://c1.neweggimages.com/ProductImageCompressAll300/34-725-205-V01.jpg",
-		description:
-			'GIGABYTE AORUS 5 SE4, - 15.6" FHD 1920x1080 360Hz- Intel Core i7-12700H - NVIDIA GeForce RTX 3070 Laptop GPU 8GB GDDR6 - 16GB DDR4 RAM - 512GB SSD - Win11 Home - Gaming Laptop (AORUS 5 SE4-73US513SH)',
-	},
 };
 
 app.get("/getProducts", (_, res) => {
 	console.log("Succeeded to retrive all products");
 	res.json(products);
+});
+
+app.post("/addProduct", (req, res) => {
+	//happy path
+
+	if (
+		req.body &&
+		req.body.name &&
+		req.body.description &&
+		req.body.quantity &&
+		req.body.price &&
+		req.body.imageUrl
+	) {
+		for (let id of Object.keys(products)) {
+			if (id === req.body.id) {
+				res.json({
+					message: "Product already exists",
+				});
+				return;
+			}
+		}
+		products[req.body.id] = req.body;
+
+		res.json({
+			message: `You've successfully added a product`,
+		});
+		return;
+	}
+	// error handling
+	res.json({ message: "failed to add a product" });
 });
 
 // 3. update a user (PUT) email as id
@@ -316,7 +356,7 @@ app.delete("/delete", (req, res) => {
 		return;
 	}
 	// error handling
-	res.json({ message: "Deletion failed" });
+	res.json({ message: "Deletion failed", status: 400 });
 });
 
 // catch 404 and forward to error handler

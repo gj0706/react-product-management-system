@@ -90,7 +90,7 @@ const Header = ({ isSignedIn, setSignedIn, handleSignIn, handleSignOut }) => {
 						<i
 							id="user-icon"
 							className="fa-solid fa-user"
-							// onClick={showModal}
+							onClick={showModal}
 						></i>
 						{isSignedIn ? (
 							<SignOut handleSignOut={handleSignOut} />
