@@ -1,15 +1,34 @@
+import { useState } from "react";
 import SubmitButton from "../../submit-button/submit-button";
 import CreateProductPage from "../create-product/create-product";
 import ProductList from "../product-list/product-list";
 import "./homepage.css";
-const Homepage = ({ products, isSignedIn, addClicked, setAddClicked }) => {
-	const addProduct = () => {
+const Homepage = ({
+	products,
+	isSignedIn,
+	addClicked,
+	setAddClicked,
+	editClicked,
+	setEditClicked,
+	editedProduct,
+	setEditedProduct,
+}) => {
+	const clickAddProduct = () => {
 		setAddClicked(true);
 	};
+	const clickEditProduct = () => setEditClicked(true);
+
 	return (
 		<>
-			{addClicked ? (
-				<CreateProductPage setAddClicked={setAddClicked} />
+			{addClicked || editClicked ? (
+				<CreateProductPage
+					products={products}
+					setAddClicked={setAddClicked}
+					addClicked={addClicked}
+					editClicked={editClicked}
+					editedProduct={editedProduct}
+					setEditedProduct={setEditedProduct}
+				/>
 			) : (
 				<div className="homepage-container">
 					<div className="product-title">
@@ -20,14 +39,24 @@ const Homepage = ({ products, isSignedIn, addClicked, setAddClicked }) => {
 								<option>Price: low to high</option>
 								<option>Price: high to low</option>
 							</select>
-							{isSignedIn && (
-								<SubmitButton className="add-product" onClick={addProduct}>
+							{isSignedIn ? (
+								<SubmitButton className="add-product" onClick={clickAddProduct}>
 									Add Product
 								</SubmitButton>
+							) : (
+								<></>
 							)}
 						</div>
 					</div>
-					<ProductList products={products} isSignedIn={isSignedIn} />
+					<ProductList
+						products={products}
+						isSignedIn={isSignedIn}
+						setAddClicked={setAddClicked}
+						setEditClicked={setEditClicked}
+						clickEditProduct={clickEditProduct}
+						editedProduct={editedProduct}
+						setEditedProduct={setEditedProduct}
+					/>
 					<div className="pagenation"></div>
 				</div>
 			)}

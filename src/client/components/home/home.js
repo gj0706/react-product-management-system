@@ -8,7 +8,8 @@ const Home = () => {
 	const [isSignedIn, setSignedIn] = useState(false);
 	const [products, setProducts] = useState({});
 	const [addClicked, setAddClicked] = useState(false);
-
+	const [editClicked, setEditClicked] = useState(false);
+	const [editedProduct, setEditedProduct] = useState({});
 	const handleSignIn = () => {
 		setSignedIn(true);
 	};
@@ -36,6 +37,7 @@ const Home = () => {
 				setSignedIn={setSignedIn}
 				handleSignIn={handleSignIn}
 				handleSignOut={handleSignOut}
+				setAddClicked={setAddClicked}
 			/>
 
 			<Homepage
@@ -44,6 +46,10 @@ const Home = () => {
 				setSignedIn={setSignedIn}
 				addClicked={addClicked}
 				setAddClicked={setAddClicked}
+				editClicked={editClicked}
+				setEditClicked={setEditClicked}
+				editedProduct={editedProduct}
+				setEditedProduct={setEditedProduct}
 			/>
 
 			<Footer />

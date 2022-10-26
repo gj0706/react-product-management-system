@@ -9,7 +9,13 @@ import UpdatePwModalContent from "../update-password-modal-content/update-passwo
 import FORM from "../../constants/form";
 import "./header.css";
 
-const Header = ({ isSignedIn, setSignedIn, handleSignIn, handleSignOut }) => {
+const Header = ({
+	isSignedIn,
+	setSignedIn,
+	handleSignIn,
+	handleSignOut,
+	setAddClicked,
+}) => {
 	const [user, setUser] = useState({});
 	const [visible, setVisible] = useState(false);
 	const [signInModalOn, setSignInModalOn] = useState(true);
@@ -93,7 +99,10 @@ const Header = ({ isSignedIn, setSignedIn, handleSignIn, handleSignOut }) => {
 							onClick={showModal}
 						></i>
 						{isSignedIn ? (
-							<SignOut handleSignOut={handleSignOut} />
+							<SignOut
+								handleSignOut={handleSignOut}
+								setAddClicked={setAddClicked}
+							/>
 						) : (
 							// <span
 							// 	id="sign-out-text"

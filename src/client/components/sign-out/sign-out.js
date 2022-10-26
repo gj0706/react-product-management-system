@@ -1,7 +1,7 @@
 import FORM from "../../constants/form";
 import "./sign-out.css";
 
-const SignOut = ({ handleSignOut }) => {
+const SignOut = ({ handleSignOut, setAddClicked }) => {
 	const handleOnClick = async () => {
 		try {
 			const response = await fetch("/signout");

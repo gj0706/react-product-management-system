@@ -1,8 +1,34 @@
+import { useState } from "react";
+import { ContextExclusionPlugin } from "webpack";
 import SubmitButton from "../../submit-button/submit-button";
+import CreateProductPage from "../create-product/create-product";
 import "./product-item.css";
-const ProductItem = ({ name, price, imageUrl, isSignedIn }) => {
+const ProductItem = ({
+	id,
+	name,
+	price,
+	description,
+	quantity,
+	products,
+	imageUrl,
+	isSignedIn,
+	setAddClicked,
+	setEditClicked,
+	clickEditProduct,
+	editedProduct,
+	setEditedProduct,
+}) => {
 	const addProductToCart = () => {};
-	const editProduct = () => {};
+
+	const editProduct = (e) => {
+		const productToBeEdited = products[e.currentTarget.id];
+
+		clickEditProduct();
+		console.log(productToBeEdited);
+		setEditedProduct(productToBeEdited);
+		console.log(editedProduct);
+	};
+
 	return (
 		<div className="item-container">
 			<img className="item-img" src={imageUrl} alt={`${name}`} />
@@ -15,7 +41,7 @@ const ProductItem = ({ name, price, imageUrl, isSignedIn }) => {
 					Add
 				</SubmitButton>
 				{isSignedIn && (
-					<SubmitButton className="edit-btn" onClick={editProduct}>
+					<SubmitButton className="edit-btn" onClick={editProduct} id={id}>
 						Edit
 					</SubmitButton>
 				)}

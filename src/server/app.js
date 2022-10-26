@@ -102,6 +102,7 @@ app.post("/signup", (req, res) => {
 			if (email === req.body.email) {
 				res.json({
 					message: "Account already exists",
+					status: 400,
 				});
 				return;
 			}
@@ -314,6 +315,7 @@ app.post("/addProduct", (req, res) => {
 			if (id === req.body.id) {
 				res.json({
 					message: "Product already exists",
+					status: 400,
 				});
 				return;
 			}
@@ -327,6 +329,28 @@ app.post("/addProduct", (req, res) => {
 	}
 	// error handling
 	res.json({ message: "failed to add a product" });
+});
+
+app.put("/updateProduct", (req, res) => {
+	if (
+		req.body &&
+		req.body.name &&
+		req.body.description &&
+		req.body.quantity &&
+		req.body.price &&
+		req.body.imageUrl
+	) {
+		for (let id of Object.keys(products)) {
+			if (id === req.body.id) {
+				products[req.body.id] = { ...products.id, ...req.body };
+				res.json({ message: "product update succeed" });
+			} else {
+				res.json({ message: "product not found", status: 404 });
+			}
+		}
+		return;
+	}
+	res.json({ message: "Update failed" });
 });
 
 // 3. update a user (PUT) email as id

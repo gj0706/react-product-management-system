@@ -11,9 +11,15 @@ const initialState = {
 	quantity: "",
 };
 
-const CreateProductPage = (setAddClicked) => {
+const CreateProductPage = (
+	setAddClicked,
+	addClicked,
+	editClicked,
+	editedProduct
+) => {
 	const [product, setProduct] = useState(initialState);
 	const resetForm = () => setProduct(initialState);
+	// const { id, name, price, quantity, imageUrl, description } = editedProduct;
 	const changeHandler = (event) => {
 		const newProduct = {
 			...product,
@@ -22,10 +28,9 @@ const CreateProductPage = (setAddClicked) => {
 		setProduct(newProduct);
 		// console.log(product);
 	};
-
-	const id = uuidv4();
-	console.log(id);
-	const newProduct = { ...product, id: id };
+	console.log(editedProduct);
+	const uniqId = uuidv4();
+	const newProduct = { ...product, id: uniqId };
 	// const newFields = changeHandler();
 
 	const addProduct = async () => {
@@ -64,14 +69,15 @@ const CreateProductPage = (setAddClicked) => {
 	// async () => {
 	// 	const response = await fetch("/addProduct", {});
 	// };
-	const handleCancel = (e) => {
-		e.preventDefault();
+	const handleCancel = () => {
 		setAddClicked(false);
 	};
 
 	return (
 		<>
-			<h1 className="create-product-title">Create Product</h1>
+			<h1 className="create-product-title">
+				{addClicked ? "Edit Product" : "Create Product"}
+			</h1>
 			<div className="form-container">
 				<form className="create-product-form">
 					<label>Product name</label>
@@ -81,7 +87,7 @@ const CreateProductPage = (setAddClicked) => {
 						className="product-name"
 						onChange={changeHandler}
 						value={product.name}
-						required
+						// required
 					/>
 					<label>Product Description</label>
 					<textarea
@@ -89,7 +95,7 @@ const CreateProductPage = (setAddClicked) => {
 						name="description"
 						onChange={changeHandler}
 						value={product.description}
-						required
+						// required
 					/>
 					<div className="category-price">
 						<div className="category">
@@ -105,7 +111,7 @@ const CreateProductPage = (setAddClicked) => {
 								name="price"
 								value={product.price}
 								onChange={changeHandler}
-								required
+								// required
 							/>
 						</div>
 					</div>
@@ -115,7 +121,7 @@ const CreateProductPage = (setAddClicked) => {
 							<label>In Stock Quantity</label>
 							<input
 								type="text"
-								required
+								// required
 								name="quantity"
 								value={product.quantity}
 								onChange={changeHandler}
@@ -132,10 +138,10 @@ const CreateProductPage = (setAddClicked) => {
 								placeholder="http://"
 								name="imageUrl"
 								onChange={changeHandler}
-								required
+								// required
 							/>
 
-							<input id="upload" type="submit" />
+							<input id="upload" type="submit" value="upload" />
 						</div>
 					</div>
 					<div className="img-preview">
