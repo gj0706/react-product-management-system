@@ -24,6 +24,7 @@ const Homepage = ({
 				<CreateProductPage
 					products={products}
 					setAddClicked={setAddClicked}
+					setEditClicked={setEditClicked}
 					addClicked={addClicked}
 					editClicked={editClicked}
 					editedProduct={editedProduct}

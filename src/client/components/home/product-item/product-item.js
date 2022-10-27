@@ -1,8 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
+import {
+	BrowserRouter as Router,
+	Switch,
+	Routes,
+	Route,
+	Link,
+	useNavigate,
+} from "react-router-dom";
 import { ContextExclusionPlugin } from "webpack";
 import SubmitButton from "../../submit-button/submit-button";
 import CreateProductPage from "../create-product/create-product";
 import "./product-item.css";
+import ProductDetailPage from "../product-detail/product-detail";
 const ProductItem = ({
 	id,
 	name,
@@ -18,24 +27,38 @@ const ProductItem = ({
 	editedProduct,
 	setEditedProduct,
 }) => {
+	const navigate = useNavigate();
 	const addProductToCart = () => {};
+	const showProductDetail = useCallback(
+		() => navigate("/sample", { replace: true }),
+		[navigate]
+	);
 
 	const editProduct = (e) => {
+		e.preventDefault();
+
 		const productToBeEdited = products[e.currentTarget.id];
 
-		clickEditProduct();
 		console.log(productToBeEdited);
-		setEditedProduct(productToBeEdited);
-		console.log(editedProduct);
+
+		setEditedProduct((prev) => {
+			return { ...prev, ...productToBeEdited };
+		});
+		// console.log(editedProduct);
+		clickEditProduct();
 	};
 
 	return (
 		<div className="item-container">
-			<img className="item-img" src={imageUrl} alt={`${name}`} />
-			{/* <div className="item-info"> */}
+			<img
+				id={`${name}-${id}`}
+				className="item-img"
+				src={imageUrl}
+				alt={name}
+				onClick={showProductDetail}
+			/>
 			<p id="item-name">{name}</p>
 			<p id="item-price">{price}</p>
-			{/* </div> */}
 			<div className="item-btn-container">
 				<SubmitButton className="add-item-btn" onClick={addProductToCart}>
 					Add

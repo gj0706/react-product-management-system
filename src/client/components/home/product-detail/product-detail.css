@@ -1,0 +1,14 @@
+.detail-title {
+	text-align: start;
+	margin: 0px 50px;
+	padding: 45px 30px;
+}
+.detail-body {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	background-color: #f3f3f3;
+	padding: 45px 30px;
+	margin: 0px 50px;
+	text-align: start;
+}
