@@ -6,9 +6,22 @@
 .detail-body {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
+	justify-content: flex-start;
 	background-color: #f3f3f3;
 	padding: 45px 30px;
 	margin: 0px 50px;
 	text-align: start;
+}
+
+.product-info {
+	margin: auto;
+}
+
+.link-to-edit {
+	text-decoration: none;
+}
+.detail-image {
+}
+
+.cancel {
 }

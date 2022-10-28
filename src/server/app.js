@@ -82,12 +82,12 @@ app.post("/signin", (req, res) => {
 					message: `You've successfully signed in with Email: ${req.body.email}`,
 				});
 				return;
+			} else {
+				return res.json({
+					message: "Email or passrod doesn't match",
+					status: 400,
+				});
 			}
-			// else {
-			// 	return res
-			// 		.status(400)
-			// 		.json({ message: "Email or passrod doesn't match" });
-			// }
 		}
 	}
 	res.json({ message: "Failed to sign in" });
@@ -342,10 +342,10 @@ app.put("/updateProduct", (req, res) => {
 	) {
 		for (let id of Object.keys(products)) {
 			if (id === req.body.id) {
-				products[req.body.id] = { ...products.id, ...req.body };
+				products[id] = { ...products.id, ...req.body };
 				res.json({ message: "product update succeed" });
 			} else {
-				res.json({ message: "product not found", status: 404 });
+				res.json({ message: "product not found", status: 400 });
 			}
 		}
 		return;
@@ -355,7 +355,7 @@ app.put("/updateProduct", (req, res) => {
 
 // 3. update a user (PUT) email as id
 //  req.body => {email:  "ferry.zoila@gmail.com", password: 777777} =>
-app.put("/update", (req, res) => {
+app.put("/updateUser", (req, res) => {
 	if (req.body && req.body.email && req.body.password) {
 		for (let i = 0; i < users.length; i++) {
 			if (users[i].email === req.body.email) {
@@ -369,7 +369,7 @@ app.put("/update", (req, res) => {
 	res.json({ message: "Update failed" });
 });
 
-app.delete("/delete", (req, res) => {
+app.delete("/deleteUser", (req, res) => {
 	if (req.body && req.body.email && req.body.password) {
 		for (let i = 0; i < users.length; i++) {
 			if (users[i].email === req.body.email) {

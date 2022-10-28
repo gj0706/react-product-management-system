@@ -1,12 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import {
-	BrowserRouter as Router,
-	Switch,
-	Routes,
-	Route,
-	Link,
-	useNavigate,
-} from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { ContextExclusionPlugin } from "webpack";
 import SubmitButton from "../../submit-button/submit-button";
 import CreateProductPage from "../create-product/create-product";
@@ -29,34 +22,32 @@ const ProductItem = ({
 }) => {
 	const navigate = useNavigate();
 	const addProductToCart = () => {};
-	const showProductDetail = useCallback(
-		() => navigate("/sample", { replace: true }),
-		[navigate]
-	);
-
-	const editProduct = (e) => {
-		e.preventDefault();
-
-		const productToBeEdited = products[e.currentTarget.id];
-
-		console.log(productToBeEdited);
-
-		setEditedProduct((prev) => {
-			return { ...prev, ...productToBeEdited };
-		});
-		// console.log(editedProduct);
-		clickEditProduct();
-	};
-
+	console.log(description);
 	return (
 		<div className="item-container">
-			<img
-				id={`${name}-${id}`}
-				className="item-img"
-				src={imageUrl}
-				alt={name}
-				onClick={showProductDetail}
-			/>
+			<Link
+				className="item-link"
+				to={"detail"}
+				state={{
+					from: {
+						id: id,
+						name: name,
+						price: price,
+						quantity: quantity,
+						description: description,
+						imageUrl: imageUrl,
+					},
+				}}
+			>
+				<img
+					id={`${name}-${id}`}
+					className="item-img"
+					src={imageUrl}
+					alt={name}
+					// onClick={showProductDetail}
+				/>
+			</Link>
+
 			<p id="item-name">{name}</p>
 			<p id="item-price">{price}</p>
 			<div className="item-btn-container">
@@ -64,9 +55,27 @@ const ProductItem = ({
 					Add
 				</SubmitButton>
 				{isSignedIn && (
-					<SubmitButton className="edit-btn" onClick={editProduct} id={id}>
-						Edit
-					</SubmitButton>
+					<Link
+						to="/edit"
+						state={{
+							from: {
+								id: id,
+								name: name,
+								price: price,
+								quantity: quantity,
+								description: description,
+								imageUrl: imageUrl,
+							},
+						}}
+					>
+						<SubmitButton
+							className="edit-btn"
+							id={id}
+							//  onClick={handleOnclick}
+						>
+							Edit
+						</SubmitButton>
+					</Link>
 				)}
 			</div>
 		</div>

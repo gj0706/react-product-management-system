@@ -20,6 +20,7 @@ const ProductList = ({
 					name={name}
 					price={"$" + `${price}`}
 					quantity={quantity}
+					description={description}
 					imageUrl={imageUrl}
 					isSignedIn={isSignedIn}
 					setAddClicked={setAddClicked}

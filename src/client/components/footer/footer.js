@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom";
 import facebookSvg from "../../assets/icon-facebook.svg";
 import twitterSvg from "../../assets/icon-twitter.svg";
 import youtubeSvg from "../../assets/icon-youtube.svg";
@@ -25,6 +26,7 @@ const Footer = () => {
 				<a>Privacy policies</a>
 				<a>Help</a>
 			</div>
+			<Outlet />
 		</footer>
 	);
 };

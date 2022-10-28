@@ -1,5 +1,8 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
+import Footer from "../../footer/footer";
+import Header from "../../header/header";
 import SubmitButton from "../../submit-button/submit-button";
 import "./create-product.css";
 
@@ -75,9 +78,8 @@ const CreateProductPage = (
 
 	return (
 		<>
-			<h1 className="create-product-title">
-				{addClicked ? "Edit Product" : "Create Product"}
-			</h1>
+			<Header />
+			<h1 className="product-title">Create Product</h1>
 			<div className="form-container">
 				<form className="create-product-form">
 					<label>Product name</label>
@@ -151,15 +153,14 @@ const CreateProductPage = (
 						<SubmitButton className="add" onClick={submitProduct}>
 							Add
 						</SubmitButton>
-						<SubmitButton className="cancel" onClick={handleCancel}>
-							Cancel
-						</SubmitButton>
+						<Link to="/">
+							<SubmitButton className="cancel">Cancel</SubmitButton>
+						</Link>
 					</div>
 				</form>
 			</div>
+			<Footer />
 		</>
-
-		// </div>
 	);
 };
 
