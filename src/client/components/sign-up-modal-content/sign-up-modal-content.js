@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import api from "../../api/api";
+import { v4 as uuidv4 } from "uuid";
+
 import {
 	useForm,
 	isRequired,
@@ -13,6 +15,7 @@ import FormInput from "../form-input/form-input";
 import SubmitButton from "../submit-button/submit-button";
 import FORM from "../../constants/form";
 import "./sign-up-modal-content.css";
+import ajaxConfigHelper from "../../api/api";
 
 const SignUpModalContent = ({
 	users,
@@ -20,6 +23,7 @@ const SignUpModalContent = ({
 	showSignInModal,
 	visible,
 	handleOnLogin,
+	setVisible,
 }) => {
 	// const [clickable, setClickable] = useState(true);
 
@@ -48,57 +52,25 @@ const SignUpModalContent = ({
 		touched,
 	} = useForm(initialState, validations);
 
-	// const handleSubmit = async (event) => {
-	// 	event.preventDefault();
-	// 	if (!(errors || !isValid)) {
-	// 		try {
-	// 			const response = await fetch("/signup", {
-	// 				method: "POST",
-	// 				headers: {
-	// 					"Content-Type": "application/json",
-	// 				},
-	// 				body: JSON.stringify(formFields),
-	// 			});
-	// 			const result = await response.json();
-	// 			console.log(result);
-	// 			if (response.status === 200) {
-	// 				resetFormFields();
-	// 				console.log("User created successfully");
-	// 				return result;
-	// 			} else {
-	// 				console.log("Some error occured");
-	// 			}
-	// 		} catch (error) {
-	// 			console.log(error);
-	// 		}
-	// 	}
-	// };
 	const { email, password } = formFields;
 
 	const fetchData = async () => {
 		try {
-			let response = await fetch("/signup", {
-				method: "POST",
-				mode: "cors",
-				cache: "no-cache",
-				credentials: "same-origin",
-				headers: {
-					"Content-Type": "application/json",
-					Accept: "application/json",
-				},
-				redirect: "follow",
-				referrerPolicy: "no-referrer",
-				body: JSON.stringify({
+			let response = await fetch(
+				"/signup",
+				ajaxConfigHelper({
+					id: email,
 					email: email,
 					password: password,
-				}),
-			});
+					type: "USER",
+				})
+			);
 			let result = await response.json();
 			console.log(result);
 			if (response.status === 200) {
-				resetFormFields();
+				setVisible(false);
 				console.log("Signed up successfully");
-			} else {
+			} else if (response.status === 400) {
 				console.log("Some error occured");
 			}
 		} catch (err) {
@@ -109,6 +81,7 @@ const SignUpModalContent = ({
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		fetchData();
+		resetFormFields();
 	};
 
 	// useEffect(() => {

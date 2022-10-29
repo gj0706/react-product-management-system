@@ -14,6 +14,7 @@ const ProductDetailPage = () => {
 	// console.log(name);
 	return (
 		<>
+			<Header />
 			<h1 className="detail-title">Product Detail</h1>
 			<div className="detail-body">
 				<div className="detail-container">
@@ -54,6 +55,7 @@ const ProductDetailPage = () => {
 					</div>
 				</div>
 			</div>
+			<Footer />
 		</>
 	);
 };

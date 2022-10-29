@@ -5,6 +5,7 @@ import Footer from "../../footer/footer";
 import Header from "../../header/header";
 import SubmitButton from "../../submit-button/submit-button";
 import "./create-product.css";
+import ajaxConfigHelper from "../../../api/api";
 
 const initialState = {
 	name: "",
@@ -38,26 +39,14 @@ const CreateProductPage = (
 
 	const addProduct = async () => {
 		try {
-			let response = await fetch("/addProduct", {
-				method: "POST",
-				mode: "cors",
-				cache: "no-cache",
-				credentials: "same-origin",
-				headers: {
-					"Content-Type": "application/json",
-					Accept: "application/json",
-				},
-				redirect: "follow",
-				referrerPolicy: "no-referrer",
-				body: JSON.stringify(newProduct),
-			});
+			let response = await fetch("/addProduct", ajaxConfigHelper(newProduct));
 			let result = await response.json();
 			console.log(result);
 			if (response.status === 200) {
 				resetForm();
 
-				// console.log("Signed in successfully");
-			} else {
+				console.log("Product created successfully");
+			} else if (response.status === 400) {
 				console.log("Some error occured");
 			}
 		} catch (err) {
@@ -68,6 +57,7 @@ const CreateProductPage = (
 	const submitProduct = (e) => {
 		e.preventDefault();
 		addProduct();
+		resetForm();
 	};
 	// async () => {
 	// 	const response = await fetch("/addProduct", {});

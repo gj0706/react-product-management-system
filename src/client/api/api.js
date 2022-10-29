@@ -1,5 +1,3 @@
-import { ContextExclusionPlugin } from "webpack";
-
 const ajaxConfigHelper = (data, method = "POST") => {
 	return {
 		method, // *GET, POST, PUT, DELETE, etc.
@@ -16,76 +14,76 @@ const ajaxConfigHelper = (data, method = "POST") => {
 	};
 };
 
-const getUsersApi = async () => {
-	try {
-		const response = await fetch("/getUsers", {
-			method: "GET",
-			headers: {
-				"Content-Type": "aapplication/json",
-			},
-		});
-		const result = await response.json();
-		console.log(result);
-		return result;
-	} catch (error) {
-		console.log(error);
-	}
-};
+// const getUsersApi = async () => {
+// 	try {
+// 		const response = await fetch("/getUsers", {
+// 			method: "GET",
+// 			headers: {
+// 				"Content-Type": "aapplication/json",
+// 			},
+// 		});
+// 		const result = await response.json();
+// 		console.log(result);
+// 		return result;
+// 	} catch (error) {
+// 		console.log(error);
+// 	}
+// };
 
-const getProductsApi = async () => {
-	try {
-		const response = await fetch("/getProducts", {
-			method: "GET",
-			headers: {
-				"Content-Type": "aapplication/json",
-			},
-		});
-		const result = await response.json();
-		console.log(result);
-		return result;
-	} catch (error) {
-		console.log(error);
-	}
-};
-const signinApi = async (accountInfo) => {
-	try {
-		const response = await fetch("/signin", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(accountInfo),
-		});
-		const result = await response.json();
-		console.log(result);
-		return result;
-	} catch (error) {
-		console.log(error);
-	}
-};
+// const getProductsApi = async () => {
+// 	try {
+// 		const response = await fetch("/getProducts", {
+// 			method: "GET",
+// 			headers: {
+// 				"Content-Type": "aapplication/json",
+// 			},
+// 		});
+// 		const result = await response.json();
+// 		console.log(result);
+// 		return result;
+// 	} catch (error) {
+// 		console.log(error);
+// 	}
+// };
+// const signinApi = async (accountInfo) => {
+// 	try {
+// 		const response = await fetch("/signin", {
+// 			method: "POST",
+// 			headers: {
+// 				"Content-Type": "application/json",
+// 			},
+// 			body: JSON.stringify(accountInfo),
+// 		});
+// 		const result = await response.json();
+// 		console.log(result);
+// 		return result;
+// 	} catch (error) {
+// 		console.log(error);
+// 	}
+// };
 
-const signupApi = async (accountInfo) => {
-	try {
-		const response = await fetch("/signup", ajaxConfigHelper(accountInfo));
-		const result = await response.json();
-		console.log(result);
-		return result;
-	} catch (error) {
-		console.log(error);
-	}
-};
+// const signupApi = async (accountInfo) => {
+// 	try {
+// 		const response = await fetch("/signup", ajaxConfigHelper(accountInfo));
+// 		const result = await response.json();
+// 		console.log(result);
+// 		return result;
+// 	} catch (error) {
+// 		console.log(error);
+// 	}
+// };
 
-const logoutApi = async () => {
-	try {
-		const response = await fetch("", {
-			method: "POST",
-		});
-		const result = await response.json();
-		console.log(result);
-		return result;
-	} catch (error) {
-		console.log(error);
-	}
-};
+// const logoutApi = async () => {
+// 	try {
+// 		const response = await fetch("", {
+// 			method: "POST",
+// 		});
+// 		const result = await response.json();
+// 		console.log(result);
+// 		return result;
+// 	} catch (error) {
+// 		console.log(error);
+// 	}
+// };
 
-export default { getUsersApi, signinApi, signupApi, logoutApi, getProductsApi };
+export default ajaxConfigHelper;

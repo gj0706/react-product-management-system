@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import api from "../../api/api";
+import ajaxConfigHelper from "../../api/api";
 import {
 	useForm,
 	isRequired,
@@ -50,22 +50,10 @@ const SignInModalContent = ({
 
 	const fetchData = async () => {
 		try {
-			let response = await fetch("/signin", {
-				method: "POST",
-				mode: "cors",
-				cache: "no-cache",
-				credentials: "same-origin",
-				headers: {
-					"Content-Type": "application/json",
-					Accept: "application/json",
-				},
-				redirect: "follow",
-				referrerPolicy: "no-referrer",
-				body: JSON.stringify({
-					email: email,
-					password: password,
-				}),
-			});
+			let response = await fetch(
+				"/signin",
+				ajaxConfigHelper({ email: email, password: password })
+			);
 			let result = await response.json();
 			console.log(result);
 			if (response.status === 200) {

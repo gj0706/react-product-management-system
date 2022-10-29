@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import api from "../../api/api";
 import SignOut from "../sign-out/sign-out";
 import SignIn from "../sign-in/sign-in";
@@ -41,39 +42,6 @@ const Header = ({
 		setSignUpModalOn(false);
 	};
 
-	// useEffect(() => {
-	// 	const getUserData = async () => {
-	// 		try {
-	// 			const response = await fetch("/getUser", {
-	// 				method: "POST",
-	// 				mode: "cors",
-	// 				cache: "no-cache",
-	// 				credentials: "same-origin",
-	// 				headers: {
-	// 					"Content-Type": "application/json",
-	// 					Accept: "application/json",
-	// 				},
-	// 				redirect: "follow",
-	// 				referrerPolicy: "no-referrer",
-	// 				body: JSON.stringify({
-	// 					email: user.email,
-	// 					password: user.password,
-	// 				}),
-	// 			});
-	// 			if (response.status === 200) {
-	// 				setSignedIn(true);
-	// 			} else {
-	// 				setSignedIn(false);
-	// 				throw new Error(
-	// 					`Get customer API response status error: ${response.status}`
-	// 				);
-	// 			}
-	// 		} catch (error) {
-	// 			// throw new Error(`Get customer API error: ${JSON.stringify(error)}`);
-	// 		}
-	// 	};
-	// 	getUserData();
-	// }, [isSignedIn]);
 	const handleOnClick = () => {};
 
 	return (
@@ -104,23 +72,7 @@ const Header = ({
 								setAddClicked={setAddClicked}
 							/>
 						) : (
-							// <span
-							// 	id="sign-out-text"
-							// 	onClick={handleOnClick}
-							// 	handleSignOut={() => setSignedIn(false)}
-							// >
-							// 	{FORM.SIGNOUT}
-							// </span>
 							<SignIn showModal={showModal} handleSignIn={handleSignIn} />
-							// <span
-							// 	id="sign-in-text"
-							// 	onClick={showModal}
-							// 	handleSignIn={() => {
-							// 		setSignedIn(true);
-							// 	}}
-							// >
-							// 	{FORM.SIGNIN}
-							// </span>
 						)}
 					</div>
 					<div className="shopping-cart">
@@ -146,6 +98,7 @@ const Header = ({
 				{signUpModalOn ? (
 					<SignUpModalContent
 						visible={visible}
+						setVisible={setVisible}
 						user={user}
 						setUser={setUser}
 						signInModalOn={signInModalOn}

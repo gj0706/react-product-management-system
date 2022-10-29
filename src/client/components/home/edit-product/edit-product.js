@@ -4,6 +4,7 @@ import Footer from "../../footer/footer";
 import Header from "../../header/header";
 import ProductForm from "../../product-form/product-form";
 import SubmitButton from "../../submit-button/submit-button";
+import ajaxConfigHelper from "../../../api/api";
 import "./edit-product.css";
 
 const initialState = {
@@ -42,26 +43,20 @@ const EditProductPage = () =>
 
 		const updateProduct = async () => {
 			try {
-				let response = await fetch("/updateProduct", {
-					method: "PUT",
-					mode: "cors",
-					cache: "no-cache",
-					credentials: "same-origin",
-					headers: {
-						"Content-Type": "application/json",
-						Accept: "application/json",
-					},
-					redirect: "follow",
-					referrerPolicy: "no-referrer",
-					body: JSON.stringify({
-						id: newProduct.id,
-						name: newProduct.name,
-						price: newProduct.price,
-						quantity: newProduct.quantity,
-						imageUrl: newProduct.imageUrl,
-						description: newProduct.description,
-					}),
-				});
+				let response = await fetch(
+					"/updateProduct",
+					ajaxConfigHelper(
+						{
+							id: id,
+							name: newProduct.name,
+							price: newProduct.price,
+							quantity: newProduct.quantity,
+							imageUrl: newProduct.imageUrl,
+							description: newProduct.description,
+						},
+						"PUT"
+					)
+				);
 				let result = await response.json();
 				console.log(result);
 				if (response.status === 200) {
