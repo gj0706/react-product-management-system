@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { selectCurrentUser } from "../../stores/user.selector";
 import ajaxConfigHelper from "../../api/api";
 import {
 	useForm,
@@ -10,17 +12,14 @@ import FORM from "../../constants/form";
 import FormInput from "../form-input/form-input";
 import SubmitButton from "../submit-button/submit-button";
 import "./sign-in-modal-content.css";
+import { setCurrentUser } from "../../actions/user-action";
 
 const SignInModalContent = ({
 	showSignUpModal,
 	showForgetPwModal,
-	handleSignIn,
 	setVisible,
-	isSignedIn,
-	setSignedIn,
-	user,
-	setUser,
 }) => {
+	const dispatch = useDispatch();
 	const initialState = {
 		email: "",
 		password: "",
@@ -47,9 +46,7 @@ const SignInModalContent = ({
 	} = useForm(initialState, validations);
 
 	const { email, password } = formFields;
-	// const handleSignIn = ()=>{
 
-	// 	}
 	const fetchData = async () => {
 		try {
 			let response = await fetch(
@@ -59,13 +56,10 @@ const SignInModalContent = ({
 			let result = await response.json();
 			console.log(result.data);
 			if (response.status === 200) {
-				setUser(result.data);
+				// setUser(result.data);
+				dispatch(setCurrentUser(result.data));
 				localStorage.setItem("user", JSON.stringify(result.data));
 				setVisible(false);
-				// console.log(handleSignIn);
-				// handleSignIn();
-
-				// console.log("Signed in successfully");
 			} else if (response.status === 400) {
 				console.log("Some error occured");
 			}

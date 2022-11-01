@@ -2,23 +2,15 @@ import { useState, useEffect, useCallback } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../../stores/user.selector";
+import { selectProducts } from "../../../stores/product-selector";
 import SubmitButton from "../../submit-button/submit-button";
 import CreateProductPage from "../create-product/create-product";
 import "./product-item.css";
 import ProductDetailPage from "../product-detail/product-detail";
-const ProductItem = ({
-	id,
-	name,
-	price,
-	description,
-	quantity,
-	products,
-	imageUrl,
-	isSignedIn,
-	user,
-}) => {
+const ProductItem = ({ id, name, price, description, quantity, imageUrl }) => {
 	const navigate = useNavigate();
 	const currentUser = useSelector(selectCurrentUser);
+	const products = useSelector(selectProducts);
 	const addProductToCart = () => {};
 	// console.log(description);
 	return (

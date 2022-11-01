@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectProducts } from "../../../stores/product-selector";
 import Header from "../../header/header";
 import CreateProductPage from "../create-product/create-product";
 import Footer from "../../footer/footer";
@@ -7,6 +9,8 @@ import SubmitButton from "../../submit-button/submit-button";
 import "./product-detail.css";
 
 const ProductDetailPage = () => {
+	const products = useSelector(selectProducts);
+
 	const location = useLocation();
 	console.log(location.state.from);
 	const { id, name, price, quantity, imageUrl, description } =

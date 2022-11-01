@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { selectProducts } from "../../../stores/product-selector";
 import ProductItem from "../product-item/product-item";
 import "./product-list.css";
 
-const ProductList = ({ products, isSignedIn, user }) => {
+const ProductList = () => {
+	const products = useSelector(selectProducts);
+
 	const productList = Object.values(products).map(
 		({ id, name, price, quantity, imageUrl, description }) => {
 			return (
@@ -15,8 +19,6 @@ const ProductList = ({ products, isSignedIn, user }) => {
 					quantity={quantity}
 					description={description}
 					imageUrl={imageUrl}
-					isSignedIn={isSignedIn}
-					user={user}
 				/>
 			);
 		}

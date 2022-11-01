@@ -16,10 +16,11 @@ function App() {
 
 	useEffect(() => {
 		const loggedInUser = localStorage.getItem("user");
-		if (loggedInUser) {
-			const foundUser = JSON.parse(loggedInUser);
-			dispatch(setCurrentUser(foundUser));
-		}
+		// if (loggedInUser) {
+		// 	const foundUser = JSON.parse(loggedInUser);
+		// 	dispatch(setCurrentUser(foundUser));
+		// }
+		dispatch(setCurrentUser(JSON.parse(loggedInUser)));
 	}, [dispatch]);
 
 	return (

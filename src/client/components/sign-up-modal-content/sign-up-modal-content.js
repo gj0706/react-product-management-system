@@ -17,16 +17,7 @@ import FORM from "../../constants/form";
 import "./sign-up-modal-content.css";
 import ajaxConfigHelper from "../../api/api";
 
-const SignUpModalContent = ({
-	users,
-	setUsers,
-	showSignInModal,
-	visible,
-	handleOnLogin,
-	setVisible,
-}) => {
-	// const [clickable, setClickable] = useState(true);
-
+const SignUpModalContent = ({ showSignInModal, setVisible }) => {
 	const initialState = {
 		email: "",
 		password: "",

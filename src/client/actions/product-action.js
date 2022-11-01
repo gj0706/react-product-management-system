@@ -1,5 +1,10 @@
+import { createAction } from "./creat-action-helper";
 import ajaxConfigHelper from "../api/api";
 import { TYPES } from "../constants/types";
+
+export const setProducts = (products) =>
+	createAction(TYPES.SET_PRODUCTS, products);
+
 export const getProducts = (dispatch) => async () => {
 	try {
 		const response = await fetch("/getProducts");

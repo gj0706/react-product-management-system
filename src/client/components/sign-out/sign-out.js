@@ -1,8 +1,11 @@
 import { redirect, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setCurrentUser } from "../../actions/user-action";
 import FORM from "../../constants/form";
 import "./sign-out.css";
 
 const SignOut = ({ handleSignOut, setUser }) => {
+	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	// const handleSignOut = () => {
 	// 	setUser({});
@@ -14,8 +17,9 @@ const SignOut = ({ handleSignOut, setUser }) => {
 			const response = await fetch("/signout");
 			const result = await response.json();
 
-			alert("User signed out.");
-			handleSignOut();
+			// alert("User signed out.");
+			// handleSignOut();
+			dispatch(setCurrentUser(null));
 			localStorage.clear();
 			navigate("/");
 		} catch (e) {

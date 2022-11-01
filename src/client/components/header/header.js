@@ -12,14 +12,7 @@ import UpdatePwModalContent from "../update-password-modal-content/update-passwo
 import FORM from "../../constants/form";
 import "./header.css";
 
-const Header = ({
-	isSignedIn,
-	setSignedIn,
-	handleSignIn,
-	handleSignOut,
-	user,
-	setUser,
-}) => {
+const Header = () => {
 	const [visible, setVisible] = useState(false);
 	const [signInModalOn, setSignInModalOn] = useState(true);
 	const [signUpModalOn, setSignUpModalOn] = useState(false);
@@ -69,16 +62,7 @@ const Header = ({
 							className="fa-solid fa-user"
 							onClick={showModal}
 						></i>
-						{currentUser ? (
-							<SignOut handleSignOut={handleSignOut} setUser={setUser} />
-						) : (
-							<SignIn
-								showModal={showModal}
-								handleSignIn={handleSignIn}
-								user={user}
-								setUser={setUser}
-							/>
-						)}
+						{currentUser ? <SignOut /> : <SignIn showModal={showModal} />}
 					</div>
 					<Cart visible={visible} setVisible={setVisible} />
 				</div>
@@ -100,8 +84,6 @@ const Header = ({
 				{signUpModalOn ? (
 					<SignUpModalContent
 						visible={visible}
-						user={user}
-						setUser={setUser}
 						signInModalOn={signInModalOn}
 						showSignInModal={showSignInModal}
 					/>
@@ -111,13 +93,8 @@ const Header = ({
 					<SignInModalContent
 						visible={visible}
 						setVisible={setVisible}
-						user={user}
-						setUser={setUser}
 						showForgetPwModal={showForgetPwModal}
 						showSignUpModal={showSignUpModal}
-						// handleSignIn={handleSignIn}
-						isSignedIn={isSignedIn}
-						setSignedIn={setSignedIn}
 					/>
 				)}
 			</Modal>
