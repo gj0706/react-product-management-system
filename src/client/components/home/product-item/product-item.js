@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { ContextExclusionPlugin } from "webpack";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../../stores/user.selector";
 import SubmitButton from "../../submit-button/submit-button";
 import CreateProductPage from "../create-product/create-product";
 import "./product-item.css";
@@ -14,15 +15,12 @@ const ProductItem = ({
 	products,
 	imageUrl,
 	isSignedIn,
-	setAddClicked,
-	setEditClicked,
-	clickEditProduct,
-	editedProduct,
-	setEditedProduct,
+	user,
 }) => {
 	const navigate = useNavigate();
+	const currentUser = useSelector(selectCurrentUser);
 	const addProductToCart = () => {};
-	console.log(description);
+	// console.log(description);
 	return (
 		<div className="item-container">
 			<Link
@@ -54,7 +52,7 @@ const ProductItem = ({
 				<SubmitButton className="add-item-btn" onClick={addProductToCart}>
 					Add
 				</SubmitButton>
-				{isSignedIn && (
+				{currentUser && (
 					<Link
 						to="/edit"
 						state={{

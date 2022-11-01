@@ -1,23 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../../stores/user.selector";
 import SubmitButton from "../../submit-button/submit-button";
 import CreateProductPage from "../create-product/create-product";
 import ProductList from "../product-list/product-list";
 import "./homepage.css";
-const Homepage = ({
-	products,
-	isSignedIn,
-	addClicked,
-	setAddClicked,
-	editClicked,
-	setEditClicked,
-	editedProduct,
-	setEditedProduct,
-}) => {
-	const clickAddProduct = () => {
-		setAddClicked(true);
-	};
-	const clickEditProduct = () => setEditClicked(true);
+const Homepage = ({ products, isSignedIn, user }) => {
+	const currentUser = useSelector(selectCurrentUser);
 
 	return (
 		<>
@@ -29,7 +19,7 @@ const Homepage = ({
 						<option>Price: low to high</option>
 						<option>Price: high to low</option>
 					</select>
-					{isSignedIn ? (
+					{currentUser ? (
 						<Link to="/create">
 							<SubmitButton
 								className="add-product"
@@ -43,15 +33,7 @@ const Homepage = ({
 					)}
 				</div>
 			</div>
-			<ProductList
-				products={products}
-				isSignedIn={isSignedIn}
-				setAddClicked={setAddClicked}
-				setEditClicked={setEditClicked}
-				clickEditProduct={clickEditProduct}
-				editedProduct={editedProduct}
-				setEditedProduct={setEditedProduct}
-			/>
+			<ProductList products={products} isSignedIn={isSignedIn} user={user} />
 			<div className="pagenation"></div>
 		</>
 	);

@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../stores/user.selector";
 import api from "../../api/api";
 import SignOut from "../sign-out/sign-out";
 import SignIn from "../sign-in/sign-in";
 import Modal from "../modal/modal";
+import Cart from "../cart/cart";
 import SignInModalContent from "../sign-in-modal-content/sign-in-modal-content";
 import SignUpModalContent from "../sign-up-modal-content/sign-up-modal-content";
 import UpdatePwModalContent from "../update-password-modal-content/update-password-modal-content";
@@ -15,14 +17,15 @@ const Header = ({
 	setSignedIn,
 	handleSignIn,
 	handleSignOut,
-	setAddClicked,
+	user,
+	setUser,
 }) => {
-	const [user, setUser] = useState({});
 	const [visible, setVisible] = useState(false);
 	const [signInModalOn, setSignInModalOn] = useState(true);
 	const [signUpModalOn, setSignUpModalOn] = useState(false);
 	const [forgetPwModalOn, setForgetPwModalOn] = useState(false);
-
+	const currentUser = useSelector(selectCurrentUser);
+	console.log(currentUser);
 	const showModal = () => {
 		setVisible(true);
 	};
@@ -66,19 +69,18 @@ const Header = ({
 							className="fa-solid fa-user"
 							onClick={showModal}
 						></i>
-						{isSignedIn ? (
-							<SignOut
-								handleSignOut={handleSignOut}
-								setAddClicked={setAddClicked}
-							/>
+						{currentUser ? (
+							<SignOut handleSignOut={handleSignOut} setUser={setUser} />
 						) : (
-							<SignIn showModal={showModal} handleSignIn={handleSignIn} />
+							<SignIn
+								showModal={showModal}
+								handleSignIn={handleSignIn}
+								user={user}
+								setUser={setUser}
+							/>
 						)}
 					</div>
-					<div className="shopping-cart">
-						<i className="fa-solid fa-cart-shopping" id="cart-icon"></i>
-						<span id="cart-text">$0.00</span>
-					</div>
+					<Cart visible={visible} setVisible={setVisible} />
 				</div>
 			</nav>
 			<Modal
@@ -98,7 +100,6 @@ const Header = ({
 				{signUpModalOn ? (
 					<SignUpModalContent
 						visible={visible}
-						setVisible={setVisible}
 						user={user}
 						setUser={setUser}
 						signInModalOn={signInModalOn}
@@ -114,7 +115,7 @@ const Header = ({
 						setUser={setUser}
 						showForgetPwModal={showForgetPwModal}
 						showSignUpModal={showSignUpModal}
-						handleSignIn={handleSignIn}
+						// handleSignIn={handleSignIn}
 						isSignedIn={isSignedIn}
 						setSignedIn={setSignedIn}
 					/>

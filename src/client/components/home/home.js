@@ -2,20 +2,26 @@ import { useState, useEffect } from "react";
 import Header from "../header/header";
 import Homepage from "./homepage/homepage";
 import Footer from "../footer/footer";
-import CreateProductPage from "./create-product/create-product";
 import "./home.css";
 const Home = () => {
+	const [user, setUser] = useState(null);
 	const [isSignedIn, setSignedIn] = useState(false);
 	const [products, setProducts] = useState({});
-	const [addClicked, setAddClicked] = useState(false);
-	const [editClicked, setEditClicked] = useState(false);
-	const [editedProduct, setEditedProduct] = useState({});
 	const handleSignIn = () => {
 		setSignedIn(true);
 	};
 	const handleSignOut = () => {
 		setSignedIn(false);
+		setUser(null);
 	};
+
+	// useEffect(() => {
+	// 	const loggedInUser = localStorage.getItem("user");
+	// 	if (loggedInUser) {
+	// 		const foundUser = JSON.parse(loggedInUser);
+	// 		setUser(foundUser);
+	// 	}
+	// }, []);
 
 	useEffect(() => {
 		const getProductData = async () => {
@@ -37,21 +43,16 @@ const Home = () => {
 				setSignedIn={setSignedIn}
 				handleSignIn={handleSignIn}
 				handleSignOut={handleSignOut}
-				setAddClicked={setAddClicked}
+				user={user}
+				setUser={setUser}
 			/>
 
 			<Homepage
 				products={products}
 				isSignedIn={isSignedIn}
 				setSignedIn={setSignedIn}
-				addClicked={addClicked}
-				setAddClicked={setAddClicked}
-				editClicked={editClicked}
-				setEditClicked={setEditClicked}
-				editedProduct={editedProduct}
-				setEditedProduct={setEditedProduct}
+				user={user}
 			/>
-
 			<Footer />
 		</div>
 	);

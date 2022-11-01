@@ -41,11 +41,12 @@ const Modal = ({
 			// ref={modal}
 			style={{ display: visible ? "block" : "none" }}
 		>
-			<h2 id="title-text">{titleText}</h2>
-			<span className="close" onClick={closeModal}>
-				&times;
-			</span>
-
+			<div className="modal-title">
+				<h2 id="title-text">{titleText}</h2>
+				<span className="close" onClick={closeModal}>
+					&times;
+				</span>
+			</div>
 			{children}
 		</div>
 	);

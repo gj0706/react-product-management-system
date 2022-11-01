@@ -79,19 +79,6 @@ input.nav-search {
 	margin: 10px 10px 10px 20px;
 	cursor: pointer;
 }
-.shopping-cart {
-	cursor: pointer;
-	margin: 0px 15px;
-}
-
-#cart-text {
-	cursor: pointer;
-}
-
-#cart-icon {
-	margin: 0px 10px;
-	cursor: pointer;
-}
 
 @media screen and (max-width: 640px) {
 	.nav-bar {

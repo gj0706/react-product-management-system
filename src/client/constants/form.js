@@ -1,4 +1,4 @@
-export const FORM = {
+const FORM = {
 	SIGNIN: "Sign in",
 	SIGNOUT: "Sign out",
 	SIGNUP: "Sign up",
@@ -8,8 +8,8 @@ export const FORM = {
 	UPDATE_PW: "Update password",
 	LOCAL_LOGIN_API_BASE_URL: "http://localhost:3000",
 	USER_TYPE: {
-		CUSTOMER: "CUSTOMER",
-		ADMIN: "ADMINISTRATOR",
+		USR: "USER",
+		ADMIN: "ADMIN",
 	},
 	CREATE_ACC: "Create account",
 	COPYRIGHT: "@2022 All Rights Reserved",

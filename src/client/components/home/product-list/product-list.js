@@ -2,14 +2,7 @@ import { useEffect, useState } from "react";
 import ProductItem from "../product-item/product-item";
 import "./product-list.css";
 
-const ProductList = ({
-	products,
-	isSignedIn,
-	setAddClicked,
-	clickEditProduct,
-	editedProduct,
-	setEditedProduct,
-}) => {
+const ProductList = ({ products, isSignedIn, user }) => {
 	const productList = Object.values(products).map(
 		({ id, name, price, quantity, imageUrl, description }) => {
 			return (
@@ -23,10 +16,7 @@ const ProductList = ({
 					description={description}
 					imageUrl={imageUrl}
 					isSignedIn={isSignedIn}
-					setAddClicked={setAddClicked}
-					clickEditProduct={clickEditProduct}
-					editedProduct={editedProduct}
-					setEditedProduct={setEditedProduct}
+					user={user}
 				/>
 			);
 		}

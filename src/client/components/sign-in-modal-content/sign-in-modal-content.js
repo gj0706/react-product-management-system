@@ -47,7 +47,9 @@ const SignInModalContent = ({
 	} = useForm(initialState, validations);
 
 	const { email, password } = formFields;
+	// const handleSignIn = ()=>{
 
+	// 	}
 	const fetchData = async () => {
 		try {
 			let response = await fetch(
@@ -55,11 +57,13 @@ const SignInModalContent = ({
 				ajaxConfigHelper({ email: email, password: password })
 			);
 			let result = await response.json();
-			console.log(result);
+			console.log(result.data);
 			if (response.status === 200) {
-				setUser(formFields);
-				handleSignIn();
+				setUser(result.data);
+				localStorage.setItem("user", JSON.stringify(result.data));
 				setVisible(false);
+				// console.log(handleSignIn);
+				// handleSignIn();
 
 				// console.log("Signed in successfully");
 			} else if (response.status === 400) {

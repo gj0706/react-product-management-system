@@ -16,9 +16,9 @@ const initialState = {
 };
 
 const CreateProductPage = (
-	setAddClicked,
-	addClicked,
-	editClicked,
+	// setAddClicked,
+	// addClicked,
+	// editClicked,
 	editedProduct
 ) => {
 	const [product, setProduct] = useState(initialState);
@@ -62,9 +62,9 @@ const CreateProductPage = (
 	// async () => {
 	// 	const response = await fetch("/addProduct", {});
 	// };
-	const handleCancel = () => {
-		setAddClicked(false);
-	};
+	// const handleCancel = () => {
+	// 	setAddClicked(false);
+	// };
 
 	return (
 		<>

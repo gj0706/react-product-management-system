@@ -69,6 +69,7 @@ app.post("/signin", async (req, res) => {
 		if (password === queryResult.password) {
 			res.json({
 				message: `You've successfully signed in with Email: ${req.body.email}`,
+				data: queryResult,
 			});
 			return;
 		} else {

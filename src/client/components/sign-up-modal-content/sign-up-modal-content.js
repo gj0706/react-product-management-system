@@ -84,28 +84,6 @@ const SignUpModalContent = ({
 		resetFormFields();
 	};
 
-	// useEffect(() => {
-	// 	fetchData();
-	// }, []);
-	// useEffect(() => {
-	// 	handleSubmit();
-	// }, []);
-
-	// const handleSubmit = (event) => {
-	// 	event.preventDefault();
-
-	// 	alert(
-	// 		"You've signed in with the following information: " +
-	// 			JSON.stringify(formFields, null, 2)
-	// 	);
-
-	// 	setUsers((prev) => {
-	// 		return [...prev, formFields];
-	// 	});
-	// 	console.log(users);
-	// 	resetFormFields();
-	// };
-
 	return (
 		<div className="sign-in-container">
 			<form className="sign-in-form" onSubmit={handleSubmit}>
