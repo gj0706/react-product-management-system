@@ -6,7 +6,7 @@
 .detail-body {
 	display: flex;
 	flex-direction: row;
-	justify-content: flex-start;
+	justify-content: center;
 	background-color: #f3f3f3;
 	padding: 45px 30px;
 	margin: 0px 50px;
@@ -14,14 +14,19 @@
 }
 
 .product-info {
-	margin: auto;
+	margin: 30px 50px;
 }
 
-.link-to-edit {
-	text-decoration: none;
-}
-.detail-image {
+.add-edit-btns {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
 }
 
-.cancel {
+.add-edit-btns a {
+	width: 35%;
+}
+
+#detail-btn {
+	width: 100%;
 }

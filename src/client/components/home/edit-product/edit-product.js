@@ -144,7 +144,9 @@ const EditProductPage = () => {
 							Submit
 						</SubmitButton>
 						<Link to="/">
-							<SubmitButton className="cancel">Cancel</SubmitButton>
+							<SubmitButton className="edit-btn" id="edit-cancel">
+								Cancel
+							</SubmitButton>
 						</Link>
 					</div>
 				</form>

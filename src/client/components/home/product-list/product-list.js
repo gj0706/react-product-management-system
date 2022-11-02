@@ -6,23 +6,10 @@ import "./product-list.css";
 
 const ProductList = () => {
 	const products = useSelector(selectProducts);
-
-	const productList = Object.values(products).map(
-		({ id, name, price, quantity, imageUrl, description }) => {
-			return (
-				<ProductItem
-					products={products}
-					key={`${name}-${id}`}
-					id={id}
-					name={name}
-					price={"$" + `${price}`}
-					quantity={quantity}
-					description={description}
-					imageUrl={imageUrl}
-				/>
-			);
-		}
-	);
+	console.log(products);
+	const productList = Object.values(products).map((product) => {
+		return <ProductItem product={product} key={product.id} />;
+	});
 	return <div className="product-list-container">{productList}</div>;
 };
 

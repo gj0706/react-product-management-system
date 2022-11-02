@@ -146,6 +146,7 @@
 	cursor: pointer;
 	margin-top: 15px;
 }
+
 #img-url {
 	/* padding-right: 50px; */
 }
@@ -157,6 +158,8 @@
 }
 .add-cancel {
 	display: flex;
+	flex-direction: row;
+
 	justify-content: space-between;
 }
 
@@ -170,4 +173,12 @@
 	background-color: rgb(255, 255, 255);
 	color: black;
 	border: 1px solid black;
+}
+.add-cancel a {
+	width: 40%;
+	margin-top: 15px;
+}
+
+#create-cancel {
+	width: 49%;
 }

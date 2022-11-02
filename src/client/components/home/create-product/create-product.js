@@ -144,7 +144,9 @@ const CreateProductPage = (
 							Add
 						</SubmitButton>
 						<Link to="/">
-							<SubmitButton className="cancel">Cancel</SubmitButton>
+							<SubmitButton className="edit-btn" id="create-cancel">
+								Cancel
+							</SubmitButton>
 						</Link>
 					</div>
 				</form>

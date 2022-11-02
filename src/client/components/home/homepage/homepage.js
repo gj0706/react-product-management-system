@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectCurrentUser } from "../../../stores/user.selector";
+import { selectCurrentUser } from "../../../stores/user-selector";
 import { selectProducts } from "../../../stores/product-selector";
 import SubmitButton from "../../submit-button/submit-button";
 import CreateProductPage from "../create-product/create-product";

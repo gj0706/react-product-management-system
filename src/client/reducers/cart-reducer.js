@@ -1,49 +1,25 @@
-import { remove } from "fs-extra";
+import { TYPES } from "../constants/types";
 
-const INITIAL_STATE = {
+export const CART_INITIAL_STATE = {
 	isCartOpen: false,
 	cartItems: [],
-	caretCount: 0,
-	cartTotal: 0,
 };
 
-const cartReducer = (state, action) => {
+export const cartReducer = (state = CART_INITIAL_STATE, action = {}) => {
 	const { type, payload } = action;
-	// const payload ={
-	//   cartItems,
-	//   cartCount,
-	//   cartTotal,
-	// }
 
 	switch (type) {
+		case TYPES.SET_CART_ITEMS:
+			return {
+				...state,
+				cartItems: payload,
+			};
+		case TYPES.SET_IS_CART_OPEN:
+			return {
+				...state,
+				isCartOpen: payload,
+			};
 		default:
-			throw new Error(`unhandled type of ${type} in cartReducer`);
+			return state;
 	}
-};
-
-const updateCartItemsReducer = (newCartItems) => {
-	/*
-  generate newCartTotal
-  generate newCartCount
-  dispatch new action with payload = {
-    newCartItem,
-    newCartTotal,
-    newCartCount,
-  }
-  */
-};
-
-const addItemToCart = (productToAdd) => {
-	const newCartItems = addCartItem(cartItems, productToAdd);
-	updateCartItemsReducer(newCartItems);
-};
-
-const removeItemToCart = (cartItemToRemove) => {
-	const newCartItems = removeCartItem(cartItems, cartItemToRemove);
-	updateCartItemsReducer(newCartItems);
-};
-
-const clearItemFromCart = (cartItemToClear) => {
-	const newCartItems = clearCartItem(cartItems, cartItemToClear);
-	updateCartItemsReducer(newCartItems);
 };

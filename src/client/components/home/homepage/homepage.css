@@ -28,3 +28,9 @@
 	border-radius: 15;
 	cursor: pointer;
 }
+
+.add-product:hover {
+	background-color: rgb(255, 255, 255);
+	color: black;
+	border: 1px solid black;
+}

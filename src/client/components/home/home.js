@@ -5,6 +5,7 @@ import Header from "../header/header";
 import Homepage from "./homepage/homepage";
 import Footer from "../footer/footer";
 import "./home.css";
+import { Outlet } from "react-router-dom";
 const Home = () => {
 	// const [user, setUser] = useState(null);
 	// const [isSignedIn, setSignedIn] = useState(false);
@@ -27,7 +28,6 @@ const Home = () => {
 	return (
 		<div className="home-container">
 			<Header />
-
 			<Homepage />
 			<Footer />
 		</div>

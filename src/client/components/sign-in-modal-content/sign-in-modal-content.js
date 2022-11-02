@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { selectCurrentUser } from "../../stores/user.selector";
+import { selectCurrentUser } from "../../stores/user-selector";
 import ajaxConfigHelper from "../../api/api";
 import {
 	useForm,

@@ -1,19 +1,33 @@
 import CartItemList from "../cart-item-list/cart-item-list";
 import SubmitButton from "../submit-button/submit-button";
+import { useSelector, useDispatch } from "react-redux";
+import { setIsCartOpen } from "../../actions/cart-action";
+import {
+	selectIsCartOpen,
+	selectCartTotal,
+	selectCartCount,
+} from "../../stores/cart-selector";
 import "./cart-modal.css";
-const CartModal = ({ cartModalOn, setCartModalOn }) => {
+const CartModal = () => {
+	const dispatch = useDispatch();
+	const isCartOpen = useSelector(selectIsCartOpen);
+	const cartTotal = useSelector(selectCartTotal);
+	const cartCount = useSelector(selectCartCount);
+
+	const tax = parseInt(cartTotal * 0.08).toFixed(2);
+	const estimatedTotal = (cartTotal + parseInt(tax)).toFixed(2);
 	const closeModal = () => {
-		setCartModalOn((cartModalOn = !cartModalOn));
+		dispatch(setIsCartOpen(false));
 	};
 	return (
 		<div
 			className="cart-modal-container"
-			style={{ display: cartModalOn ? "block" : "none" }}
+			style={{ display: isCartOpen ? "block" : "none" }}
 		>
 			<div className="cart-modal-content">
 				<div className="cart-modal-title">
 					<h2>
-						Cart<span id="total-items">(3)</span>
+						Cart<span id="total-items">({cartCount})</span>
 					</h2>
 					<span className="cart-close" onClick={closeModal}>
 						&times;
@@ -30,22 +44,25 @@ const CartModal = ({ cartModalOn, setCartModalOn }) => {
 						<tbody>
 							<tr>
 								<td>Subtotal</td>
-								<td align="right">$499</td>
+								<td align="right">${cartTotal.toFixed(2)}</td>
 							</tr>
 							<tr>
 								<td>Tax</td>
-								<td align="right">$49.9</td>
+								<td align="right">${tax}</td>
 							</tr>
 							<tr>
 								<td>Discount</td>
-								<td align="right">$410</td>
+								<td align="right">$0</td>
 							</tr>
 							<tr>
 								<td>Estimated total</td>
-								<td align="right">$429.10</td>
+								<td align="right">${estimatedTotal}</td>
 							</tr>
 						</tbody>
 					</table>
+				</div>
+				<div className="check-out-btn">
+					<SubmitButton id="check-out">Continue to check out</SubmitButton>
 				</div>
 			</div>
 		</div>

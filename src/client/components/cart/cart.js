@@ -1,10 +1,21 @@
 import { useState } from "react";
 import CartModal from "../cart-modal/cart-modal";
+import { useSelector, useDispatch } from "react-redux";
+import { setIsCartOpen } from "../../actions/cart-action";
+import {
+	selectIsCartOpen,
+	selectCartCount,
+	selectCartTotal,
+} from "../../stores/cart-selector";
 import "./cart.css";
 const Cart = () => {
-	const [cartModalOn, setCartModalOn] = useState(false);
+	const dispatch = useDispatch();
+	const cartCount = useSelector(selectCartCount);
+	const isCartOpen = useSelector(selectIsCartOpen);
+	const cartTotal = useSelector(selectCartTotal);
+	const subTotal = (cartTotal * 1.08).toFixed(2);
 	const openModal = () => {
-		setCartModalOn(true);
+		dispatch(setIsCartOpen(true));
 	};
 
 	return (
@@ -14,12 +25,14 @@ const Cart = () => {
 					className="fa-solid fa-cart-shopping"
 					id="cart-icon"
 					onClick={openModal}
-				></i>
-				<span id="cart-text">$0.00</span>
+				>
+					{" "}
+				</i>
+				{cartCount !== 0 && <span className="cart-count">{cartCount}</span>}
+
+				<span id="cart-text">${subTotal}</span>
 			</div>
-			{cartModalOn && (
-				<CartModal cartModalOn={cartModalOn} setCartModalOn={setCartModalOn} />
-			)}
+			{isCartOpen && <CartModal />}
 		</>
 	);
 };

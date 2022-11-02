@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { selectCurrentUser } from "../../stores/user.selector";
-import api from "../../api/api";
+import { selectCurrentUser } from "../../stores/user-selector";
+import { Outlet } from "react-router-dom";
 import SignOut from "../sign-out/sign-out";
 import SignIn from "../sign-in/sign-in";
 import Modal from "../modal/modal";
@@ -98,6 +98,7 @@ const Header = () => {
 					/>
 				)}
 			</Modal>
+			<Outlet />
 		</>
 	);
 };
