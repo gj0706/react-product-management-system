@@ -35,7 +35,7 @@ const CartModal = () => {
 				</div>
 				<CartItemList />
 				<div className="coupon-input">
-					<input name="coupon" />
+					<input name="coupon" placeholder="Apply Discount Code" />
 					<SubmitButton id="apply-coupon">Apply</SubmitButton>
 				</div>
 				<div className="price-table">

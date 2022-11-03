@@ -45,17 +45,24 @@
 }
 @media screen and (max-width: 640px) {
 	.modal-container {
-		/* position: fixed;
+		position: fixed;
 		top: 0;
 		bottom: 0;
 		left: 0;
 		right: 0;
 		flex-direction: column;
 		z-index: 100;
-		transform: translate(50%, 50%);
+		transform: translate(1%, 1%);
 		background-color: white;
-		margin: auto; */
+		margin: auto;
 		height: 400px;
 		width: 350px;
+		overflow: auto;
+	}
+	.modal-title {
+		background-color: white;
+		color: black;
+		text-align: center;
+		width: 70%px;
 	}
 }

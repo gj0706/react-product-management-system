@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../stores/user-selector";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import SignOut from "../sign-out/sign-out";
 import SignIn from "../sign-in/sign-in";
 import Modal from "../modal/modal";
@@ -17,6 +17,7 @@ const Header = () => {
 	const [signInModalOn, setSignInModalOn] = useState(true);
 	const [signUpModalOn, setSignUpModalOn] = useState(false);
 	const [forgetPwModalOn, setForgetPwModalOn] = useState(false);
+	const navigate = useNavigate();
 	const currentUser = useSelector(selectCurrentUser);
 	console.log(currentUser);
 	const showModal = () => {
@@ -39,14 +40,23 @@ const Header = () => {
 	};
 
 	const handleOnClick = () => {};
+	const goHome = () => {
+		navigate("/");
+	};
 
 	return (
 		<>
 			<nav className="nav-bar">
 				<div className="nav-title">
-					<span id="bigTitle">Management</span>
-					<span id="bigTitle-shrink">M</span>
-					<span id="smallTitle">Chuwa</span>
+					<span id="bigTitle" onClick={goHome}>
+						Management
+					</span>
+					<span id="bigTitle-shrink" onClick={goHome}>
+						M
+					</span>
+					<span id="smallTitle" onClick={goHome}>
+						Chuwa
+					</span>
 				</div>
 
 				<div className="search-bar">

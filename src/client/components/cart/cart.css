@@ -24,3 +24,19 @@
 	background-color: red;
 	text-align: center;
 }
+
+@media screen and (max-width: 640px) {
+	.cart-count {
+		position: absolute;
+		width: 15px;
+		height: 15px;
+		font-size: 10px;
+		font-weight: bold;
+		bottom: 115px;
+		right: 145px;
+		color: white;
+		border-radius: 50%;
+		background-color: red;
+		text-align: center;
+	}
+}

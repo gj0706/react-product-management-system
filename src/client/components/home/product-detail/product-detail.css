@@ -1,8 +1,8 @@
-.detail-title {
+/* .detail-title {
 	text-align: start;
 	margin: 0px 50px;
-	padding: 45px 30px;
-}
+	padding: 50px 30px;
+} */
 .detail-body {
 	display: flex;
 	flex-direction: row;
@@ -47,4 +47,44 @@
 
 #detail-btn {
 	width: 135px;
+}
+
+@media screen and (max-width: 640px) {
+	.detail-body {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		background-color: #f3f3f3;
+		padding: 45px 30px;
+		margin: 10px 10px 50px 10px;
+		text-align: start;
+	}
+
+	.product-detail-container h1 {
+		font-size: large;
+	}
+
+	.detail-image {
+		padding-top: 10px;
+	}
+
+	.product-info h2,
+	h1 {
+		font-size: medium;
+	}
+
+	.product-info p {
+		font-size: small;
+		color: grey;
+	}
+	.product-info {
+		margin: 30px 10px;
+	}
+
+	#detail-btn {
+		width: 100px;
+	}
+	#add-edit-btn {
+		width: 100px;
+	}
 }

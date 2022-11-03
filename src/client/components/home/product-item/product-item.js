@@ -48,16 +48,16 @@ const ProductItem = ({ product }) => {
 			<Link
 				className="item-link"
 				to={`/detail/${id}`}
-				state={{
-					from: {
-						id: product.id,
-						name: product.name,
-						price: product.price,
-						quantity: product.quantity,
-						description: product.description,
-						imageUrl: product.imageUrl,
-					},
-				}}
+				// state={{
+				// 	from: {
+				// 		id: product.id,
+				// 		name: product.name,
+				// 		price: product.price,
+				// 		quantity: product.quantity,
+				// 		description: product.description,
+				// 		imageUrl: product.imageUrl,
+				// 	},
+				// }}
 			>
 				<img
 					id={`${name}-${product.id}`}
@@ -84,19 +84,7 @@ const ProductItem = ({ product }) => {
 				)}
 
 				{currentUser && (
-					<Link
-						to={`/edit/${product.id}`}
-						// state={{
-						// 	from: {
-						// 		id: product.id,
-						// 		name: product.name,
-						// 		price: product.price,
-						// 		quantity: product.quantity,
-						// 		description: product.description,
-						// 		imageUrl: product.imageUrl,
-						// 	},
-						// }}
-					>
+					<Link to={`/edit/${product.id}`}>
 						<SubmitButton className="edit-btn">Edit</SubmitButton>
 					</Link>
 				)}

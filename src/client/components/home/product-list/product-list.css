@@ -7,3 +7,68 @@
 	padding: 45px 30px;
 	margin: 0px 50px;
 }
+
+.pagenation {
+	height: 200px;
+	padding: 20px 50px 0px 50px;
+}
+.pagenation a {
+	display: block;
+	height: 35px;
+	width: 35px;
+	border: 1px solid lightgrey;
+	/* color: rgb(67, 27, 227); */
+	float: right;
+	margin-left: auto;
+	padding-top: 10px;
+	padding-left: 25px;
+	cursor: pointer;
+}
+.pagenation a:hover {
+	background-color: rgb(67, 27, 227);
+	color: white;
+}
+
+/* .pagenation a:active {
+	background-color: rgb(67, 27, 227);
+	color: white;
+} */
+
+.page1-active {
+	background-color: rgb(67, 27, 227);
+	color: white;
+}
+
+.page2-active {
+	background-color: rgb(67, 27, 227);
+	color: white;
+}
+
+@media screen and (max-width: 640px) {
+	.product-list-container {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-around;
+		flex-wrap: wrap;
+		background-color: white;
+		padding: 0px 30px;
+		margin: 0px 50px;
+	}
+	.pagenation span {
+		display: block;
+		height: 35px;
+		width: 35px;
+		border: 1px solid lightgrey;
+		color: rgb(67, 27, 227);
+		float: right;
+		margin-left: auto;
+		padding-top: 0px;
+		padding-left: 25px;
+		margin-bottom: 100px;
+	}
+
+	.pagenation span:hover {
+		background-color: rgb(67, 27, 227);
+		color: white;
+	}
+}

@@ -80,3 +80,20 @@
 #check-out {
 	width: 100%;
 }
+
+@media screen and (max-width: 640px) {
+	.cart-modal-content {
+		position: absolute;
+		top: 0;
+		right: 0;
+		z-index: 5;
+		background-color: white;
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		height: fit-content;
+		color: black;
+		margin-bottom: 100px;
+		padding-bottom: 150px;
+	}
+}

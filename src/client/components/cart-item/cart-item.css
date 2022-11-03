@@ -44,3 +44,16 @@
 	justify-content: space-between;
 	align-items: center;
 }
+
+@media screen and (max-width: 640px) {
+	.cart-item-container {
+		display: flex;
+		flex-direction: row;
+		padding: 5px 10px;
+		border-bottom: 1px solid lightgrey;
+		margin-bottom: 5px;
+	}
+	.cart-img {
+		width: 30%;
+	}
+}

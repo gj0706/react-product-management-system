@@ -1,6 +1,6 @@
 .nav-bar {
 	background-color: #111827;
-	position: sticky;
+	position: fixed;
 	width: 100%;
 	left: 0;
 	top: 0;
@@ -17,14 +17,17 @@
 	font-size: larger;
 	font-weight: bold;
 	margin: 0px 5px 0px 120px;
+	cursor: pointer;
 }
 
 #bigTitle-shrink {
 	display: none;
+	cursor: pointer;
 }
 #smallTitle {
 	font-size: x-small;
 	font-weight: bold;
+	cursor: pointer;
 }
 .nav-title {
 	/* margin: auto; */
@@ -97,12 +100,19 @@ input.nav-search {
 
 	.search-bar {
 		order: 3;
-		width: 100%;
-		margin-top: 0px;
+
+		/* margin-top: 0px;
+		margin: auto; */
+	}
+
+	input.nav-search {
+		width: 330px;
+		margin: 0px 20px;
 	}
 
 	#sign-in-text {
 		display: none;
+		cursor: pointer;
 	}
 
 	.nav-right {
@@ -121,6 +131,7 @@ input.nav-search {
 		font-size: larger;
 		font-weight: bold;
 		margin-right: 0px;
+		cursor: pointer;
 	}
 
 	#bigTitle {

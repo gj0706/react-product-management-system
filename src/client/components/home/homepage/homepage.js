@@ -12,34 +12,26 @@ const Homepage = () => {
 	const products = useSelector(selectProducts);
 	return (
 		<>
-			<div className="product-title">
-				<h1>Products</h1>
-				<div className="title-right">
-					<select className="drop-down">
-						<option>Last added</option>
-						<option>Price: low to high</option>
-						<option>Price: high to low</option>
-					</select>
-					{currentUser ? (
-						<Link to="/create">
-							<SubmitButton className="add-product">Add Product</SubmitButton>
-						</Link>
-					) : (
-						<></>
-					)}
+			<div className="home-page-container">
+				<div className="product-title">
+					<h1>Products</h1>
+					<div className="title-right">
+						<select className="drop-down">
+							<option>Last added</option>
+							<option>Price: low to high</option>
+							<option>Price: high to low</option>
+						</select>
+						{currentUser ? (
+							<Link to="/create">
+								<SubmitButton className="add-product">Add Product</SubmitButton>
+							</Link>
+						) : (
+							<></>
+						)}
+					</div>
 				</div>
+				<ProductList products={products} />
 			</div>
-			<ProductList products={products} />
-			{/* <div className="pagenation">
-				<span>
-					<i class="fa-solid fa-angles-right"></i>
-				</span>
-				<span>2</span>
-				<span>1</span>
-				<span>
-					<i class="fa-solid fa-angles-left"></i>
-				</span>
-			</div> */}
 		</>
 	);
 };

@@ -64,3 +64,27 @@
 	color: #5048e5;
 	cursor: pointer;
 }
+
+@media screen and (max-width: 640px) {
+	.sign-in-container {
+		margin: auto;
+		height: 300px;
+		width: 350px;
+		/* border-radius: 5px;
+		box-shadow: 2px 2px 2px 2px lightgray; */
+		/* background: white; */
+		/* margin-left: auto;
+		margin-right: auto; */
+		/* margin-top: 20%; */
+		background-color: white;
+
+		/* width: 40%;
+		height: 40%; */
+	}
+	.sign-in-form {
+		width: 70%;
+		/* height: 80%; */
+		margin: auto;
+		/* padding: 20px 30px; */
+	}
+}
