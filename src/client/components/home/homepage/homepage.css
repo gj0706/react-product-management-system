@@ -34,3 +34,23 @@
 	color: black;
 	border: 1px solid black;
 }
+
+.pagenation {
+	padding: 20px 50px 0px 50px;
+}
+
+.pagenation span {
+	display: block;
+	height: 35px;
+	width: 35px;
+	border: 1px solid lightgrey;
+	color: rgb(67, 27, 227);
+	float: right;
+	margin-left: auto;
+	padding-top: 10px;
+	padding-left: 25px;
+}
+.pagenation span:hover {
+	background-color: rgb(67, 27, 227);
+	color: white;
+}

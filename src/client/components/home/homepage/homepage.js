@@ -30,7 +30,16 @@ const Homepage = () => {
 				</div>
 			</div>
 			<ProductList products={products} />
-			<div className="pagenation"></div>
+			{/* <div className="pagenation">
+				<span>
+					<i class="fa-solid fa-angles-right"></i>
+				</span>
+				<span>2</span>
+				<span>1</span>
+				<span>
+					<i class="fa-solid fa-angles-left"></i>
+				</span>
+			</div> */}
 		</>
 	);
 };
