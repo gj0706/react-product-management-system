@@ -108,10 +108,11 @@
 } */
 
 .img-preview {
+	display: flex;
+	align-items: center;
 	height: 290px;
 	width: 482px;
 	border: 1px dashed lightgrey;
-	margin: auto;
 }
 
 .add-product {
@@ -179,5 +180,6 @@
 }
 
 #edit-cancel {
-	width: 50%;
+	width: 160px;
+	margin-top: 15px;
 }

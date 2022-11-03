@@ -28,9 +28,9 @@ function App() {
 			<Route path="/" element={<Home />} />
 			{/* <Route path="home" element={<Homepage />} /> */}
 
-			<Route path="/detail" element={<ProductDetailPage />} />
+			<Route path="/detail/:pId" element={<ProductDetailPage />} />
 			<Route path="/create" element={<CreateProductPage />} />
-			<Route path="/edit" element={<EditProductPage />} />
+			<Route path="/edit/:pId" element={<EditProductPage />} />
 		</Routes>
 	);
 }

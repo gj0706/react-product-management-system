@@ -1,17 +1,16 @@
 import { redirect, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { clearItemFromCart } from "../../actions/cart-action";
 import { setCurrentUser } from "../../actions/user-action";
+import { selectCartItems } from "../../stores/cart-selector";
 import FORM from "../../constants/form";
 import "./sign-out.css";
 
 const SignOut = ({ handleSignOut, setUser }) => {
+	const cartItems = useSelector(selectCartItems);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	// const handleSignOut = () => {
-	// 	setUser({});
-	// 	localStorage.clear();
-	// 	// navigate("/");
-	// };
+
 	const handleOnClick = async () => {
 		try {
 			const response = await fetch("/signout");

@@ -38,7 +38,6 @@ const CartModal = () => {
 					<input name="coupon" />
 					<SubmitButton id="apply-coupon">Apply</SubmitButton>
 				</div>
-				<hr />
 				<div className="price-table">
 					<table>
 						<tbody>

@@ -18,7 +18,9 @@ const SignInModalContent = ({
 	showSignUpModal,
 	showForgetPwModal,
 	setVisible,
+	visible,
 }) => {
+	const [blur, setBlur] = useState(false);
 	const dispatch = useDispatch();
 	const initialState = {
 		email: "",
@@ -74,38 +76,45 @@ const SignInModalContent = ({
 		resetFormFields();
 	};
 
+	const handleBlur = (e) => {
+		setBlur(true);
+	};
+
 	return (
 		<div className="sign-in-container">
 			<form className="sign-in-form" onSubmit={handleSubmit}>
 				<FormInput
 					style={{
-						border: touched.email && errors.email && "1px solid red",
+						border: blur && errors.email && "1px solid red",
 					}}
 					name="email"
 					type="text"
 					value={formFields.email}
 					label="Email"
+					onBlur={handleBlur}
 					handleChange={changeHandler}
 					placeholder={FORM.EMAIL.PLACE_HOLDER}
 				/>
-				{touched.email && errors.email && (
-					<p className="error">{errors.email}</p>
-				)}
+				{(blur && errors.email) ||
+					(blur && !email && <p className="error">{errors.email}</p>)}
 				<FormInput
-					style={{
-						border: touched.password && errors.password && "1px solid red",
-					}}
+					style={{ border: blur && errors.password && "1px solid red" }}
 					name="password"
 					type="password"
 					value={formFields.password}
 					label="Password"
 					handleChange={changeHandler}
+					onBlur={handleBlur}
 					placeholder={FORM.PASSWORD.PLACE_HOLDER}
 				/>
-				{touched.password && errors.password && (
-					<p className="error">{errors.password}</p>
-				)}
-				<SubmitButton type="submit">
+				{(blur && errors.password) ||
+					(blur && !password && <p className="error">{errors.password}</p>)}
+				<SubmitButton
+					type="submit"
+					disabled={
+						email === "" || password === "" || errors.email || errors.password
+					}
+				>
 					<span>{FORM.SIGNIN}</span>
 				</SubmitButton>
 			</form>

@@ -47,7 +47,7 @@ const ProductItem = ({ product }) => {
 		<div className="item-container">
 			<Link
 				className="item-link"
-				to={"detail"}
+				to={`/detail/${id}`}
 				state={{
 					from: {
 						id: product.id,
@@ -85,17 +85,17 @@ const ProductItem = ({ product }) => {
 
 				{currentUser && (
 					<Link
-						to="/edit"
-						state={{
-							from: {
-								id: product.id,
-								name: product.name,
-								price: product.price,
-								quantity: product.quantity,
-								description: product.description,
-								imageUrl: product.imageUrl,
-							},
-						}}
+						to={`/edit/${product.id}`}
+						// state={{
+						// 	from: {
+						// 		id: product.id,
+						// 		name: product.name,
+						// 		price: product.price,
+						// 		quantity: product.quantity,
+						// 		description: product.description,
+						// 		imageUrl: product.imageUrl,
+						// 	},
+						// }}
 					>
 						<SubmitButton className="edit-btn">Edit</SubmitButton>
 					</Link>

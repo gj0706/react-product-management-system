@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { selectProducts } from "../../../stores/product-selector";
 import {
@@ -18,11 +18,11 @@ const ProductDetailPage = () => {
 	const products = useSelector(selectProducts);
 	const cartItems = useSelector(selectCartItems);
 	const dispatch = useDispatch();
-	const location = useLocation();
-	const product = location.state.from;
+	const { pId } = useParams();
+	const product = products.filter((ele) => ele.id === pId)[0];
 
-	const { id, name, price, quantity, imageUrl, description } =
-		location.state.from;
+	const { id, name, price, quantity, imageUrl, description } = product;
+	console.log(quantity);
 
 	const getCurrentItem = () => {
 		for (let i = 0; i < cartItems.length; i++) {
@@ -50,14 +50,18 @@ const ProductDetailPage = () => {
 			<Header />
 			<h1 className="detail-title">Product Detail</h1>
 			<div className="detail-body">
-				<div className="detail-container">
+				<div className="image-container">
 					<img className="detail-image" href="" src={imageUrl} alt={name}></img>
 				</div>
 				<div className="product-info">
 					<p>Caterogy 1</p>
 					<h2>{name}</h2>
 					<h1>{price}</h1>
-					<p>{name}</p>
+					{product.quantity === "0" && (
+						<div className="out-of-stock">Out of Stock</div>
+					)}
+
+					<p>{description}</p>
 					<div className="add-edit-btns">
 						{currentItem ? (
 							<div className="item-quantity" id="item-quantity">
@@ -66,13 +70,17 @@ const ProductDetailPage = () => {
 								<span onClick={removeItemHandler}>-</span>
 							</div>
 						) : (
-							<SubmitButton className="add-item-btn" onClick={addItemHandler}>
+							<SubmitButton
+								className="add-item-btn"
+								id="add-item-btn"
+								onClick={addItemHandler}
+							>
 								Add to cart
 							</SubmitButton>
 						)}
 						<Link
 							className="link-to-detail"
-							to="/edit"
+							to={`/edit/${product.id}`}
 							state={{
 								from: {
 									id: id,

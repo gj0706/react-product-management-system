@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectProducts } from "../../../stores/product-selector";
 import Footer from "../../footer/footer";
 import Header from "../../header/header";
 import ProductForm from "../../product-form/product-form";
@@ -17,10 +19,14 @@ const initialState = {
 };
 
 const EditProductPage = () => {
+	const products = useSelector(selectProducts);
 	const [newProduct, setNewProduct] = useState(initialState);
+	const [showImage, setShowImage] = useState(false);
 	const location = useLocation();
 	const navigate = useNavigate();
-	const oldProduct = location.state.from;
+	const { pId } = useParams();
+	// const oldProduct = location.state.from;
+	const oldProduct = products.filter((ele) => ele.id === pId)[0];
 	const { id, name, price, quantity, imageUrl, description } = oldProduct;
 
 	// const resetForm = () => setNewProduct(initialState);
@@ -33,7 +39,10 @@ const EditProductPage = () => {
 		setNewProduct(product);
 	};
 
-	const goBack = () => navigate(-1);
+	const goBack = () => {
+		// e.preventDefault();
+		navigate(-1);
+	};
 
 	const updateProduct = async () => {
 		try {
@@ -63,7 +72,10 @@ const EditProductPage = () => {
 			console.log(err);
 		}
 	};
-
+	const addImage = (e) => {
+		e.preventDefault();
+		setShowImage(true);
+	};
 	const submitUpdate = (e) => {
 		e.preventDefault();
 		updateProduct();
@@ -74,7 +86,7 @@ const EditProductPage = () => {
 			<Header />
 			<h1 className="product-title">Edit Product</h1>
 			<div className="form-container">
-				<form className="create-product-form">
+				<form className="create-product-form" onSubmit={submitUpdate}>
 					<label>Product name</label>
 					<input
 						name="name"
@@ -133,21 +145,32 @@ const EditProductPage = () => {
 								// required
 							/>
 
-							<input id="upload" type="submit" value="upload" />
+							<button id="upload" onClick={addImage}>
+								upload
+							</button>
 						</div>
 					</div>
 					<div className="img-preview">
-						<img id="prevImage" src="#" alt="your image" />
+						{showImage ? (
+							<img id="prevImage" src={oldProduct.imageUrl} alt="your image" />
+						) : (
+							<div></div>
+						)}
 					</div>
 					<div className="add-cancel">
-						<SubmitButton className="add" onClick={submitUpdate}>
+						<SubmitButton className="add" type="submit">
 							Submit
 						</SubmitButton>
-						<Link to="/">
-							<SubmitButton className="edit-btn" id="edit-cancel">
-								Cancel
-							</SubmitButton>
-						</Link>
+						{/* <Link to={"/"}> */}
+						<SubmitButton
+							type="button"
+							className="edit-btn"
+							id="edit-cancel"
+							onClick={goBack}
+						>
+							Cancel
+						</SubmitButton>
+						{/* </Link> */}
 					</div>
 				</form>
 			</div>

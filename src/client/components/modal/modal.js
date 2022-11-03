@@ -18,23 +18,6 @@ const Modal = ({
 		setForgetPwModalOn(false);
 	};
 
-	// const handleOutsideClick = useCallback(
-	// 	(e) => {
-	// 		if (visible) {
-	// 			if (!modal.current.contains(e.target)) {
-	// 				closeModal();
-	// 				document.removeEventListener("click", handleOutsideClick, false);
-	// 			}
-	// 		}
-	// 	},
-	// 	[closeModal]
-	// );
-	// useEffect(() => {
-	// 	document.addEventListener("click", handleOutsideClick, false);
-	// 	return () =>
-	// 		document.removeEventListener("click", handleOutsideClick, false);
-	// }, [handleOutsideClick]);
-
 	return (
 		<div
 			className="modal-container"

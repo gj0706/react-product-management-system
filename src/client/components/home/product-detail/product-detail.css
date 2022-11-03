@@ -13,8 +13,22 @@
 	text-align: start;
 }
 
+.detail-image {
+	padding-top: 60px;
+}
+
 .product-info {
 	margin: 30px 50px;
+}
+
+.out-of-stock {
+	height: 30px;
+	padding: 8px 8px 0px 8px;
+	display: inline-block;
+	text-align: center;
+	background-color: #fbe6e4;
+	color: red;
+	border-radius: 5px;
 }
 
 .add-edit-btns {
@@ -27,6 +41,10 @@
 	width: 35%;
 }
 
+#add-edit-btn {
+	width: 135px;
+}
+
 #detail-btn {
-	width: 100%;
+	width: 135px;
 }
