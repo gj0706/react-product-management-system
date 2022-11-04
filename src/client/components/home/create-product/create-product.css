@@ -108,10 +108,15 @@
 } */
 
 .img-preview {
+	display: flex;
+	align-items: center;
 	height: 290px;
 	width: 482px;
 	border: 1px dashed lightgrey;
-	margin: auto;
+}
+
+#prevImage {
+	width: 60%;
 }
 
 .add-product {
@@ -235,5 +240,8 @@
 		height: 150px;
 		border: 1px dashed lightgrey;
 		margin-right: 0px;
+	}
+	#prevImage {
+		width: 40%;
 	}
 }

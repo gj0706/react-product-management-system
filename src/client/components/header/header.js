@@ -19,7 +19,6 @@ const Header = () => {
 	const [forgetPwModalOn, setForgetPwModalOn] = useState(false);
 	const navigate = useNavigate();
 	const currentUser = useSelector(selectCurrentUser);
-	console.log(currentUser);
 	const showModal = () => {
 		setVisible(true);
 	};

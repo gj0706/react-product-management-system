@@ -74,7 +74,7 @@ app.post("/signin", async (req, res) => {
 			return;
 		} else {
 			return res.json({
-				message: "Email or passrod doesn't match",
+				message: "Email or password doesn't match",
 				status: 400,
 			});
 		}

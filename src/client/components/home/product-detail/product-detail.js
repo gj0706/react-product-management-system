@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLocation, Link, useParams } from "react-router-dom";
+import { useLocation, Link, useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { selectProducts } from "../../../stores/product-selector";
 import {
@@ -18,6 +18,7 @@ const ProductDetailPage = () => {
 	const products = useSelector(selectProducts);
 	const cartItems = useSelector(selectCartItems);
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const { pId } = useParams();
 	const product = products.filter((ele) => ele.id === pId)[0];
 
@@ -45,11 +46,18 @@ const ProductDetailPage = () => {
 		// setClicked(false);
 	};
 
+	const goBack = () => {
+		navigate(-1);
+	};
+
 	return (
 		<>
 			<Header />
 			<div className="product-detail-container">
 				<h1 className="product-title">Product Detail</h1>
+				<SubmitButton className="edit-btn" id="go-back-btn" onClick={goBack}>
+					Go back
+				</SubmitButton>
 				<div className="detail-body">
 					<div className="image-container">
 						<img
@@ -84,20 +92,7 @@ const ProductDetailPage = () => {
 									Add to cart
 								</SubmitButton>
 							)}
-							<Link
-								className="link-to-detail"
-								to={`/edit/${product.id}`}
-								state={{
-									from: {
-										id: id,
-										name: name,
-										price: price,
-										quantity: quantity,
-										description: description,
-										imageUrl: imageUrl,
-									},
-								}}
-							>
+							<Link className="link-to-detail" to={`/edit/${product.id}`}>
 								<SubmitButton
 									className="edit-btn"
 									id="detail-btn"

@@ -15,11 +15,11 @@ function App() {
 
 	useEffect(() => {
 		const loggedInUser = localStorage.getItem("user");
-		// if (loggedInUser) {
-		// 	const foundUser = JSON.parse(loggedInUser);
-		// 	dispatch(setCurrentUser(foundUser));
-		// }
-		dispatch(setCurrentUser(JSON.parse(loggedInUser)));
+		if (loggedInUser) {
+			const foundUser = JSON.parse(loggedInUser);
+			dispatch(setCurrentUser(foundUser));
+		}
+		// dispatch(setCurrentUser(JSON.parse(loggedInUser)));
 	}, [dispatch]);
 
 	return (
@@ -30,7 +30,7 @@ function App() {
 			<Route path="/detail/:pId" element={<ProductDetailPage />} />
 			<Route path="/create" element={<CreateProductPage />} />
 			<Route path="/edit/:pId" element={<EditProductPage />} />
-			<Route path="/error" element={<Errorpage />} />
+			<Route path="/*" element={<Errorpage />} />
 		</Routes>
 	);
 }

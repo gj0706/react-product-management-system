@@ -34,7 +34,7 @@ const CreateProductPage = (
 		setProduct(newProduct);
 		// console.log(product);
 	};
-	console.log(editedProduct);
+	// console.log(editedProduct);
 	const uniqId = uuidv4();
 	const newProduct = { ...product, id: uniqId };
 	// const newFields = changeHandler();

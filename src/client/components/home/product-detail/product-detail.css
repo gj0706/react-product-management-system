@@ -13,8 +13,16 @@
 	text-align: start;
 }
 
+#go-back-btn {
+	display: block;
+	margin-left: auto;
+	margin-right: 50px;
+	width: 135px;
+}
+
 .detail-image {
 	padding-top: 60px;
+	width: 80%;
 }
 
 .product-info {
@@ -58,6 +66,7 @@
 		padding: 45px 30px;
 		margin: 10px 10px 50px 10px;
 		text-align: start;
+		overflow: auto;
 	}
 
 	.product-detail-container h1 {

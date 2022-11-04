@@ -40,7 +40,6 @@ const EditProductPage = () => {
 	};
 
 	const goBack = () => {
-		// e.preventDefault();
 		navigate(-1);
 	};
 
@@ -94,7 +93,6 @@ const EditProductPage = () => {
 						className="product-name"
 						onChange={changeHandler}
 						defaultValue={oldProduct.name}
-						// required
 					/>
 					<label>Product Description</label>
 					<textarea
@@ -142,7 +140,6 @@ const EditProductPage = () => {
 								name="imageUrl"
 								defaultValue={oldProduct.imageUrl}
 								onChange={changeHandler}
-								// required
 							/>
 
 							<button id="upload" onClick={addImage}>

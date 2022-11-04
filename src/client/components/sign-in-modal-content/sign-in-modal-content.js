@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { redirect, useNavigate } from "react-router-dom";
 import { selectCurrentUser } from "../../stores/user-selector";
 import ajaxConfigHelper from "../../api/api";
 import {
@@ -22,6 +23,7 @@ const SignInModalContent = ({
 }) => {
 	const [blur, setBlur] = useState(false);
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const initialState = {
 		email: "",
 		password: "",
@@ -49,6 +51,9 @@ const SignInModalContent = ({
 
 	const { email, password } = formFields;
 
+	const goToErrorPage = () => {
+		navigate("/*");
+	};
 	const fetchData = async () => {
 		try {
 			let response = await fetch(
@@ -63,10 +68,13 @@ const SignInModalContent = ({
 				localStorage.setItem("user", JSON.stringify(result.data));
 				setVisible(false);
 			} else if (response.status === 400) {
-				console.log("Some error occured");
+				// return redirect("/*");
+				goToErrorPage();
 			}
 		} catch (err) {
 			console.log(err);
+			goToErrorPage();
+			// return redirect("/*");
 		}
 	};
 

@@ -4,12 +4,18 @@ import { selectProducts } from "../../../stores/product-selector";
 import ProductItem from "../product-item/product-item";
 import "./product-list.css";
 
-const ProductList = () => {
+const ProductList = ({ selected }) => {
 	const [page1Clicked, setPage1Clicked] = useState(false);
 	const [page2Clicked, setPage2Clicked] = useState(false);
 	const [currentPage, setCurrentPage] = useState(1);
 	const products = useSelector(selectProducts);
-	console.log(products);
+	if (selected === "lastAdded") {
+		products.sort((a, b) => a.valueOf() - b.valueOf());
+	} else if (selected === "lowToHigh") {
+		products.sort((a, b) => a.price - b.price);
+	} else if (selected === "highToLow") {
+		products.sort((a, b) => b.price - a.price);
+	}
 	const productList1 = Object.values(products)
 		.slice(0, 10)
 		.map((product) => {
@@ -22,7 +28,7 @@ const ProductList = () => {
 			return <ProductItem product={product} key={product.id} />;
 		});
 
-	console.log(currentPage);
+	// console.log(currentPage);
 	const handlePage1Click = (e) => {
 		setPage1Clicked(true);
 		setPage2Clicked(false);
@@ -59,7 +65,7 @@ const ProductList = () => {
 
 			<div className="pagenation">
 				<a onClick={goToNextPage}>
-					<i class="fa-solid fa-angles-right"></i>
+					<i className="fa-solid fa-angles-right"></i>
 				</a>
 				<a
 					onClick={handlePage2Click}
@@ -69,12 +75,12 @@ const ProductList = () => {
 				</a>
 				<a
 					onClick={handlePage1Click}
-					className={!page2Clicked && "page1-active"}
+					className={!page2Clicked ? "page1-active" : undefined}
 				>
 					1
 				</a>
 				<a onClick={goToPrevPage}>
-					<i class="fa-solid fa-angles-left"></i>
+					<i className="fa-solid fa-angles-left"></i>
 				</a>
 			</div>
 		</div>
