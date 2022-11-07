@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCurrentUser } from "./actions/user-action";
+import { ErrorBoundary } from "react-error-boundary";
 
 import CreateProductPage from "./components/home/create-product/create-product";
 import ProductDetailPage from "./components/home/product-detail/product-detail";
@@ -23,15 +24,17 @@ function App() {
 	}, [dispatch]);
 
 	return (
-		<Routes>
-			<Route path="/" element={<Home />} />
-			{/* <Route path="home" element={<Homepage />} /> */}
+		<ErrorBoundary FallbackComponent={<Errorpage />}>
+			<Routes>
+				<Route path="/" element={<Home />} />
+				{/* <Route path="home" element={<Homepage />} /> */}
 
-			<Route path="/detail/:pId" element={<ProductDetailPage />} />
-			<Route path="/create" element={<CreateProductPage />} />
-			<Route path="/edit/:pId" element={<EditProductPage />} />
-			<Route path="/*" element={<Errorpage />} />
-		</Routes>
+				<Route path="/detail/:pId" element={<ProductDetailPage />} />
+				<Route path="/create" element={<CreateProductPage />} />
+				<Route path="/edit/:pId" element={<EditProductPage />} />
+				<Route path="/*" element={<Errorpage />} />
+			</Routes>
+		</ErrorBoundary>
 	);
 }
 

@@ -1,5 +1,6 @@
 import { TYPES } from "../constants/types";
 import { createAction } from "./creat-action-helper";
+import ajaxConfigHelper from "../api/api";
 
 export const addCartItem = (cartItems, productToAdd) => {
 	const existingCartItem = cartItems.find(
@@ -56,3 +57,63 @@ export const clearItemFromCart = (cartItems, cartItemToClear) => {
 
 export const setIsCartOpen = (boolean) =>
 	createAction(TYPES.SET_IS_CART_OPEN, boolean);
+
+export const getCurrentUserCart = async () => {
+	try {
+		const response = await fetch("/getCart");
+		const result = await response.json();
+		console.log(result);
+		createAction(TYPES.GET_CURRENT_USER_CART, result);
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+const updateCurrentUserCartStart = () =>
+	createAction(TYPES.UPDATE_CURRENT_USER_CART_START);
+
+const updateCurrentUserCartSuccess = () =>
+	createAction(TYPES.UPDATE_CURRENT_USER_CART_SUCCESS);
+
+const updateCurrentUserCartFailed = (error) =>
+	createAction(TYPES.UPDATE_CURRENT_USER_CART_FAILED, error);
+
+export const updateCurrentUserCartStartAsync = (cartItems) => {
+	return async (dispatch) => {
+		dispatch(updateCurrentUserCartStart());
+		try {
+			const response = await fetch(
+				"/updateCart",
+				ajaxConfigHelper(cartItems, "PUT")
+			);
+			const result = await response.json();
+			console.log(result);
+			dispatch(updateCurrentUserCartSuccess());
+		} catch (error) {
+			console.log(error);
+		}
+	};
+};
+
+export const fetchCurrentUserCartStart = () =>
+	createAction(TYPES.FETCH__CURRENT_USER_CART_START);
+
+export const fetchCurrentUserCartSuccess = (cartItems) =>
+	createAction(TYPES.FETCH__CURRENT_USER_CART_SUCCESS, cartItems);
+
+export const fetchCurrentUserCartFailure = (error) =>
+	createAction(TYPES.FETCH__CURRENT_USER_CART_FAILED, error);
+
+export const fetchCurrentUserCartStartAsync = () => {
+	return async (dispatch) => {
+		dispatch(fetchCurrentUserCartStart());
+		try {
+			const response = await fetch("/getCart");
+			const cartItems = await response.json();
+			console.log(cartItems);
+			dispatch(fetchCurrentUserCartSuccess(cartItems));
+		} catch (error) {
+			dispatch(fetchCurrentUserCartFailure(error));
+		}
+	};
+};

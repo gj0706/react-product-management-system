@@ -9,6 +9,7 @@ const { v4: uuidv4 } = require("uuid");
 const connectToMongoose = require("./database/connect");
 const User = require("./database/userModel");
 const Product = require("./database/productModel");
+const Cart = require("./database/cartModel");
 connectToMongoose();
 
 // var indexRouter = require("./routes/index");
@@ -38,7 +39,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // app.use("/", indexRouter);
 // app.use("/users", usersRouter);
 
-// 1. get all customers(GET)
+// get all users
 app.get("/getUsers", async (_, res) => {
 	try {
 		const usersData = await User.find({});
@@ -60,6 +61,7 @@ app.post("/getOneUser", async (req, res) => {
 	}
 });
 
+// sign in
 app.post("/signin", async (req, res) => {
 	if (req.body && req.body.email && req.body.password) {
 		const email = req.body.email;
@@ -82,8 +84,7 @@ app.post("/signin", async (req, res) => {
 	res.json({ message: "Failed to sign in" });
 });
 
-// 2. add a customer(POST) todo content will be put in the req.body => exapmple: {user: "email@address", password: "3333333"}
-// to get content, use : req.body.content
+// sign up
 app.post("/signup", async (req, res) => {
 	//happy path
 	if (req.body && req.body.email && req.body.password && req.body.id) {
@@ -113,10 +114,7 @@ app.post("/signup", async (req, res) => {
 	res.json({ message: "Failed to sign up" });
 });
 
-app.get("/signout", (req, res) => {
-	res.json("Successfully signedout");
-});
-
+// get all products
 app.get("/getProducts", async (_, res) => {
 	try {
 		const productData = await Product.find({});
@@ -127,6 +125,7 @@ app.get("/getProducts", async (_, res) => {
 	}
 });
 
+// add a product
 app.post("/addProduct", async (req, res) => {
 	//happy path
 
@@ -173,6 +172,7 @@ app.get("/signout", (req, res) => {
 	res.json("Successfully signedout");
 });
 
+// update product infomation
 app.put("/updateProduct", async (req, res) => {
 	try {
 		if (req.body && req.body.id) {
@@ -182,44 +182,173 @@ app.put("/updateProduct", async (req, res) => {
 			const { modifiedCount } = await result.updateOne(updatedData);
 
 			if (modifiedCount) {
-				res.json({ message: "Update succeed" });
+				res.status(200).json({ message: "Update succeed" });
 				return;
 			}
 		}
 	} catch (error) {
-		res.json({ message: "Update failed", status: 400 });
+		res.status(400).json({ message: "Update failed" });
 	}
 });
 
-// 3. update a user (PUT) email as id
-//  req.body => {email:  "ferry.zoila@gmail.com", password: 777777} =>
-app.put("/updateUser", (req, res) => {
-	if (req.body && req.body.email && req.body.password) {
-		for (let i = 0; i < users.length; i++) {
-			if (users[i].email === req.body.email) {
-				users[i] = { ...users[i], ...req.body };
-				res.json({ message: "Update succeeded" });
-			}
-		}
-		return;
+// create a new cart
+app.post("/newCart", async (req, res) => {
+	const newCart = new Cart(req.body);
+	try {
+		const savedCart = await newCart.save();
+		res.status(200).json(savedCart);
+	} catch (err) {
+		res.status(500).json(err);
 	}
-	// error handling
-	res.json({ message: "Update failed" });
 });
 
-app.delete("/deleteUser", (req, res) => {
-	if (req.body && req.body.email && req.body.password) {
-		for (let i = 0; i < users.length; i++) {
-			if (users[i].email === req.body.email) {
-				users = [...users.slice(0, i), ...users.slice(i + 1)];
-				res.json({ message: "Deletion succeeded" });
-			}
+// update a cart
+
+app.put("/updateCart", async (req, res) => {
+	const userId = req.body.userId;
+	const updatedData = req.body;
+	try {
+		const result = await Cart.findOne({ userId });
+		const { modifiedCount } = await result.updateOne(updatedData);
+
+		if (modifiedCount) {
+			res.status(200).json({ message: "Cart update succeed", data: result });
+			return;
 		}
-		return;
+	} catch (error) {
+		res.status(500).json(error);
 	}
-	// error handling
-	res.json({ message: "Deletion failed", status: 400 });
 });
+// app.put("/updateCart", async (req, res) => {
+// 	const userId = req.body.userId;
+// 	try {
+// 		const updatedCart = await Cart.findByIdAndUpdate(
+// 			userId,
+// 			{
+// 				$push: req.body.cartItems,
+// 			},
+// 			{ new: true, upsert: true }
+// 		);
+// 		res.status(200).json(updatedCart);
+// 	} catch (err) {
+// 		res.status(500).json(err);
+// 	}
+// });
+
+// delete a cart
+app.delete("/deleteCart", async (req, res) => {
+	const userId = req.body.userId;
+	try {
+		await Cart.findByIdAndDelete(userId);
+		res.status(200).json("Cart has been deleted...");
+	} catch (err) {
+		res.status(500).json(err);
+	}
+});
+
+// get all cart info from a user
+app.get("/getCart", async (req, res) => {
+	const userId = req.body.userId;
+	try {
+		const cart = await Cart.findOne({ userId });
+		const cartItems = cart.cartItems;
+		if (cartItems.length > 0) {
+			res.status(200).json(cartItems);
+		} else {
+			res.send("Cart is empty");
+		}
+	} catch (err) {
+		res.status(500).send();
+	}
+});
+
+// app.post("/addItemToCart", async (req, res) => {
+// 	Cart.findOne({ user: req.body.userId }).exec((error, cart) => {
+// 		if (error) return res.status(400).json({ error });
+// 		if (cart) {
+// 			const productId = req.body.cartItems.productId;
+// 			const item = cart.cartItems.find((c) => c.product_id == product_id);
+// 			if (item) {
+// 				Cart.findOneAndUpdate(
+// 					{ user: req.user._id, "cartItems.product_id": product_id },
+// 					{
+// 						$cartItems: {
+// 							...req.body.cartItems,
+// 							quantity: item.quantity + req.body.cartItems.quantity,
+// 						},
+// 					}
+// 				).exec((error, _cart) => {
+// 					if (error) return res.status(400).json({ error });
+// 					if (_cart) {
+// 						return res.status(201).json({ cart: _cart });
+// 					}
+// 				});
+// 				// if user cart does't exist create a list of cart for the user
+// 			} else {
+// 				Cart.findOneAndUpdate(
+// 					{ user: req.user._id },
+// 					{
+// 						$push: {
+// 							cartItems: req.body.cartItems,
+// 						},
+// 					}
+// 				).exec((error, _cart) => {
+// 					if (error) return res.status(400).json({ error });
+// 					if (_cart) {
+// 						return res.status(201).json({ cart: _cart });
+// 					}
+// 				});
+// 			}
+// 		} else {
+// 			// if cart not exist create a new cart
+// 			const cart = new Cart({
+// 				user: req.user._id,
+// 				cartItems: req.body.cartItems,
+// 			});
+// 			cart.save((error, cart) => {
+// 				if (error) return res.status(400).json({ error });
+// 				if (cart) {
+// 					return res.status(200).json({ cart });
+// 				}
+// 			});
+// 		}
+// 	});
+// });
+
+// app.post("/addToCart", async (req, res) => {
+// 	const userId = req.body.userId;
+// 	try {
+// 		const cart = await User.findOne({ userId });
+// 		const cartItems = user.cartItems;
+// 		if (cartItems) {
+// 			const itemIndex = cartItems.findIndex(
+// 				(item) => item.productId === req.body.cartItem.productId
+// 			);
+
+// 			if (itemIndex > -1) {
+// 				// product already in the cart, update quantity
+// 				const cartItem = cartItems[itemIndex];
+// 				cartItem.quantity += req.body.cartItem.quantity;
+// 				cartItems[itemIndex] = cartItem;
+// 			} else {
+// 				// product not in the cart, add to the cartItems list
+// 				cartItems.push(req.body.cartItem);
+// 			}
+
+// 			await cartItems.save();
+// 			return res.status(201).send(cartItems);
+// 		} else {
+// 			// if there is no cart for the user, create a new cart
+
+// 			const newCart = await user.insert({
+// 				cartItems: [{ ...req.body.cartItem }],
+// 			});
+// 			return res.status(201).send(newCart);
+// 		}
+// 	} catch (error) {
+// 		res.json({ message: "Update failed", status: 400 });
+// 	}
+// });
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

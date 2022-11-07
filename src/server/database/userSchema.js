@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { schema } = require("webpack-dev-server");
 
 // mongodb => setup schema => setup model => use model to query and update entity in the database
 
@@ -8,6 +7,7 @@ const userSchema = new mongoose.Schema(
 		email: {
 			type: String,
 			required: true,
+			unique: true,
 		},
 		password: {
 			type: String,
@@ -21,6 +21,10 @@ const userSchema = new mongoose.Schema(
 			type: String,
 			required: true,
 		},
+		// cartItems: {
+		// 	type: Array,
+		// 	default: [],
+		// },
 	},
 	{ tiimestamp: true }
 );
