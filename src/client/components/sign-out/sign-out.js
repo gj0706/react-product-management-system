@@ -1,6 +1,6 @@
 import { redirect, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { clearItemFromCart } from "../../actions/cart-action";
+import { emptyCart } from "../../actions/cart-action";
 import { setCurrentUser } from "../../actions/user-action";
 import { selectCartItems } from "../../stores/cart-selector";
 import FORM from "../../constants/form";
@@ -19,6 +19,7 @@ const SignOut = ({ handleSignOut, setUser }) => {
 			// alert("User signed out.");
 			// handleSignOut();
 			dispatch(setCurrentUser(null));
+			dispatch(emptyCart());
 			localStorage.clear();
 			navigate("/");
 		} catch (e) {

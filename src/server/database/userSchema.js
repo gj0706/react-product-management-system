@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema(
 		// 	default: [],
 		// },
 	},
-	{ tiimestamp: true }
+	{ tiimestamps: true }
 );
 
 module.exports = userSchema;

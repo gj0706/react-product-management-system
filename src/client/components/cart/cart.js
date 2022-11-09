@@ -28,7 +28,9 @@ const Cart = () => {
 				>
 					{" "}
 				</i>
-				{cartCount !== 0 && <span className="cart-count">{cartCount}</span>}
+				{parseInt(cartCount) !== 0 && (
+					<span className="cart-count">{parseInt(cartCount)}</span>
+				)}
 
 				<span id="cart-text">${subTotal}</span>
 			</div>

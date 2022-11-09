@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { redirect, useNavigate } from "react-router-dom";
 import { selectCurrentUser } from "../../stores/user-selector";
 import ajaxConfigHelper from "../../api/api";
@@ -10,10 +10,13 @@ import {
 	isValidPassword,
 } from "../../validator/validator";
 import FORM from "../../constants/form";
+
 import FormInput from "../form-input/form-input";
 import SubmitButton from "../submit-button/submit-button";
 import "./sign-in-modal-content.css";
 import { setCurrentUser } from "../../actions/user-action";
+import { addItemToCart, emptyCart } from "../../actions/cart-action";
+import { selectCartItems } from "../../stores/cart-selector";
 
 const SignInModalContent = ({
 	showSignUpModal,
@@ -24,6 +27,7 @@ const SignInModalContent = ({
 	const [blur, setBlur] = useState(false);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	const cartItems = useSelector(selectCartItems);
 	const initialState = {
 		email: "",
 		password: "",
@@ -54,6 +58,7 @@ const SignInModalContent = ({
 	const goToErrorPage = () => {
 		navigate("/*");
 	};
+
 	const fetchData = async () => {
 		try {
 			let response = await fetch(
@@ -63,16 +68,16 @@ const SignInModalContent = ({
 			let result = await response.json();
 			console.log(result.data);
 			if (response.status === 200) {
-				// setUser(result.data);
 				dispatch(setCurrentUser(result.data));
-				localStorage.setItem("user", JSON.stringify(result.data));
+				// dispatch(emptyCart());
+				localStorage.setItem("user", JSON.stringify({ id: result.data.id }));
 				setVisible(false);
 			} else if (response.status === 400) {
 				// return redirect("/*");
 				goToErrorPage();
 			}
-		} catch (err) {
-			console.log(err);
+		} catch (error) {
+			console.log(error);
 			goToErrorPage();
 			// return redirect("/*");
 		}

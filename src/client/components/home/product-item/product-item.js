@@ -16,23 +16,16 @@ import "./product-item.css";
 import ProductDetailPage from "../product-detail/product-detail";
 
 const ProductItem = ({ product }) => {
-	// const [currentItem, setCurrentItem] = useState({});
+	// const [isInCart, setIsInCart] = useState(false);
 	const navigate = useNavigate();
 	const currentUser = useSelector(selectCurrentUser);
 	const cartItems = useSelector(selectCartItems);
 	const { id, name, price, imageUrl } = product;
 	const dispatch = useDispatch();
 
-	const getCurrentItem = () => {
-		for (let i = 0; i < cartItems.length; i++) {
-			if (cartItems[i].id === id) {
-				const newItem = cartItems[i];
-				return newItem;
-			}
-		}
-	};
-
-	const currentItem = getCurrentItem();
+	const existingCartItem = cartItems.find(
+		(cartItem) => cartItem.id === product.id
+	);
 
 	const addItemHandler = () => dispatch(addItemToCart(cartItems, product));
 
@@ -45,20 +38,7 @@ const ProductItem = ({ product }) => {
 	};
 	return (
 		<div className="item-container">
-			<Link
-				className="item-link"
-				to={`/detail/${id}`}
-				// state={{
-				// 	from: {
-				// 		id: product.id,
-				// 		name: product.name,
-				// 		price: product.price,
-				// 		quantity: product.quantity,
-				// 		description: product.description,
-				// 		imageUrl: product.imageUrl,
-				// 	},
-				// }}
-			>
+			<Link className="item-link" to={`/detail/${id}`}>
 				<img
 					id={`${name}-${product.id}`}
 					className="item-img"
@@ -71,10 +51,10 @@ const ProductItem = ({ product }) => {
 			<p id="item-name">{name}</p>
 			<p id="item-price">${price}</p>
 			<div className="item-btn-container">
-				{currentItem ? (
+				{existingCartItem ? (
 					<div className="item-quantity">
 						<span onClick={addItemHandler}>&#43;</span>
-						<span>{currentItem.quantity}</span>
+						<span>{existingCartItem.quantity}</span>
 						<span onClick={removeItemHandler}>-</span>
 					</div>
 				) : (

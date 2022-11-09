@@ -13,12 +13,12 @@ export const selectIsCartOpen = createSelector(
 );
 
 export const selectCartCount = createSelector([selectCartItems], (cartItems) =>
-	cartItems.reduce((total, cartItem) => total + cartItem.quantity, 0)
+	cartItems.reduce((total, cartItem) => total + parseInt(cartItem.quantity), 0)
 );
 
 export const selectCartTotal = createSelector([selectCartItems], (cartItems) =>
 	cartItems.reduce(
-		(total, cartItem) => total + cartItem.quantity * cartItem.price,
+		(total, cartItem) => total + parseInt(cartItem.quantity) * cartItem.price,
 		0
 	)
 );

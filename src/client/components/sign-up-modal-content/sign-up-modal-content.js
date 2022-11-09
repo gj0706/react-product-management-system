@@ -70,9 +70,21 @@ const SignUpModalContent = ({ showSignInModal, setVisible }) => {
 		}
 	};
 
+	const creatNewCart = async () => {
+		try {
+			const response = await fetch(
+				`/newCart/${email}`,
+				ajaxConfigHelper({ id: email })
+			);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		fetchData();
+		creatNewCart();
 		resetFormFields();
 	};
 

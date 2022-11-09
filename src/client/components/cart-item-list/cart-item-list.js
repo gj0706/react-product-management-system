@@ -1,9 +1,13 @@
 import { useSelector } from "react-redux";
 import { selectCartItems } from "../../stores/cart-selector";
+import { updateCurrentuserCart } from "../../actions/cart-action";
+import { selectCurrentUser } from "../../stores/user-selector";
 import CartItem from "../cart-item/cart-item";
 
 const CartItemList = () => {
 	const cartItems = useSelector(selectCartItems);
+	// const currentUserId = useSelector(selectCurrentUser).id;
+
 	return (
 		<>
 			{cartItems.length ? (
