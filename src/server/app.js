@@ -197,11 +197,11 @@ app.get("/getCart/:id", async (req, res) => {
 	try {
 		const cart = await Cart.findOne({ userId });
 		const cartItems = cart.cartItems;
-		if (cartItems.length > 0) {
-			res.status(200).json(cartItems);
-		} else {
-			res.json("Cart is empty");
-		}
+		// if (cartItems.length > 0) {
+		res.status(200).json(cartItems);
+		// } else {
+		// 	res.json("Cart is empty");
+		// }
 	} catch (err) {
 		res.status(400).send(err);
 	}

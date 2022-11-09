@@ -3,7 +3,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentUser } from "./actions/user-action";
 import { updateCurrentuserCart } from "./actions/cart-action";
-// import { ErrorBoundary } from "react-error-boundary";
+// import { ErrorBoundary } from "reeact-error-boundary";
 import { selectCartItems } from "./stores/cart-selector";
 import {
 	addItemToCart,
@@ -38,11 +38,11 @@ function App() {
 			const foundUser = JSON.parse(loggedInUser);
 			const currentUserId = foundUser.id;
 			dispatch(setCurrentUser(foundUser));
-			fetchCurrentUserCart(currentUserId);
-			// updateCurrentuserCart(currentUserId, cartItems);
+			// fetchCurrentUserCart(currentUserId);
+			updateCurrentuserCart(currentUserId, cartItems);
 		}
 		// dispatch(setCurrentUser(JSON.parse(loggedInUser)));
-	}, [dispatch]);
+	}, [cartItems]);
 
 	return (
 		// <ErrorBoundary FallbackComponent={<Errorpage />}>

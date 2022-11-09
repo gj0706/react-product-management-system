@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { redirect, useNavigate } from "react-router-dom";
 import { selectCurrentUser } from "../../stores/user-selector";
+// import { fetchCurrentUserCart } from "../../actions/cart-action";
+import { setCurrentUserCart } from "../../actions/cart-action";
 import ajaxConfigHelper from "../../api/api";
 import {
 	useForm,
@@ -55,8 +57,19 @@ const SignInModalContent = ({
 
 	const { email, password } = formFields;
 
-	const goToErrorPage = () => {
-		navigate("/*");
+	const goToErrorPage = (error) => {
+		navigate("/*", { replace: true, state: { error } });
+		// navigate("/*");
+	};
+
+	const fetchCurrentUserCart = async (id) => {
+		try {
+			const response = await fetch(`/getCart/${id}`);
+			const result = await response.json();
+			dispatch(setCurrentUserCart(result));
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	const fetchData = async () => {
@@ -66,19 +79,23 @@ const SignInModalContent = ({
 				ajaxConfigHelper({ email: email, password: password })
 			);
 			let result = await response.json();
-			console.log(result.data);
+			// console.log(result.data);
 			if (response.status === 200) {
-				dispatch(setCurrentUser(result.data));
+				dispatch(
+					setCurrentUser({ id: result.data.id, type: result.data.type })
+				);
 				// dispatch(emptyCart());
 				localStorage.setItem("user", JSON.stringify({ id: result.data.id }));
+				fetchCurrentUserCart(result.data.id);
 				setVisible(false);
-			} else if (response.status === 400) {
-				// return redirect("/*");
-				goToErrorPage();
+				navigate("/");
+				// } else if (response.status === 400) {
+				// 	// return redirect("/*");
+				// 	goToErrorPage();
 			}
 		} catch (error) {
 			console.log(error);
-			goToErrorPage();
+			goToErrorPage(error);
 			// return redirect("/*");
 		}
 	};
