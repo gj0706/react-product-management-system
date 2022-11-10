@@ -5,6 +5,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const { v4: uuidv4 } = require("uuid");
 // connect to database
+const auth = require("./routes/auth");
 
 const connectToMongoose = require("./database/connect");
 const User = require("./database/userModel");
@@ -35,7 +36,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
-
+app.use("/auth", auth);
 // app.use("/", indexRouter);
 // app.use("/users", usersRouter);
 
@@ -88,13 +89,19 @@ app.post("/signin", async (req, res) => {
 app.post("/signup", async (req, res) => {
 	//happy path
 	if (req.body && req.body.email && req.body.password && req.body.id) {
-		const user = new User({
-			type: req.body.type,
-			id: req.body.id,
-			email: req.body.email,
-			password: req.body.password,
-		});
 		try {
+			const existUser = await User.findOne({ email: req.body.email });
+
+			if (existUser) {
+				res.status(400).json({ message: "User already exists" });
+			}
+			const user = new User({
+				type: req.body.type,
+				id: req.body.id,
+				email: req.body.email,
+				password: req.body.password,
+			});
+
 			const newUser = await user.save();
 			if (user === newUser) {
 				res.status(201).json({
@@ -202,8 +209,8 @@ app.get("/getCart/:id", async (req, res) => {
 		// } else {
 		// 	res.json("Cart is empty");
 		// }
-	} catch (err) {
-		res.status(400).send(err);
+	} catch (error) {
+		res.status(400).json(error);
 	}
 });
 

@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
+require("dotenv").config();
 
-const connectiongStr =
-	"mongodb+srv://gj0706:fEbjun-2cyhky-tyjfuq@product-management.t0ytpwp.mongodb.net/?retryWrites=true&w=majority";
+const connectiongStr = process.env.MONGO_URL;
 
 const connectToMongoose = () => {
 	mongoose.connect(connectiongStr, {
