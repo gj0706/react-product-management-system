@@ -8,7 +8,7 @@ const FORM = {
 	UPDATE_PW: "Update password",
 	LOCAL_LOGIN_API_BASE_URL: "http://localhost:3000",
 	USER_TYPE: {
-		USR: "USER",
+		USER: "USER",
 		ADMIN: "ADMIN",
 	},
 	CREATE_ACC: "Create account",

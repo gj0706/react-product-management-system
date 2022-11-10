@@ -6,6 +6,9 @@
 	margin-bottom: 5px;
 }
 
+.cart-img {
+	width: 50%;
+}
 .item-details {
 	display: flex;
 	flex-direction: column;

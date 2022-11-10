@@ -22,26 +22,14 @@ function App() {
 	const dispatch = useDispatch();
 	const cartItems = useSelector(selectCartItems);
 
-	const fetchCurrentUserCart = async (id) => {
-		try {
-			const response = await fetch(`/getCart/${id}`);
-			const result = await response.json();
-			dispatch(setCurrentUserCart(result));
-		} catch (error) {
-			console.log(error);
-		}
-	};
 	useEffect(() => {
 		const loggedInUser = localStorage.getItem("user");
 		if (loggedInUser) {
-			// dispatch(emptyCart());
 			const foundUser = JSON.parse(loggedInUser);
 			const currentUserId = foundUser.id;
 			dispatch(setCurrentUser(foundUser));
-			// fetchCurrentUserCart(currentUserId);
 			updateCurrentuserCart(currentUserId, cartItems);
 		}
-		// dispatch(setCurrentUser(JSON.parse(loggedInUser)));
 	}, [cartItems]);
 
 	return (

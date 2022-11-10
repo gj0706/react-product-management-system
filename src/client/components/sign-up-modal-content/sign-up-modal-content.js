@@ -2,14 +2,11 @@ import { useState } from "react";
 import { useEffect } from "react";
 import api from "../../api/api";
 import { v4 as uuidv4 } from "uuid";
-
 import {
 	useForm,
 	isRequired,
 	isValidEmail,
 	isValidPassword,
-	areValidBoth,
-	areRequiredBoth,
 } from "../../validator/validator";
 import FormInput from "../form-input/form-input";
 import SubmitButton from "../submit-button/submit-button";
@@ -45,16 +42,16 @@ const SignUpModalContent = ({ showSignInModal, setVisible }) => {
 	} = useForm(initialState, validations);
 
 	const { email, password } = formFields;
-
-	const fetchData = async () => {
+	const newId = uuidv4();
+	const fetchData = async (type = FORM.USER_TYPE.USER) => {
 		try {
 			let response = await fetch(
-				"/signup",
+				"/auth/signUp",
 				ajaxConfigHelper({
-					id: email,
+					id: newId,
 					email: email,
 					password: password,
-					type: "USER",
+					type: type,
 				})
 			);
 			let result = await response.json();
@@ -73,8 +70,8 @@ const SignUpModalContent = ({ showSignInModal, setVisible }) => {
 	const creatNewCart = async () => {
 		try {
 			const response = await fetch(
-				`/newCart/${email}`,
-				ajaxConfigHelper({ id: email })
+				`/newCart/${newId}`,
+				ajaxConfigHelper({ id: newId })
 			);
 		} catch (err) {
 			console.log(err);

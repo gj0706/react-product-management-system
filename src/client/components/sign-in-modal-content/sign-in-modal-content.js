@@ -75,7 +75,7 @@ const SignInModalContent = ({
 	const fetchData = async () => {
 		try {
 			let response = await fetch(
-				"/signin",
+				"/auth/signIn",
 				ajaxConfigHelper({ email: email, password: password })
 			);
 			let result = await response.json();
@@ -85,7 +85,14 @@ const SignInModalContent = ({
 					setCurrentUser({ id: result.data.id, type: result.data.type })
 				);
 				// dispatch(emptyCart());
-				localStorage.setItem("user", JSON.stringify({ id: result.data.id }));
+				localStorage.setItem(
+					"user",
+					JSON.stringify({
+						id: result.data.id,
+						type: result.data.type,
+						accessToken: result.token,
+					})
+				);
 				fetchCurrentUserCart(result.data.id);
 				setVisible(false);
 				navigate("/");

@@ -92,6 +92,7 @@ const Header = () => {
 			>
 				{signUpModalOn ? (
 					<SignUpModalContent
+						setVisible={setVisible}
 						visible={visible}
 						signInModalOn={signInModalOn}
 						showSignInModal={showSignInModal}

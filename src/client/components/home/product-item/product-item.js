@@ -63,7 +63,7 @@ const ProductItem = ({ product }) => {
 					</SubmitButton>
 				)}
 
-				{currentUser && (
+				{!(currentUser === null || currentUser.type === "USER") && (
 					<Link to={`/edit/${product.id}`}>
 						<SubmitButton className="edit-btn">Edit</SubmitButton>
 					</Link>

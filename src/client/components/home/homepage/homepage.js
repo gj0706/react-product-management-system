@@ -38,7 +38,7 @@ const Homepage = () => {
 								</option>
 							))}
 						</select>
-						{currentUser ? (
+						{!(currentUser === null || currentUser.type === "USER") ? (
 							<Link to="/create">
 								<SubmitButton className="add-product">Add Product</SubmitButton>
 							</Link>

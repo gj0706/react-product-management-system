@@ -7,6 +7,7 @@ import {
 	addItemToCart,
 	clearItemFromCart,
 } from "../../../actions/cart-action";
+import { selectCurrentUser } from "../../../stores/user-selector";
 import { selectCartItems } from "../../../stores/cart-selector";
 import Header from "../../header/header";
 import CreateProductPage from "../create-product/create-product";
@@ -17,13 +18,13 @@ import "./product-detail.css";
 const ProductDetailPage = () => {
 	const products = useSelector(selectProducts);
 	const cartItems = useSelector(selectCartItems);
+	const currentUser = useSelector(selectCurrentUser);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const { pId } = useParams();
 	const product = products.filter((ele) => ele.id === pId)[0];
 
 	const { id, name, price, quantity, imageUrl, description } = product;
-	console.log(quantity);
 
 	const getCurrentItem = () => {
 		for (let i = 0; i < cartItems.length; i++) {
@@ -92,16 +93,18 @@ const ProductDetailPage = () => {
 									Add to cart
 								</SubmitButton>
 							)}
-							<Link className="link-to-detail" to={`/edit/${product.id}`}>
-								<SubmitButton
-									className="edit-btn"
-									id="detail-btn"
-									// className="edit"
-									// onClick={handleCancel}
-								>
-									edit
-								</SubmitButton>
-							</Link>
+							{!(currentUser === null || currentUser.type === "USER") && (
+								<Link className="link-to-detail" to={`/edit/${product.id}`}>
+									<SubmitButton
+										className="edit-btn"
+										id="detail-btn"
+										// className="edit"
+										// onClick={handleCancel}
+									>
+										edit
+									</SubmitButton>
+								</Link>
+							)}
 						</div>
 					</div>
 				</div>
