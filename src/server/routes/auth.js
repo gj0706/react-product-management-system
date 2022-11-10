@@ -50,10 +50,10 @@ router.post(
 
 			const newUser = await user.save();
 			const token = await JWT.sign(
-				{ email: email },
-				process.env.JWT_TOKEN_CODE,
+				{ email: email, type: type },
+				process.env.JWT_SEC_KEY,
 				{
-					expiresIn: "12h",
+					expiresIn: "3d",
 				}
 			);
 			if (user === newUser) {
@@ -104,8 +104,8 @@ router.post("/signIn", async (req, res) => {
 			});
 		}
 		//send json web token
-		const token = await JWT.sign({ email: email }, process.env.JWT_TOKEN_CODE, {
-			expiresIn: "12h",
+		const token = await JWT.sign({ email: email }, process.env.JWT_SEC_KEY, {
+			expiresIn: "3d",
 		});
 		res.json({
 			message: "Sign in succeed",

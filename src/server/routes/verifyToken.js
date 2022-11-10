@@ -1,15 +1,31 @@
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
-const verifyToken = (req, res, next) => {
-	const authHeader = req.headers.token;
-	if (authHeader) {
-		const token = authHeader.split(" ")[1];
-		jwt.verify(token, process.env.JWT_SEC, (err, user) => {
-			if (err) res.status(403).json("Token is not valid!");
-			req.user = user;
-			next();
+module.exports = async (req, res, next) => {
+	const token = req.header("x-auth-token");
+
+	// CHECK IF WE EVEN HAVE A TOKEN
+	if (!token) {
+		res.status(401).json({
+			errors: [
+				{
+					msg: "No token found",
+				},
+			],
 		});
-	} else {
-		return res.status(401).json("You are not authenticated!");
+	}
+
+	try {
+		const user = await jwt.verify(token, process.env.JWT_SEC_KEY);
+		req.user = user.email;
+		next();
+	} catch (error) {
+		res.status(400).json({
+			errors: [
+				{
+					msg: "Invalid Token",
+				},
+			],
+		});
 	}
 };

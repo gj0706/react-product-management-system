@@ -19,7 +19,7 @@ const { get } = require("http");
 const { electron } = require("webpack");
 const { resolveWatchPlugin } = require("jest-resolve");
 const { query } = require("express");
-
+const verifyToken = require("./routes/verifyToken");
 var app = express();
 
 // 1. allCustomers => return all the customer info(emial, pw, type) => GET
