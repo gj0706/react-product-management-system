@@ -133,7 +133,7 @@ app.get("/getProducts", async (_, res) => {
 });
 
 // add a product
-app.post("/addProduct", async (req, res) => {
+app.post("/addProduct", verifyToken, async (req, res) => {
 	//happy path
 
 	if (
@@ -153,26 +153,26 @@ app.post("/addProduct", async (req, res) => {
 			imageUrl: req.body.imageUrl,
 			description: req.body.description,
 		});
-
-		const newProduct = await product.save();
-		if (product === newProduct) {
-			res.status(201).json({
-				message: "Product added",
-				newProduct: {
-					id: newProduct.id,
-					name: newProduct.name,
-					price: newProduct.price,
-					quantity: newProduct.quantity,
-					imageUrl: newProduct.imageUrl,
-					description: newProduct.description,
-				},
-			});
-			return;
+		try {
+			const newProduct = await product.save();
+			if (product === newProduct) {
+				res.status(201).json({
+					message: "Product added",
+					newProduct: {
+						id: newProduct.id,
+						name: newProduct.name,
+						price: newProduct.price,
+						quantity: newProduct.quantity,
+						imageUrl: newProduct.imageUrl,
+						description: newProduct.description,
+					},
+				});
+				return;
+			}
+		} catch (error) {
+			res.status(400).json({ message: "Failed to sign up" });
 		}
-		// error handling
-		res.json({ message: "Failed to add a user", status: 400 });
 	}
-	res.json({ message: "Failed to sign up" });
 });
 
 app.get("/signout", (req, res) => {
@@ -180,7 +180,7 @@ app.get("/signout", (req, res) => {
 });
 
 // update product infomation
-app.put("/updateProduct", async (req, res) => {
+app.put("/updateProduct", verifyToken, async (req, res) => {
 	try {
 		if (req.body && req.body.id) {
 			const id = req.body.id;
@@ -189,12 +189,14 @@ app.put("/updateProduct", async (req, res) => {
 			const { modifiedCount } = await result.updateOne(updatedData);
 
 			if (modifiedCount) {
-				res.status(200).json({ message: "Update succeed", data: updatedData });
+				res
+					.status(200)
+					.json({ message: "Product update succeed", data: updatedData });
 				return;
 			}
 		}
 	} catch (error) {
-		res.status(400).json({ message: "Update failed" });
+		res.status(400).json({ message: "Product update failed" });
 	}
 });
 
@@ -206,42 +208,10 @@ app.get("/getCart/:id", async (req, res) => {
 		const cartItems = cart.cartItems;
 		// if (cartItems.length > 0) {
 		res.status(200).json(cartItems);
-		// } else {
-		// 	res.json("Cart is empty");
-		// }
 	} catch (error) {
 		res.status(400).json(error);
 	}
 });
-
-// app.post("/getCart/:id", async (req, res) => {
-// 	const userId = req.params.id;
-// 	try {
-// 		const cart = await Cart.findOne({ userId });
-// 		if (!cart) {
-// 			const newCart = new Cart({
-// 				userId: userId,
-// 				cartItems: [],
-// 			});
-// 			const savedCart = await newCart.save();
-// 			res.status(200).json({
-// 				message: "No cart found. Created a new cart for you.",
-// 				cartItems: cartItems,
-// 			});
-// 		} else {
-// 			const cartItems = cart.cartItems;
-// 			if (cartItems.length > 0) {
-// 				res
-// 					.status(200)
-// 					.json({ message: "Fetch success", cartItems: cartItems });
-// 			} else {
-// 				res.send({ message: "Cart is empty", cartItems: cartItems });
-// 			}
-// 		}
-// 	} catch (err) {
-// 		res.status(500).send(err);
-// 	}
-// });
 
 // create a new cart
 app.post("/newCart/:id", async (req, res) => {
@@ -260,7 +230,7 @@ app.post("/newCart/:id", async (req, res) => {
 
 // update a cart
 
-app.put("/updateCart/:id", async (req, res) => {
+app.put("/updateCart/:id", verifyToken, async (req, res) => {
 	const userId = req.params.id;
 	const updatedData = req.body;
 	try {
@@ -275,21 +245,6 @@ app.put("/updateCart/:id", async (req, res) => {
 		res.status(400).json(err);
 	}
 });
-// app.put("/updateCart", async (req, res) => {
-// 	const userId = req.body.userId;
-// 	try {
-// 		const updatedCart = await Cart.findByIdAndUpdate(
-// 			userId,
-// 			{
-// 				$push: req.body.cartItems,
-// 			},
-// 			{ new: true, upsert: true }
-// 		);
-// 		res.status(200).json(updatedCart);
-// 	} catch (err) {
-// 		res.status(500).json(err);
-// 	}
-// });
 
 // delete a cart
 app.delete("/deleteCart", async (req, res) => {
@@ -301,94 +256,6 @@ app.delete("/deleteCart", async (req, res) => {
 		res.status(400).json(err);
 	}
 });
-
-// app.post("/addItemToCart", async (req, res) => {
-// 	Cart.findOne({ user: req.body.userId }).exec((error, cart) => {
-// 		if (error) return res.status(400).json({ error });
-// 		if (cart) {
-// 			const productId = req.body.cartItems.productId;
-// 			const item = cart.cartItems.find((c) => c.product_id == product_id);
-// 			if (item) {
-// 				Cart.findOneAndUpdate(
-// 					{ user: req.user._id, "cartItems.product_id": product_id },
-// 					{
-// 						$cartItems: {
-// 							...req.body.cartItems,
-// 							quantity: item.quantity + req.body.cartItems.quantity,
-// 						},
-// 					}
-// 				).exec((error, _cart) => {
-// 					if (error) return res.status(400).json({ error });
-// 					if (_cart) {
-// 						return res.status(201).json({ cart: _cart });
-// 					}
-// 				});
-// 				// if user cart does't exist create a list of cart for the user
-// 			} else {
-// 				Cart.findOneAndUpdate(
-// 					{ user: req.user._id },
-// 					{
-// 						$push: {
-// 							cartItems: req.body.cartItems,
-// 						},
-// 					}
-// 				).exec((error, _cart) => {
-// 					if (error) return res.status(400).json({ error });
-// 					if (_cart) {
-// 						return res.status(201).json({ cart: _cart });
-// 					}
-// 				});
-// 			}
-// 		} else {
-// 			// if cart not exist create a new cart
-// 			const cart = new Cart({
-// 				user: req.user._id,
-// 				cartItems: req.body.cartItems,
-// 			});
-// 			cart.save((error, cart) => {
-// 				if (error) return res.status(400).json({ error });
-// 				if (cart) {
-// 					return res.status(200).json({ cart });
-// 				}
-// 			});
-// 		}
-// 	});
-// });
-
-// app.post("/addToCart", async (req, res) => {
-// 	const userId = req.body.userId;
-// 	try {
-// 		const cart = await User.findOne({ userId });
-// 		const cartItems = user.cartItems;
-// 		if (cartItems) {
-// 			const itemIndex = cartItems.findIndex(
-// 				(item) => item.productId === req.body.cartItem.productId
-// 			);
-
-// 			if (itemIndex > -1) {
-// 				// product already in the cart, update quantity
-// 				const cartItem = cartItems[itemIndex];
-// 				cartItem.quantity += req.body.cartItem.quantity;
-// 				cartItems[itemIndex] = cartItem;
-// 			} else {
-// 				// product not in the cart, add to the cartItems list
-// 				cartItems.push(req.body.cartItem);
-// 			}
-
-// 			await cartItems.save();
-// 			return res.status(201).send(cartItems);
-// 		} else {
-// 			// if there is no cart for the user, create a new cart
-
-// 			const newCart = await user.insert({
-// 				cartItems: [{ ...req.body.cartItem }],
-// 			});
-// 			return res.status(201).send(newCart);
-// 		}
-// 	} catch (error) {
-// 		res.json({ message: "Update failed", status: 400 });
-// 	}
-// });
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
