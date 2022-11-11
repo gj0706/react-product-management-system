@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import Footer from "../../footer/footer";
@@ -6,6 +7,7 @@ import Header from "../../header/header";
 import SubmitButton from "../../submit-button/submit-button";
 import "./create-product.css";
 import ajaxConfigHelper from "../../../api/api";
+import { selectCurrentUser } from "../../../stores/user-selector";
 
 const initialState = {
 	name: "",
@@ -15,15 +17,12 @@ const initialState = {
 	quantity: "",
 };
 
-const CreateProductPage = (
-	// setAddClicked,
-	// addClicked,
-	// editClicked,
-	editedProduct
-) => {
+const CreateProductPage = () => {
 	const [product, setProduct] = useState(initialState);
 	const resetForm = () => setProduct(initialState);
 	const [showImage, setShowImage] = useState(false);
+	const currentUser = useSelector(selectCurrentUser);
+	const token = currentUser.accessToken;
 
 	// const { id, name, price, quantity, imageUrl, description } = editedProduct;
 	const changeHandler = (event) => {
@@ -34,14 +33,23 @@ const CreateProductPage = (
 		setProduct(newProduct);
 		// console.log(product);
 	};
-	// console.log(editedProduct);
 	const uniqId = uuidv4();
 	const newProduct = { ...product, id: uniqId };
 	// const newFields = changeHandler();
 
 	const addProduct = async () => {
 		try {
-			let response = await fetch("/addProduct", ajaxConfigHelper(newProduct));
+			let response = await fetch(
+				"/addProduct",
+				ajaxConfigHelper(
+					newProduct,
+					"POST",
+					new Headers({
+						token: `Bearer ${token}`,
+						"content-type": "application/json",
+					})
+				)
+			);
 			let result = await response.json();
 			console.log(result);
 			if (response.status === 200) {

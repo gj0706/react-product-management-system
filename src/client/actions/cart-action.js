@@ -12,7 +12,7 @@ const addCartItem = (cartItems, productToAdd) => {
 	if (existingCartItem) {
 		return cartItems.map((cartItem) =>
 			cartItem.id === productToAdd.id
-				? { ...cartItem, quantity: cartItem.quantity + 1 }
+				? { ...cartItem, quantity: parseInt(cartItem.quantity) + 1 }
 				: cartItem
 		);
 	}
@@ -78,11 +78,18 @@ export const setIsCartOpen = (boolean) =>
 // 	}
 // };
 
-export const updateCurrentuserCart = async (id, cartItems) => {
+export const updateCurrentuserCart = async (id, cartItems, token) => {
 	try {
 		const response = await fetch(
 			`/updateCart/${id}`,
-			ajaxConfigHelper({ cartItems: [...cartItems] }, "PUT")
+			ajaxConfigHelper(
+				{ cartItems: [...cartItems] },
+				"PUT",
+				new Headers({
+					token: `Bearer ${token}`,
+					"content-type": "application/json",
+				})
+			)
 		);
 		const result = await response.json();
 		console.log(result);

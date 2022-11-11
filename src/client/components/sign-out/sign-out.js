@@ -5,6 +5,7 @@ import { setCurrentUser } from "../../actions/user-action";
 import { selectCartItems } from "../../stores/cart-selector";
 import FORM from "../../constants/form";
 import "./sign-out.css";
+import { selectCurrentUser } from "../../stores/user-selector";
 
 const SignOut = ({ handleSignOut, setUser }) => {
 	const cartItems = useSelector(selectCartItems);

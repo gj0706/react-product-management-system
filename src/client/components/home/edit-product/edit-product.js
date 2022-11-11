@@ -8,6 +8,7 @@ import ProductForm from "../../product-form/product-form";
 import SubmitButton from "../../submit-button/submit-button";
 import ajaxConfigHelper from "../../../api/api";
 import "./edit-product.css";
+import { selectCurrentUser } from "../../../stores/user-selector";
 
 const initialState = {
 	id: "",
@@ -22,6 +23,8 @@ const EditProductPage = () => {
 	const products = useSelector(selectProducts);
 	const [newProduct, setNewProduct] = useState(initialState);
 	const [showImage, setShowImage] = useState(false);
+	const currentUser = useSelector(selectCurrentUser);
+	const token = currentUser.accessToken;
 	const location = useLocation();
 	const navigate = useNavigate();
 	const { pId } = useParams();
@@ -36,8 +39,12 @@ const EditProductPage = () => {
 			...oldProduct,
 			[event.target.name]: event.target.value,
 		};
+		console.log(event.target.value);
+
 		setNewProduct(product);
 	};
+
+	console.log(newProduct);
 
 	const goBack = () => {
 		navigate(-1);
@@ -56,7 +63,11 @@ const EditProductPage = () => {
 						imageUrl: newProduct.imageUrl,
 						description: newProduct.description,
 					},
-					"PUT"
+					"PUT",
+					new Headers({
+						token: `Bearer ${token}`,
+						"content-type": "application/json",
+					})
 				)
 			);
 			let result = await response.json();

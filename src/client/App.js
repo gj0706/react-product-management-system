@@ -28,7 +28,7 @@ function App() {
 			const foundUser = JSON.parse(loggedInUser);
 			const currentUserId = foundUser.id;
 			dispatch(setCurrentUser(foundUser));
-			updateCurrentuserCart(currentUserId, cartItems);
+			updateCurrentuserCart(currentUserId, cartItems, foundUser.accessToken);
 		}
 	}, [cartItems]);
 
