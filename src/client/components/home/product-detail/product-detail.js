@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import { useLocation, Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { selectProducts } from "../../../stores/product-selector";
 import {
@@ -10,7 +9,6 @@ import {
 import { selectCurrentUser } from "../../../stores/user-selector";
 import { selectCartItems } from "../../../stores/cart-selector";
 import Header from "../../header/header";
-import CreateProductPage from "../create-product/create-product";
 import Footer from "../../footer/footer";
 import SubmitButton from "../../submit-button/submit-button";
 import "./product-detail.css";
@@ -37,14 +35,30 @@ const ProductDetailPage = () => {
 
 	const currentItem = getCurrentItem();
 
-	const addItemHandler = () => dispatch(addItemToCart(cartItems, product));
+	const addItemHandler = () =>
+		dispatch(
+			addItemToCart(cartItems, product, currentUser.id, currentUser.accessToken)
+		);
 
 	const removeItemHandler = () =>
-		dispatch(removeItemFromCart(cartItems, product));
+		dispatch(
+			removeItemFromCart(
+				cartItems,
+				product,
+				currentUser.id,
+				currentUser.accessToken
+			)
+		);
 
 	const clearItemHandler = () => {
-		dispatch(clearItemFromCart(cartItems, product));
-		// setClicked(false);
+		dispatch(
+			clearItemFromCart(
+				cartItems,
+				product,
+				currentUser.id,
+				currentUser.accessToken
+			)
+		);
 	};
 
 	const goBack = () => {
@@ -95,12 +109,7 @@ const ProductDetailPage = () => {
 							)}
 							{!(currentUser === null || currentUser.type === "USER") && (
 								<Link className="link-to-detail" to={`/edit/${product.id}`}>
-									<SubmitButton
-										className="edit-btn"
-										id="detail-btn"
-										// className="edit"
-										// onClick={handleCancel}
-									>
+									<SubmitButton className="edit-btn" id="detail-btn">
 										edit
 									</SubmitButton>
 								</Link>

@@ -1,16 +1,8 @@
-import { useState, useEffect } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { setCurrentUser } from "./actions/user-action";
-import { updateCurrentuserCart } from "./actions/cart-action";
-// import { ErrorBoundary } from "reeact-error-boundary";
-import { selectCartItems } from "./stores/cart-selector";
-import {
-	addItemToCart,
-	emptyCart,
-	setCurrentUserCart,
-} from "./actions/cart-action";
-import ajaxConfigHelper from "./api/api";
+import { setCurrentUserCart } from "./actions/cart-action";
 import CreateProductPage from "./components/home/create-product/create-product";
 import ProductDetailPage from "./components/home/product-detail/product-detail";
 import EditProductPage from "./components/home/edit-product/edit-product";
@@ -20,7 +12,24 @@ import "./App.css";
 
 function App() {
 	const dispatch = useDispatch();
-	const cartItems = useSelector(selectCartItems);
+
+	const fetchCurrentUserCart = async (id, token) => {
+		try {
+			const response = await fetch(`/getCart/${id}`, {
+				method: "GET",
+				headers: new Headers({
+					token: `Bearer ${token}`,
+					"content-type": "application/json",
+				}),
+			});
+			const result = await response.json();
+			dispatch(setCurrentUserCart(result));
+			console.log("current user cart: ", result);
+			return result;
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	useEffect(() => {
 		const loggedInUser = localStorage.getItem("user");
@@ -28,22 +37,18 @@ function App() {
 			const foundUser = JSON.parse(loggedInUser);
 			const currentUserId = foundUser.id;
 			dispatch(setCurrentUser(foundUser));
-			updateCurrentuserCart(currentUserId, cartItems, foundUser.accessToken);
+			fetchCurrentUserCart(currentUserId, foundUser.accessToken);
 		}
-	}, [cartItems]);
+	}, []);
 
 	return (
-		// <ErrorBoundary FallbackComponent={<Errorpage />}>
 		<Routes>
 			<Route path="/" element={<Home />} />
-			{/* <Route path="home" element={<Homepage />} /> */}
-
 			<Route path="/detail/:pId" element={<ProductDetailPage />} />
 			<Route path="/create" element={<CreateProductPage />} />
 			<Route path="/edit/:pId" element={<EditProductPage />} />
 			<Route path="/*" element={<Errorpage />} />
 		</Routes>
-		// </ErrorBoundary>
 	);
 }
 

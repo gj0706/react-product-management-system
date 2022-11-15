@@ -1,10 +1,13 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Footer from "../footer/footer";
 import Header from "../header/header";
 import SubmitButton from "../submit-button/submit-button";
 import "./error-page.css";
-const Errorpage = ({ error }) => {
+const Errorpage = () => {
 	const navigate = useNavigate();
+	// const location = useLocation();
+	// const error = location.state.error;
+	// console.log(error);
 	const goHome = () => {
 		navigate("/");
 	};
@@ -17,7 +20,9 @@ const Errorpage = ({ error }) => {
 				</div>
 				<div className="error-body">
 					<span className="error-icon">!</span>
-					<h1>Oops, something went wrong!</h1>
+					{/* {error ? <h1>{error}</h1> : <h1>Something is wrong</h1>
+					} */}
+					<h1>Something went wrong</h1>
 					{/* <pre>{error.message}</pre> */}
 					<SubmitButton id="go-home-btn" onClick={goHome}>
 						Go Home

@@ -22,11 +22,6 @@ const { query } = require("express");
 const verifyToken = require("./routes/verifyToken");
 var app = express();
 
-// 1. allCustomers => return all the customer info(emial, pw, type) => GET
-// 2. signIn => add a new customer to the backend, return a boolean flag/status => POST
-// 3. updateInfo => update a customer's information, return a boolean flag/status => PUT
-// 4. deleteInfo => delete a customer's info from backend, return a boolean flag/ status => DELETE
-
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
@@ -156,7 +151,7 @@ app.post("/addProduct", verifyToken, async (req, res) => {
 		try {
 			const newProduct = await product.save();
 			if (product === newProduct) {
-				res.status(201).json({
+				res.status(200).json({
 					message: "Product added",
 					newProduct: {
 						id: newProduct.id,
@@ -201,7 +196,7 @@ app.put("/updateProduct", verifyToken, async (req, res) => {
 });
 
 // get all cart info from a user
-app.get("/getCart/:id", async (req, res) => {
+app.get("/getCart/:id", verifyToken, async (req, res) => {
 	const userId = req.params.id;
 	try {
 		const cart = await Cart.findOne({ userId });

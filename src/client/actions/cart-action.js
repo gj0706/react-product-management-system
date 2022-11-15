@@ -1,8 +1,6 @@
 import { TYPES } from "../constants/types";
-import { useDispatch } from "react-redux";
 import { createAction } from "./creat-action-helper";
 import ajaxConfigHelper from "../api/api";
-import { CART_INITIAL_STATE } from "../reducers/cart-reducer";
 
 const addCartItem = (cartItems, productToAdd) => {
 	const existingCartItem = cartItems.find(
@@ -45,18 +43,21 @@ const clearCartItem = (cartItems, cartItemToClear) =>
 export const setCurrentUserCart = (cartItems) =>
 	createAction(TYPES.SET_CART_ITEMS, cartItems);
 
-export const addItemToCart = (cartItems, productToAdd) => {
+export const addItemToCart = (cartItems, productToAdd, id, token) => {
 	const newCartItems = addCartItem(cartItems, productToAdd);
+	updateCurrentuserCart(id, newCartItems, token);
 	return createAction(TYPES.SET_CART_ITEMS, newCartItems);
 };
 
-export const removeItemFromCart = (cartItems, cartItemToRemove) => {
+export const removeItemFromCart = (cartItems, cartItemToRemove, id, token) => {
 	const newCartItems = removeCartItem(cartItems, cartItemToRemove);
+	updateCurrentuserCart(id, newCartItems, token);
 	return createAction(TYPES.SET_CART_ITEMS, newCartItems);
 };
 
-export const clearItemFromCart = (cartItems, cartItemToClear) => {
+export const clearItemFromCart = (cartItems, cartItemToClear, id, token) => {
 	const newCartItems = clearCartItem(cartItems, cartItemToClear);
+	updateCurrentuserCart(id, newCartItems, token);
 	return createAction(TYPES.SET_CART_ITEMS, newCartItems);
 };
 
@@ -66,17 +67,6 @@ export const emptyCart = () => {
 
 export const setIsCartOpen = (boolean) =>
 	createAction(TYPES.SET_IS_CART_OPEN, boolean);
-
-// export const getCurrentUserCart = async (id) => {
-// 	try {
-// 		const response = await fetch(`/getCart/${id}`);
-// 		const result = await response.json();
-// 		console.log(result);
-// 		createAction(TYPES.GET_CURRENT_USER_CART, result);
-// 	} catch (error) {
-// 		console.log(error);
-// 	}
-// };
 
 export const updateCurrentuserCart = async (id, cartItems, token) => {
 	try {

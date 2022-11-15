@@ -17,13 +17,13 @@ const ProductList = ({ selected }) => {
 		products.sort((a, b) => b.price - a.price);
 	}
 	const productList1 = Object.values(products)
-		.slice(0, 10)
+		.slice(0, 12)
 		.map((product) => {
 			return <ProductItem product={product} key={product.id} />;
 		});
 
 	const productList2 = Object.values(products)
-		.slice(10)
+		.slice(12)
 		.map((product) => {
 			return <ProductItem product={product} key={product.id} />;
 		});

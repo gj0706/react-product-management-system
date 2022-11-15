@@ -6,7 +6,6 @@ import CartItem from "../cart-item/cart-item";
 
 const CartItemList = () => {
 	const cartItems = useSelector(selectCartItems);
-	// const currentUserId = useSelector(selectCurrentUser).id;
 
 	return (
 		<>

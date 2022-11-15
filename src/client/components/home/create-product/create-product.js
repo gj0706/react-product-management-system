@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import Footer from "../../footer/footer";
 import Header from "../../header/header";
@@ -23,6 +23,7 @@ const CreateProductPage = () => {
 	const [showImage, setShowImage] = useState(false);
 	const currentUser = useSelector(selectCurrentUser);
 	const token = currentUser.accessToken;
+	const navigate = useNavigate();
 
 	// const { id, name, price, quantity, imageUrl, description } = editedProduct;
 	const changeHandler = (event) => {
@@ -57,6 +58,7 @@ const CreateProductPage = () => {
 
 				console.log("Product created successfully");
 			} else if (response.status === 400) {
+				navigate("/*");
 				console.log("Some error occured");
 			}
 		} catch (err) {

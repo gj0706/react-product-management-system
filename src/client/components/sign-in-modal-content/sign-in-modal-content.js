@@ -1,8 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { selectCurrentUser } from "../../stores/user-selector";
-// import { fetchCurrentUserCart } from "../../actions/cart-action";
 import { setCurrentUserCart } from "../../actions/cart-action";
 import ajaxConfigHelper from "../../api/api";
 import {
@@ -17,7 +16,6 @@ import FormInput from "../form-input/form-input";
 import SubmitButton from "../submit-button/submit-button";
 import "./sign-in-modal-content.css";
 import { setCurrentUser } from "../../actions/user-action";
-import { addItemToCart, emptyCart } from "../../actions/cart-action";
 import { selectCartItems } from "../../stores/cart-selector";
 
 const SignInModalContent = ({
@@ -30,6 +28,7 @@ const SignInModalContent = ({
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const cartItems = useSelector(selectCartItems);
+	const currentUser = useSelector(selectCurrentUser);
 	const initialState = {
 		email: "",
 		password: "",
@@ -46,20 +45,15 @@ const SignInModalContent = ({
 			},
 	];
 
-	const {
-		formFields,
-		isValid,
-		errors,
-		changeHandler,
-		resetFormFields,
-		touched,
-	} = useForm(initialState, validations);
+	const { formFields, errors, changeHandler, resetFormFields } = useForm(
+		initialState,
+		validations
+	);
 
 	const { email, password } = formFields;
 
 	const goToErrorPage = (error) => {
 		navigate("/*", { replace: true, state: { error } });
-		// navigate("/*");
 	};
 
 	const fetchCurrentUserCart = async (id) => {
@@ -82,9 +76,12 @@ const SignInModalContent = ({
 			// console.log(result.data);
 			if (response.status === 200) {
 				dispatch(
-					setCurrentUser({ id: result.data.id, type: result.data.type })
+					setCurrentUser({
+						id: result.data.id,
+						type: result.data.type,
+						accessToken: result.data.token,
+					})
 				);
-				// dispatch(emptyCart());
 				localStorage.setItem(
 					"user",
 					JSON.stringify({
@@ -93,17 +90,15 @@ const SignInModalContent = ({
 						accessToken: result.token,
 					})
 				);
-				fetchCurrentUserCart(result.data.id);
 				setVisible(false);
 				navigate("/");
-				// } else if (response.status === 400) {
-				// 	// return redirect("/*");
-				// 	goToErrorPage();
+				window.location.reload(false);
+			} else if (response.status === 400 || 404) {
+				navigate("/*");
 			}
 		} catch (error) {
 			console.log(error);
-			goToErrorPage(error);
-			// return redirect("/*");
+			navigate("/*");
 		}
 	};
 

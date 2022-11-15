@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
 	removeItemFromCart,
@@ -6,19 +5,45 @@ import {
 	clearItemFromCart,
 } from "../../actions/cart-action";
 import { selectCartItems } from "../../stores/cart-selector";
+import { selectCurrentUser } from "../../stores/user-selector";
 import "./cart-item.css";
 
 const CartItem = ({ cartItem }) => {
 	const dispatch = useDispatch();
 	const cartItems = useSelector(selectCartItems);
+	const currentUser = useSelector(selectCurrentUser);
 
-	const addItemHandler = () => dispatch(addItemToCart(cartItems, cartItem));
+	const addItemHandler = () => {
+		dispatch(
+			addItemToCart(
+				cartItems,
+				cartItem,
+				currentUser.id,
+				currentUser.accessToken
+			)
+		);
+	};
 
-	const removeItemHandler = () =>
-		dispatch(removeItemFromCart(cartItems, cartItem));
-
-	const clearItemHandler = () =>
-		dispatch(clearItemFromCart(cartItems, cartItem));
+	const removeItemHandler = () => {
+		dispatch(
+			removeItemFromCart(
+				cartItems,
+				cartItem,
+				currentUser.id,
+				currentUser.accessToken
+			)
+		);
+	};
+	const clearItemHandler = () => {
+		dispatch(
+			clearItemFromCart(
+				cartItems,
+				cartItem,
+				currentUser.id,
+				currentUser.accessToken
+			)
+		);
+	};
 
 	return (
 		<div className="cart-item-container">

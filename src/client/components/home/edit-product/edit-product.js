@@ -76,6 +76,7 @@ const EditProductPage = () => {
 				console.log("Successfully updated product info");
 				goBack();
 			} else if (response.status === 400) {
+				navigate("/*");
 				console.log("Some error occured");
 			}
 		} catch (err) {

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import api from "../../api/api";
 import { v4 as uuidv4 } from "uuid";
@@ -20,7 +21,7 @@ const SignUpModalContent = ({ showSignInModal, setVisible }) => {
 		email: "",
 		password: "",
 	};
-
+	const navigate = useNavigate();
 	const validations = [
 		({ email }) => isRequired(email) || { email: "E-mail is required" },
 		({ email }) => isValidEmail(email) || { email: "E-mail is not valid" },
@@ -43,28 +44,9 @@ const SignUpModalContent = ({ showSignInModal, setVisible }) => {
 
 	const { email, password } = formFields;
 	const newId = uuidv4();
-	const fetchData = async (type = FORM.USER_TYPE.USER) => {
-		try {
-			let response = await fetch(
-				"/auth/signUp",
-				ajaxConfigHelper({
-					id: newId,
-					email: email,
-					password: password,
-					type: type,
-				})
-			);
-			let result = await response.json();
-			console.log(result);
-			if (response.status === 200) {
-				setVisible(false);
-				console.log("Signed up successfully");
-			} else if (response.status === 400) {
-				console.log("Some error occured");
-			}
-		} catch (err) {
-			console.log(err);
-		}
+	const goToErrorPage = (error) => {
+		navigate("/*", { replace: true, state: { error } });
+		// navigate("/*");
 	};
 
 	const creatNewCart = async () => {
@@ -78,10 +60,39 @@ const SignUpModalContent = ({ showSignInModal, setVisible }) => {
 		}
 	};
 
+	const fetchData = async (type = FORM.USER_TYPE.USER) => {
+		try {
+			let response = await fetch(
+				"/auth/signUp",
+				ajaxConfigHelper({
+					id: newId,
+					email: email,
+					password: password,
+					type: type,
+				})
+			);
+			// console.log(response.status);
+			let result = await response.json();
+			// console.log(result.errors[0]);
+			if (response.status === 200) {
+				setVisible(false);
+				console.log("Signed up successfully");
+				creatNewCart();
+			} else if (response.status === 400 || 422) {
+				// goToErrorPage(result.errors[0].msg);
+				navigate("/*");
+				// console.log("Error occurred");
+			}
+		} catch (err) {
+			navigate("/*");
+			console.log(err);
+		}
+	};
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		fetchData();
-		creatNewCart();
+		// creatNewCart();
 		resetFormFields();
 	};
 
