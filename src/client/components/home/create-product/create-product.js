@@ -55,6 +55,7 @@ const CreateProductPage = () => {
 			console.log(result);
 			if (response.status === 200) {
 				resetForm();
+				navigate("/");
 
 				console.log("Product created successfully");
 			} else if (response.status === 400) {

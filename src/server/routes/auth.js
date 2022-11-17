@@ -105,7 +105,7 @@ router.post("/signIn", async (req, res) => {
 		}
 		//send json web token
 		const token = await JWT.sign({ email: email }, process.env.JWT_SEC_KEY, {
-			expiresIn: "3d",
+			expiresIn: "30d",
 		});
 		res.json({
 			message: "Sign in succeed",

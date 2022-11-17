@@ -2,8 +2,10 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCurrentUser } from "../../../stores/user-selector";
 import {
-	removeItemFromCart,
 	addItemToCart,
+	addItemToCartAsync,
+	removeItemFromCart,
+	removeItemFromCartAsync,
 } from "../../../actions/cart-action";
 import { selectCartItems } from "../../../stores/cart-selector";
 import SubmitButton from "../../submit-button/submit-button";
@@ -19,20 +21,34 @@ const ProductItem = ({ product }) => {
 	);
 
 	const addItemHandler = () => {
-		dispatch(
-			addItemToCart(cartItems, product, currentUser.id, currentUser.accessToken)
-		);
+		if (currentUser) {
+			dispatch(
+				addItemToCartAsync(
+					cartItems,
+					product,
+					currentUser.id,
+					currentUser.accessToken
+				)
+			);
+		} else {
+			dispatch(addItemToCart(cartItems, product));
+		}
 	};
 
-	const removeItemHandler = () =>
-		dispatch(
-			removeItemFromCart(
-				cartItems,
-				product,
-				currentUser.id,
-				currentUser.accessToken
-			)
-		);
+	const removeItemHandler = () => {
+		if (currentUser) {
+			dispatch(
+				removeItemFromCartAsync(
+					cartItems,
+					product,
+					currentUser.id,
+					currentUser.accessToken
+				)
+			);
+		} else {
+			dispatch(removeItemFromCart(cartItems, product));
+		}
+	};
 
 	return (
 		<div className="item-container">

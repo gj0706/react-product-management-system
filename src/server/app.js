@@ -58,63 +58,63 @@ app.post("/getOneUser", async (req, res) => {
 });
 
 // sign in
-app.post("/signin", async (req, res) => {
-	if (req.body && req.body.email && req.body.password) {
-		const email = req.body.email;
-		const password = req.body.password;
-		const queryResult = await User.findOne({ email });
+// app.post("/signin", async (req, res) => {
+// 	if (req.body && req.body.email && req.body.password) {
+// 		const email = req.body.email;
+// 		const password = req.body.password;
+// 		const queryResult = await User.findOne({ email });
 
-		if (password === queryResult.password) {
-			res.json({
-				message: `You've successfully signed in with Email: ${req.body.email}`,
-				data: queryResult,
-			});
-			return;
-		} else {
-			return res.json({
-				message: "Email or password doesn't match",
-				status: 400,
-			});
-		}
-	}
-	res.json({ message: "Failed to sign in" });
-});
+// 		if (password === queryResult.password) {
+// 			res.json({
+// 				message: `You've successfully signed in with Email: ${req.body.email}`,
+// 				data: queryResult,
+// 			});
+// 			return;
+// 		} else {
+// 			return res.json({
+// 				message: "Email or password doesn't match",
+// 				status: 400,
+// 			});
+// 		}
+// 	}
+// 	res.json({ message: "Failed to sign in" });
+// });
 
-// sign up
-app.post("/signup", async (req, res) => {
-	//happy path
-	if (req.body && req.body.email && req.body.password && req.body.id) {
-		try {
-			const existUser = await User.findOne({ email: req.body.email });
+// // sign up
+// app.post("/signup", async (req, res) => {
+// 	//happy path
+// 	if (req.body && req.body.email && req.body.password && req.body.id) {
+// 		try {
+// 			const existUser = await User.findOne({ email: req.body.email });
 
-			if (existUser) {
-				res.status(400).json({ message: "User already exists" });
-			}
-			const user = new User({
-				type: req.body.type,
-				id: req.body.id,
-				email: req.body.email,
-				password: req.body.password,
-			});
+// 			if (existUser) {
+// 				res.status(400).json({ message: "User already exists" });
+// 			}
+// 			const user = new User({
+// 				type: req.body.type,
+// 				id: req.body.id,
+// 				email: req.body.email,
+// 				password: req.body.password,
+// 			});
 
-			const newUser = await user.save();
-			if (user === newUser) {
-				res.status(201).json({
-					message: "Sign up succeed",
-					newUser: {
-						id: newUser.id,
-						email: newUser.email,
-					},
-				});
-				return;
-			}
-		} catch (error) {
-			// error handling
-			res.json({ message: "Failed to add a user", status: 400 });
-		}
-	}
-	res.json({ message: "Failed to sign up" });
-});
+// 			const newUser = await user.save();
+// 			if (user === newUser) {
+// 				res.status(201).json({
+// 					message: "Sign up succeed",
+// 					newUser: {
+// 						id: newUser.id,
+// 						email: newUser.email,
+// 					},
+// 				});
+// 				return;
+// 			}
+// 		} catch (error) {
+// 			// error handling
+// 			res.json({ message: "Failed to add a user", status: 400 });
+// 		}
+// 	}
+// 	res.json({ message: "Failed to sign up" });
+// });
 
 // get all products
 app.get("/getProducts", async (_, res) => {
@@ -225,7 +225,7 @@ app.post("/newCart/:id", async (req, res) => {
 
 // update a cart
 
-app.put("/updateCart/:id", verifyToken, async (req, res) => {
+app.put("/updateCart/:id", async (req, res) => {
 	const userId = req.params.id;
 	const updatedData = req.body;
 	try {

@@ -80,8 +80,8 @@ const SignUpModalContent = ({ showSignInModal, setVisible }) => {
 				creatNewCart();
 			} else if (response.status === 400 || 422) {
 				// goToErrorPage(result.errors[0].msg);
-				navigate("/*");
-				// console.log("Error occurred");
+				// navigate("/*");
+				console.log("Error occurred");
 			}
 		} catch (err) {
 			navigate("/*");

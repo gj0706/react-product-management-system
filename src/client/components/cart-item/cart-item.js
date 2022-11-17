@@ -3,6 +3,9 @@ import {
 	removeItemFromCart,
 	addItemToCart,
 	clearItemFromCart,
+	addItemToCartAsync,
+	removeItemFromCartAsync,
+	clearItemFromCartAsync,
 } from "../../actions/cart-action";
 import { selectCartItems } from "../../stores/cart-selector";
 import { selectCurrentUser } from "../../stores/user-selector";
@@ -14,35 +17,47 @@ const CartItem = ({ cartItem }) => {
 	const currentUser = useSelector(selectCurrentUser);
 
 	const addItemHandler = () => {
-		dispatch(
-			addItemToCart(
-				cartItems,
-				cartItem,
-				currentUser.id,
-				currentUser.accessToken
-			)
-		);
+		if (currentUser) {
+			dispatch(
+				addItemToCartAsync(
+					cartItems,
+					cartItem,
+					currentUser.id,
+					currentUser.accessToken
+				)
+			);
+		} else {
+			dispatch(addItemToCart(cartItems, cartItem));
+		}
 	};
 
 	const removeItemHandler = () => {
-		dispatch(
-			removeItemFromCart(
-				cartItems,
-				cartItem,
-				currentUser.id,
-				currentUser.accessToken
-			)
-		);
+		if (currentUser) {
+			dispatch(
+				removeItemFromCartAsync(
+					cartItems,
+					cartItem,
+					currentUser.id,
+					currentUser.accessToken
+				)
+			);
+		} else {
+			dispatch(removeItemFromCart(cartItems, cartItem));
+		}
 	};
 	const clearItemHandler = () => {
-		dispatch(
-			clearItemFromCart(
-				cartItems,
-				cartItem,
-				currentUser.id,
-				currentUser.accessToken
-			)
-		);
+		if (currentUser) {
+			dispatch(
+				clearItemFromCartAsync(
+					cartItems,
+					cartItem,
+					currentUser.id,
+					currentUser.accessToken
+				)
+			);
+		} else {
+			dispatch(clearItemFromCart(cartItems, cartItem));
+		}
 	};
 
 	return (

@@ -56,11 +56,19 @@ const SignInModalContent = ({
 		navigate("/*", { replace: true, state: { error } });
 	};
 
-	const fetchCurrentUserCart = async (id) => {
+	const fetchCurrentUserCart = async (id, token) => {
 		try {
-			const response = await fetch(`/getCart/${id}`);
+			const response = await fetch(`/getCart/${id}`, {
+				method: "GET",
+				headers: new Headers({
+					token: `Bearer ${token}`,
+					"content-type": "application/json",
+				}),
+			});
 			const result = await response.json();
 			dispatch(setCurrentUserCart(result));
+			console.log("current user cart: ", result);
+			return result;
 		} catch (error) {
 			console.log(error);
 		}
@@ -73,13 +81,13 @@ const SignInModalContent = ({
 				ajaxConfigHelper({ email: email, password: password })
 			);
 			let result = await response.json();
-			// console.log(result.data);
+			console.log(result);
 			if (response.status === 200) {
 				dispatch(
 					setCurrentUser({
 						id: result.data.id,
 						type: result.data.type,
-						accessToken: result.data.token,
+						accessToken: result.token,
 					})
 				);
 				localStorage.setItem(
@@ -91,10 +99,12 @@ const SignInModalContent = ({
 					})
 				);
 				setVisible(false);
+				fetchCurrentUserCart(result.data.id, result.token);
 				navigate("/");
-				window.location.reload(false);
+				// window.location.reload(false);
 			} else if (response.status === 400 || 404) {
-				navigate("/*");
+				// navigate("/*");
+				console.log("Failed to sign in");
 			}
 		} catch (error) {
 			console.log(error);

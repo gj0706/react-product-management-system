@@ -2,9 +2,10 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { selectProducts } from "../../../stores/product-selector";
 import {
-	removeItemFromCart,
 	addItemToCart,
-	clearItemFromCart,
+	addItemToCartAsync,
+	removeItemFromCart,
+	removeItemFromCartAsync,
 } from "../../../actions/cart-action";
 import { selectCurrentUser } from "../../../stores/user-selector";
 import { selectCartItems } from "../../../stores/cart-selector";
@@ -35,30 +36,32 @@ const ProductDetailPage = () => {
 
 	const currentItem = getCurrentItem();
 
-	const addItemHandler = () =>
-		dispatch(
-			addItemToCart(cartItems, product, currentUser.id, currentUser.accessToken)
-		);
+	const addItemHandler = () => {
+		if (currentUser) {
+			dispatch(
+				addItemToCartAsync(
+					cartItems,
+					product,
+					currentUser.id,
+					currentUser.accessToken
+				)
+			);
+		}
+		dispatch(addItemToCart(cartItems, product));
+	};
 
-	const removeItemHandler = () =>
-		dispatch(
-			removeItemFromCart(
-				cartItems,
-				product,
-				currentUser.id,
-				currentUser.accessToken
-			)
-		);
-
-	const clearItemHandler = () => {
-		dispatch(
-			clearItemFromCart(
-				cartItems,
-				product,
-				currentUser.id,
-				currentUser.accessToken
-			)
-		);
+	const removeItemHandler = () => {
+		if (currentUser) {
+			dispatch(
+				removeItemFromCartAsync(
+					cartItems,
+					product,
+					currentUser.id,
+					currentUser.accessToken
+				)
+			);
+		}
+		dispatch(removeItemFromCart(cartItems, product));
 	};
 
 	const goBack = () => {
