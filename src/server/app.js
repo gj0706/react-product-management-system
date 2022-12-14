@@ -225,7 +225,7 @@ app.post("/newCart/:id", async (req, res) => {
 
 // update a cart
 
-app.put("/updateCart/:id", async (req, res) => {
+app.put("/updateCart/:id", verifyToken, async (req, res) => {
 	const userId = req.params.id;
 	const updatedData = req.body;
 	try {
