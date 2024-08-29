@@ -48,14 +48,14 @@ const Header = () => {
 			<nav className="nav-bar">
 				<div className="nav-title">
 					<span id="bigTitle" onClick={goHome}>
-						Management
+						BestDeal
 					</span>
 					<span id="bigTitle-shrink" onClick={goHome}>
-						M
+						B
 					</span>
-					<span id="smallTitle" onClick={goHome}>
-						Chuwa
-					</span>
+					{/* <span id="smallTitle" onClick={goHome}>
+						Your Best Deal
+					</span> */}
 				</div>
 
 				<div className="search-bar">

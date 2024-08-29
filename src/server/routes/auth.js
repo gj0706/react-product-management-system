@@ -4,7 +4,7 @@ const { check, validationResult } = require("express-validator");
 const bcrypt = require("bcrypt");
 const JWT = require("jsonwebtoken");
 require("dotenv").config();
-
+console.log(".env variables:", process.env);
 router.post(
 	"/signUp",
 	[
@@ -78,8 +78,10 @@ router.post(
 
 router.post("/signIn", async (req, res) => {
 	const { email, password } = req.body;
+	console.log(email, password);
 	try {
 		const user = await User.findOne({ email });
+		console.log("user:", user);
 		// Check if user with email exists
 		if (!user) {
 			return res.status(400).json({
@@ -90,6 +92,8 @@ router.post("/signIn", async (req, res) => {
 				],
 			});
 		}
+		console.log("password:", password);
+		console.log("user.password:", user.password);
 
 		// Check if the password is valid
 		let isMatch = await bcrypt.compare(password, user.password);
@@ -104,9 +108,10 @@ router.post("/signIn", async (req, res) => {
 			});
 		}
 		//send json web token
-		const token = await JWT.sign({ email: email }, process.env.JWT_SEC_KEY, {
+		const token = JWT.sign({ email: email }, process.env.JWT_SEC_KEY, {
 			expiresIn: "30d",
 		});
+		console.log("token:", token);
 		res.json({
 			message: "Sign in succeed",
 			data: { id: user.id, type: user.type },
