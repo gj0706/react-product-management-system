@@ -1,8 +1,8 @@
 {
-	"name": "management-chuwa",
+	"name": "product-management-system",
 	"version": "0.1.0",
 	"private": true,
-	"proxy": "http://localhost:3002",
+	"proxy": "http://localhost:3030",
 	"dependencies": {
 		"@babel/core": "^7.16.0",
 		"@fortawesome/fontawesome-svg-core": "^6.2.0",
@@ -72,12 +72,15 @@
 		"webpack": "^5.64.4",
 		"webpack-dev-server": "^4.6.0",
 		"webpack-manifest-plugin": "^4.0.2",
-		"workbox-webpack-plugin": "^6.4.1"
+		"workbox-webpack-plugin": "^6.4.1",
+		"concurrently": "^6.3.0"
 	},
 	"scripts": {
-		"start": "node scripts/start.js",
+		"start": "concurrently  \"node scripts/start.js\" \"cd src/server && npm run dev\"",
 		"build": "node scripts/build.js",
-		"test": "node scripts/test.js"
+		"test": "node scripts/test.js",
+		"server": "cd src/server && npm run dev",
+		"dev": "concurrently \"npm start\" \"npm run server\""
 	},
 	"eslintConfig": {
 		"extends": [
