@@ -7,7 +7,9 @@ export const setProducts = (products) =>
 
 export const getProducts = (dispatch) => async () => {
 	try {
-		const response = await fetch("/getProducts");
+		const response = await fetch(
+			"https://my-test-server-abe052192bfd.herokuapp.com/getProducts"
+		);
 		const result = await response.json();
 		dispatch({
 			type: "GET_ALL_PRODUCTS",
